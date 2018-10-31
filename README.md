@@ -10,10 +10,16 @@ clone this repo
 `make all`
 
 
+## Setup ssh key
+
+`make ssh`
+
+it will return you your ssh key
+
 ## Import / Export atom package
 
 ### Export
-`apm list --installed --bare > atom-packages.list`
+`apm list --installed --bare > atom/atom-packages.list`
 
 ### Import
-`apm install --packages-file atom-packages.list`
+`apm install --packages-file atom/atom-packages.list`
