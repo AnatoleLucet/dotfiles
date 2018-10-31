@@ -2,7 +2,7 @@
 
 ## Install all
 
-`sudo apt-get install build-essential`
+`sudo apt install make`
 
 `make all`
 
