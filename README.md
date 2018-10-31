@@ -1,7 +1,7 @@
 # dotfile
 
 ## Install all
-`apt-get install git-core`
+`sudo apt-get install git-core`
 
 clone this repo
 
