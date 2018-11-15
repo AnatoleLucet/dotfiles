@@ -35,7 +35,12 @@ all:
  	wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
  	sudo apt-get update
 	sudo apt-get install google-chrome-stable
-
+	
+	# install pulseaudio
+	sudo apt update
+	sudo apt install pulseaudio
+	sudo apt install pavucontrol
+	
 	# install docker
 	ccred=$(echo -e "install docker")
 	sudo apt update
