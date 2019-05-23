@@ -76,12 +76,12 @@ ssh:
 
 config/all:
 	echo "${RED} config ${NC}"
-	#cp -f i3/config ~/.config/i3/config
+	cp -f i3/config ~/.config/i3/config
 	make config/code/import
 
 
 config/code/export:
-	echo "${RED} Saving the vscode config ${NC}"
+	echo "${RED} Exporting the vscode config ${NC}"
 	code --list-extensions | xargs -L 1 echo code --install-extension > code/list-extensions.sh
 	cp -rt  code/ ~/.config/Code/User/settings.json ~/.config/Code/User/keybindings.json ~/.config/Code/User/snippets
 
@@ -89,3 +89,11 @@ config/code/import:
 	echo "${RED} Importing the vscode config ${NC}"
 	sh code/list-extensions.sh
 	cp -rt ~/.config/Code/User/ code/settings.json code/keybindings.json code/snippets
+
+config/i3/export:
+	echo "${RED} Exporting the i3 config ${NC}"
+	cp -f ~/.config/i3/config i3/config
+
+config/i3/import:
+	echo "${RED} Importing the i3 config ${NC}"
+	cp -f i3/config ~/.config/i3/config
