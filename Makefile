@@ -19,6 +19,10 @@ all:
 	# install i3wm
 	echo "${RED} install i3wm ${NC}"
 	sudo apt-get install i3
+	
+	# install htop
+	echo "${RED} install htop ${NC}"
+	sudo apt-get install htop
 
 	# install vscode
 	echo "${RED} install vscode ${NC}"
