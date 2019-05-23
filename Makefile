@@ -20,11 +20,12 @@ all:
 	echo "${RED} install i3wm ${NC}"
 	sudo apt-get install i3
 
-	# install atom
-	echo "${RED} install atom ${NC}"
-	sudo add-apt-repository ppa:webupd8team/atom
+	# install vscode
+	echo "${RED} install vscode ${NC}"
+	wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
+	sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
 	sudo apt update
-	sudo apt install atom
+	sudo apt install code
 
 	# install zsh & ho my zsh
 	echo "${RED} install zsh & ho my zsh ${NC}"
@@ -73,7 +74,18 @@ ssh:
 	echo "${RED} ssh ${NC}"
 	cat ~/.ssh/id_rsa.pub
 
-config:
+config/all:
 	echo "${RED} config ${NC}"
-	cp -f i3/config ~/.config/i3/config
-	apm install --packages-file atom/atom-packages.list
+	#cp -f i3/config ~/.config/i3/config
+	make config/code/import
+
+
+config/code/export:
+	echo "${RED} Saving the vscode config ${NC}"
+	code --list-extensions | xargs -L 1 echo code --install-extension > code/list-extensions.sh
+	cp -rt  code/ ~/.config/Code/User/settings.json ~/.config/Code/User/keybindings.json ~/.config/Code/User/snippets
+
+config/code/import:
+	echo "${RED} Importing the vscode config ${NC}"
+	sh code/list-extensions.sh
+	cp -rt ~/.config/Code/User/ code/settings.json code/keybindings.json code/snippets

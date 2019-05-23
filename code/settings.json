@@ -1,0 +1,33 @@
+{
+  "workbench.colorTheme": "Atom One Dark",
+  "atomKeymap.promptV3Features": true,
+  "editor.multiCursorModifier": "ctrlCmd",
+  "editor.formatOnPaste": true,
+  "workbench.startupEditor": "newUntitledFile",
+  "editor.tabSize": 2,
+  "files.insertFinalNewline": true,
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact",
+    "vue-html": "html"
+  },
+  "terminal.integrated.shell.linux": "/bin/zsh",
+  "terminal.integrated.rendererType": "dom",
+  "workbench.iconTheme": "material-icon-theme",
+  "material-icon-theme.folders.theme": "classic",
+  "material-icon-theme.activeIconPack": "react",
+  "editor.smoothScrolling": true,
+  "liveshare.featureSet": "insiders",
+  "window.zoomLevel": 0,
+  "prettier.singleQuote": true,
+  "editor.formatOnSave": true,
+  "git.autofetch": true,
+  "breadcrumbs.enabled": true,
+  "sync.gist": "3c7283f662df56b08614198ba9f3dfa5",
+  "workbench.sideBar.location": "left",
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ]
+}

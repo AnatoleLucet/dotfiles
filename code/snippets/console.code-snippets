@@ -1,0 +1,28 @@
+{
+	"Print text to console": {
+		"scope": "javascript,typescript",
+		"prefix": "clog",
+		"body": [
+			"console.log($1);"
+		],
+		"description": "Log output to console"
+  },
+  
+  "Print err to console": {
+    "scope": "javascript,typescript",
+    "prefix": "cerr",
+    "body": [
+      "console.error($1);"
+    ],
+    "description": "Error output to console"
+  },
+
+  "Print dir to console": {
+    "scope": "javascript,typescript",
+    "prefix": "cdir",
+    "body": [
+      "console.dir($1);"
+    ],
+    "description": "Dir output to console"
+  },
+}
