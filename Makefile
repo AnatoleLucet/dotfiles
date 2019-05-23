@@ -82,14 +82,17 @@ all:
 	sudo apt-get update
 	sudo apt-get install nodejs npm -y
 
+
 ssh:
 	echo "${RED} ssh ${NC}"
 	cat ~/.ssh/id_rsa.pub
 
+
 config/all:
 	echo "${RED} config ${NC}"
-	cp -f i3/config ~/.config/i3/config
 	make config/code/import
+	make config/i3/import
+	make config/zsh/import
 
 
 config/code/export:
