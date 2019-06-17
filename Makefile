@@ -114,7 +114,7 @@ config/i3/import:
 	cp -f i3/config ~/.config/i3/config
 
 config/zsh/export:
-	echo "${RED} Exporting the i3 config ${NC}"
+	echo "${RED} Exporting the zsh config ${NC}"
 	cp -f ~/.zshrc zsh/
 
 config/zsh/import:
