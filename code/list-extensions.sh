@@ -10,6 +10,7 @@ code --install-extension esbenp.prettier-vscode
 code --install-extension FallenMax.mithril-emmet
 code --install-extension Gajesh1.React-JS-Snippet
 code --install-extension mgmcdermott.vscode-language-babel
+code --install-extension mikestead.dotenv
 code --install-extension mrmlnc.vscode-duplicate
 code --install-extension ms-vscode.atom-keybindings
 code --install-extension ms-vscode.vscode-typescript-tslint-plugin
