@@ -82,6 +82,10 @@ all:
 	sudo apt-get update
 	sudo apt-get install nodejs npm -y
 
+	# setting up scripts
+	echo "${RED} setting up scripts ${NC}"
+	sudo sh -c "cp scripts/docker-prune.sh /; chmod +x /docker-prune.sh"
+
 
 ssh:
 	echo "${RED} ssh ${NC}"
