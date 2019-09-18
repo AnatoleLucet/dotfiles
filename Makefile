@@ -19,10 +19,16 @@ all:
 	# install i3wm
 	echo "${RED} install i3wm ${NC}"
 	sudo apt-get install i3 -y
+	sudo apt-get install i3status
 
-	# install i3wm
+	# install snap
+	echo "${RED} install snap ${NC}"
+	sudo apt-get install dmenu
+
+	# install snap
 	echo "${RED} install snap ${NC}"
 	sudo apt install snapd -y
+
 
 	# install lsd
 	echo "${RED} install lsd ${NC}"
@@ -73,6 +79,10 @@ all:
 	echo "${RED} install node & npm ${NC}"
 	sudo apt-get update
 	sudo apt-get install nodejs npm -y
+
+	# install yarn
+	echo "${RED} install yarn ${NC}"
+	sudo npm -g i yarn
 
 	# setting up scripts
 	echo "${RED} setting up scripts ${NC}"
