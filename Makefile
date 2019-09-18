@@ -107,8 +107,8 @@ config/i3/export:
 
 config/i3/import:
 	echo "${RED} Importing the i3 config ${NC}"
-	mkdir -p ~/.config/i3/config
-	cp -f i3/config ~/.config/i3/config
+	mkdir -p ~/.config/i3
+	cp -f i3/config ~/.config/i3
 
 config/zsh/export:
 	echo "${RED} Exporting the zsh config ${NC}"
