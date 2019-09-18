@@ -34,10 +34,7 @@ all:
 
 	# install vscode
 	echo "${RED} install vscode ${NC}"
-	wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
-	sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
-	sudo apt update
-	sudo apt install code -y
+	sudo snap install code --classic
 
 	# install zsh & ho my zsh
 	echo "${RED} install zsh & ho my zsh ${NC}"
@@ -60,12 +57,7 @@ all:
 
 	# install docker
 	echo "${RED} install docker ${NC}"
-	sudo apt update
-	sudo apt install apt-transport-https ca-certificates curl software-properties-common -y
-	curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-	sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
-	sudo apt update
-	sudo apt install docker-ce -y
+	sudo snap install docker --classic
 	sudo usermod -aG docker $(USER)
 
 	# install docker-compose
@@ -115,6 +107,7 @@ config/i3/export:
 
 config/i3/import:
 	echo "${RED} Importing the i3 config ${NC}"
+	mkdir -p ~/.config/i3/config
 	cp -f i3/config ~/.config/i3/config
 
 config/zsh/export:
