@@ -28,7 +28,10 @@ all:
 	# install snap
 	echo "${RED} install snap ${NC}"
 	sudo apt install snapd -y
-
+	
+	# install powerline
+	echo "${RED} install powerline ${NC}"
+	sudo apt-get install fonts-powerline
 
 	# install lsd
 	echo "${RED} install lsd ${NC}"
