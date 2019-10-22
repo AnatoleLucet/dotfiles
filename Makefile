@@ -135,3 +135,11 @@ config/vim/export:
 config/vim/import:
 	echo "${RED} Importing the vim config ${NC}"
 	cp -f vim/* ~/
+
+config/tmux/export:
+	echo "${RED} Exporting the tmux config ${NC}"
+	cp -rt tmux/ ~/.tmux ~/.tmux.conf
+
+config/tmux/import:
+	echo "${RED} Importing the tmux config ${NC}"
+	cp -f tmux/* ~/
