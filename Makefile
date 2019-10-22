@@ -125,5 +125,13 @@ config/zsh/export:
 	cp -f ~/.zshrc zsh/
 
 config/zsh/import:
-	echo "${RED} Exporting the zsh config ${NC}"
+	echo "${RED} Importing the zsh config ${NC}"
 	cp -f zsh/.zshrc ~/
+
+config/vim/export:
+	echo "${RED} Exporting the vim config ${NC}"
+	cp -rt vim/ ~/.vim ~/.vimrc
+
+config/vim/import:
+	echo "${RED} Importing the vim config ${NC}"
+	cp -f vim/* ~/
