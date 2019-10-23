@@ -5,7 +5,9 @@ set tabstop=2
 set shiftwidth=2
 set expandtab
 
-set noswapfile 
+set noswapfile
+
+set mouse=a
 
 autocmd Filetype json let g:indentLine_enabled = 0
 
@@ -46,6 +48,8 @@ Plug 'evanleck/vim-svelte'
 Plug 'jiangmiao/auto-pairs'
 
 Plug 'tpope/vim-surround'
+
+Plug 'kien/ctrlp.vim'
 
 Plug 'terryma/vim-multiple-cursors'
 
