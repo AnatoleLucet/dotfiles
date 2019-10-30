@@ -1,6 +1,10 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =4
+let g:netrw_dirhist_cnt =8
 let g:netrw_dirhist_1='/home/anatole/dev/github-sapper/src/routes'
 let g:netrw_dirhist_2='/home/anatole/dev/github-sapper'
 let g:netrw_dirhist_3='/home/anatole/dev/github-sapper/src'
 let g:netrw_dirhist_4='/home/anatole/dev/github-sapper/src/store'
+let g:netrw_dirhist_5='/home/anatole/dev/sapper/site/node_modules/@sveltejs'
+let g:netrw_dirhist_6='/home/anatole/dev/sapper/site/node_modules/@sveltejs/site-kit'
+let g:netrw_dirhist_7='/home/anatole/dev/sapper/site/node_modules/@sveltejs/site-kit/components'
+let g:netrw_dirhist_8='/home/anatole'

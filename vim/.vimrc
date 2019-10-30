@@ -1,13 +1,14 @@
 set nu
 set relativenumber
 
-set tabstop=2
-set shiftwidth=2
-set expandtab
+"set tabstop=2
+"set shiftwidth=2
+"set expandtab
 
 set noswapfile
 
 set mouse=a
+
 
 autocmd Filetype json let g:indentLine_enabled = 0
 
@@ -27,6 +28,8 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
+Plug 'yuttie/comfortable-motion.vim'
+
 Plug 'Yggdroot/indentLine'
 
 Plug 'junegunn/vim-easy-align'
@@ -41,7 +44,7 @@ Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 
-Plug 'scrooloose/nerdcommenter'
+Plug 'tpope/vim-commentary'
 
 Plug 'evanleck/vim-svelte'
 
@@ -82,23 +85,16 @@ Plug '~/my-prototype-plugin'
 
 call plug#end()
 
-
-set background=dark
 set t_Co=256
 colorscheme palenight
 
+let g:prettier#autoformat = 0
+autocmd BufWritePre *.ts,*.tsx,*.jsx,*.js,*.json,*.css,*.scss,*.less,*.graphql PrettierAsync
 
 if (has("nvim"))
   "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 endif
-
-"For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
-"Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
-" < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
-"if (has("termguicolors"))
-  "set termguicolors
-"endif
 
 if exists('+termguicolors')
   let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"

@@ -53,7 +53,7 @@ all:
 
 	# install google chrome
 	echo "${RED} install google chrome ${NC}"
-	sudo sh -c 'echo "deb [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list'
+	sudo sh -c ' echo "deb [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list'
 	wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
 	sudo apt-get update
 	sudo apt-get install google-chrome-stable -y
@@ -133,7 +133,8 @@ config/zsh/import:
 
 config/vim/export:
 	echo "${RED} Exporting the vim config ${NC}"
-	cp -rt vim/ ~/.vim ~/.vimrc
+	cp -f ~/.vimrc vim/
+	rsync -av --progress ~/.vim vim/ --exclude .git
 
 config/vim/import:
 	echo "${RED} Importing the vim config ${NC}"
