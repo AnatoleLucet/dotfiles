@@ -103,6 +103,8 @@ config/all:
 	make config/code/import
 	make config/i3/import
 	make config/zsh/import
+	make config/vim/import
+	make config/tmux/import
 
 
 config/code/export:
@@ -139,12 +141,14 @@ config/vim/export:
 
 config/vim/import:
 	echo "${RED} Importing the vim config ${NC}"
-	cp -f vim/* ~/
+	cp -f ./vim/.vimrc
+	cp -f ./vim/.vimrc
 
 config/tmux/export:
 	echo "${RED} Exporting the tmux config ${NC}"
-	cp -rt tmux/ ~/.tmux ~/.tmux.conf
+	cp -rt tmux/ ~/.tmux.conf
 
 config/tmux/import:
 	echo "${RED} Importing the tmux config ${NC}"
-	cp -f tmux/* ~/
+	git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+	cp -f tmux/.tmux.conf ~/
