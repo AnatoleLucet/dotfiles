@@ -45,12 +45,6 @@ all:
 	echo "${RED} install vscode ${NC}"
 	sudo snap install code --classic
 
-	# install zsh & ho my zsh
-	echo "${RED} install zsh & ho my zsh ${NC}"
-	sudo apt-get install zsh -y
-	chsh -s $$(which zsh)
-	sh -c "$$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-
 	# install google chrome
 	echo "${RED} install google chrome ${NC}"
 	sudo sh -c ' echo "deb [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list'
@@ -91,6 +85,13 @@ all:
 	# setting up scripts
 	echo "${RED} setting up scripts ${NC}"
 	sudo sh -c "cp scripts/docker-prune.sh /; chmod +x /docker-prune.sh"
+
+	# keep at the end so the opening of zsh will not stop the execution
+	# install zsh & ho my zsh
+	echo "${RED} install zsh & ho my zsh ${NC}"
+	sudo apt-get install zsh -y
+	chsh -s $$(which zsh)
+	sh -c "$$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
 
 ssh:
