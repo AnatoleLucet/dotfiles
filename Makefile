@@ -67,6 +67,7 @@ all:
 	# install docker
 	echo "${RED} install docker ${NC}"
 	sudo snap install docker --classic
+	sudo groupadd docker
 	sudo usermod -aG docker $(USER)
 
 	# install docker-compose
