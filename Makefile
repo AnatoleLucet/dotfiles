@@ -81,6 +81,14 @@ all:
 	# install yarn
 	echo "${RED} install yarn ${NC}"
 	sudo npm -g i yarn
+	
+	# install vim
+	echo "${RED} install vim ${NC}"
+	sudo apt-get install vim
+
+	# install tmux
+	echo "${RED} install tmux ${NC}"
+	sudo apt-get install tmux
 
 	# setting up scripts
 	echo "${RED} setting up scripts ${NC}"
