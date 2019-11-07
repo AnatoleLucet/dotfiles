@@ -84,7 +84,7 @@ all:
 	
 	# install vim
 	echo "${RED} install vim ${NC}"
-	sudo apt-get install vim
+	sudo apt-get install vim-gtk
 
 	# install tmux
 	echo "${RED} install tmux ${NC}"
