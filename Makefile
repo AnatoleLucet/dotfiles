@@ -24,13 +24,19 @@ install:
 	sudo apt-get install i3 -y
 	sudo apt-get install i3status -y
 
-	# install snap
+	# install dmenu 
 	echo "${RED} install snap ${NC}"
 	sudo apt-get install dmenu -y
 
 	# install snap
 	echo "${RED} install snap ${NC}"
 	sudo apt install snapd -y
+	
+	# install zsh & ho my zsh
+	echo "${RED} install zsh & ho my zsh ${NC}"
+	sudo apt-get install zsh -y
+	chsh -s $$(which zsh)
+	sh -c "$$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh) --unattended"
 	
 	# install powerline
 	echo "${RED} install powerline ${NC}"
@@ -93,12 +99,8 @@ install:
 	echo "${RED} setting up scripts ${NC}"
 	sudo sh -c "cp scripts/docker-prune.sh /; chmod +x /docker-prune.sh"
 
-	# keep at the end so the opening of zsh will not stop the execution
-	# install zsh & ho my zsh
-	echo "${RED} install zsh & ho my zsh ${NC}"
-	sudo apt-get install zsh -y
-	chsh -s $$(which zsh)
-	sh -c "$$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+	# open zsh at the end
+	zsh
 
 
 # Others
