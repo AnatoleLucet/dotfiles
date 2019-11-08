@@ -146,7 +146,6 @@ config/zsh/import:
 config/vim/export:
 	echo "${RED} Exporting the vim config ${NC}"
 	cp -f ~/.vimrc vim/
-	rsync -av --progress ~/.vim vim/ --exclude .git
 
 config/vim/import:
 	echo "${RED} Importing the vim config ${NC}"
