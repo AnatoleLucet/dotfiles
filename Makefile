@@ -22,11 +22,11 @@ install:
 	# install i3wm
 	echo "${RED} install i3wm ${NC}"
 	sudo apt-get install i3 -y
-	sudo apt-get install i3status
+	sudo apt-get install i3status -y
 
 	# install snap
 	echo "${RED} install snap ${NC}"
-	sudo apt-get install dmenu
+	sudo apt-get install dmenu -y
 
 	# install snap
 	echo "${RED} install snap ${NC}"
@@ -34,7 +34,7 @@ install:
 	
 	# install powerline
 	echo "${RED} install powerline ${NC}"
-	sudo apt-get install fonts-powerline
+	sudo apt-get install fonts-powerline -y
 
 	# install lsd
 	echo "${RED} install lsd ${NC}"
@@ -83,11 +83,11 @@ install:
 	
 	# install vim
 	echo "${RED} install vim ${NC}"
-	sudo apt-get install vim-gtk
+	sudo apt-get install vim-gtk -y
 
 	# install tmux
 	echo "${RED} install tmux ${NC}"
-	sudo apt-get install tmux
+	sudo apt-get install tmux -y
 
 	# setting up scripts
 	echo "${RED} setting up scripts ${NC}"
@@ -167,7 +167,7 @@ config/vim/export:
 config/vim/import:
 	echo "${RED} Importing the vim config ${NC}"
 	# for YouCompleteMe plugin
-	sudo apt-get install python-dev
+	sudo apt-get install python-dev -y
 	# install vim-plug
 	curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 	https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
