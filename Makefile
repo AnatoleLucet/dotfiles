@@ -161,9 +161,14 @@ config/vim/import:
 
 config/tmux/export:
 	echo "${RED} Exporting the tmux config ${NC}"
-	cp -rt tmux/ ~/.tmux.conf
+	cp -f ~/.tmux.conf tmux/
 
 config/tmux/import:
 	echo "${RED} Importing the tmux config ${NC}"
+	# install tpm
 	git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+	# import tmux.conf
 	cp -f tmux/.tmux.conf ~/
+	# install plugins
+	/bin/bash ~/.tmux/plugins/tpm/scripts/install_plugins.sh
+
