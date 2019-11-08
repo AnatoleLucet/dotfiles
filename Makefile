@@ -150,8 +150,8 @@ config/vim/export:
 
 config/vim/import:
 	echo "${RED} Importing the vim config ${NC}"
-	cp -f ./vim/.vimrc
-	cp -f ./vim/.vimrc
+	cp -f ./vim/.vimrc ~/
+	cp -rf ./vim/.vim ~/
 
 config/tmux/export:
 	echo "${RED} Exporting the tmux config ${NC}"
