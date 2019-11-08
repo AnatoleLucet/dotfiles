@@ -1,16 +1,19 @@
+
+# Vars
+# ----------
+
 RED=\033[0;31m
 NC=\033[0m
 
-all:
+
+# Install
+# ----------
+
+install:
 	# update apt & apt-get
 	echo "${RED} update apt & apt-get ${NC}"
 	sudo apt-get update
 	sudo apt update
-
-	# git config
-	echo "${RED} git config ${NC}"
-	git config --global user.email "lucet.anatole@gmail.com"
-	git config --global user.name "AnatoleLucet"
 
 	# install curl
 	echo "${RED} install curl ${NC}"
@@ -69,10 +72,6 @@ all:
 	udo curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 	sudo chmod +x /usr/local/bin/docker-compose
 
-	# generate ssh key
-	echo "${RED} generate ssh key ${NC}"
-	ssh-keygen
-
 	# install node & npm
 	echo "${RED} install node & npm ${NC}"
 	sudo apt-get update
@@ -102,13 +101,18 @@ all:
 	sh -c "$$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
 
+# Others
+# ----------
+
 ssh:
 	echo "${RED} ssh ${NC}"
+	ssh-keygen
 	cat ~/.ssh/id_rsa.pub
 
 
 config/all:
 	echo "${RED} config ${NC}"
+	make config/git/import
 	make config/code/import
 	make config/i3/import
 	make config/zsh/import
@@ -116,6 +120,16 @@ config/all:
 	make config/tmux/import
 
 
+# Configs
+# ----------
+
+# Git
+config/git/import:
+	echo "${RED} Importing the git config ${NC}"
+	git config --global user.email "lucet.anatole@gmail.com"
+	git config --global user.name "AnatoleLucet"
+
+# Code
 config/code/export:
 	echo "${RED} Exporting the vscode config ${NC}"
 	code --list-extensions | xargs -L 1 echo code --install-extension > code/list-extensions.sh
@@ -126,6 +140,7 @@ config/code/import:
 	sh code/list-extensions.sh
 	cp -rt ~/.config/Code/User/ code/settings.json code/keybindings.json code/snippets
 
+# I3
 config/i3/export:
 	echo "${RED} Exporting the i3 config ${NC}"
 	cp -f ~/.config/i3/config i3/config
@@ -135,6 +150,7 @@ config/i3/import:
 	mkdir -p ~/.config/i3
 	cp -f i3/config ~/.config/i3
 
+# Zsh
 config/zsh/export:
 	echo "${RED} Exporting the zsh config ${NC}"
 	cp -f ~/.zshrc zsh/
@@ -143,6 +159,7 @@ config/zsh/import:
 	echo "${RED} Importing the zsh config ${NC}"
 	cp -f zsh/.zshrc ~/
 
+# Vim
 config/vim/export:
 	echo "${RED} Exporting the vim config ${NC}"
 	cp -f ~/.vimrc vim/
@@ -159,6 +176,7 @@ config/vim/import:
 	# install plugins
 	vim +PlugInstall +qall
 
+# Tmux
 config/tmux/export:
 	echo "${RED} Exporting the tmux config ${NC}"
 	cp -f ~/.tmux.conf tmux/
