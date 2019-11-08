@@ -28,6 +28,8 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
+Plug 'kristijanhusak/vim-js-file-import'
+
 Plug 'yuttie/comfortable-motion.vim'
 
 Plug 'Yggdroot/indentLine'
@@ -87,6 +89,13 @@ call plug#end()
 
 set t_Co=256
 colorscheme palenight
+
+autocmd FileType javascript.jsx setlocal commentstring={/*\ %s\ */}
+autocmd FileType typescript.tsx setlocal commentstring={/*\ %s\ */}
+
+let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist)|(\.(swp|ico|git|svn))$'
+
+autocmd FileType javascript let g:ale_linters = findfile('.eslintrc', '.;') != '' ? {'javascript': ['eslint']} : {'javascript': ['']}
 
 let g:prettier#autoformat = 0
 autocmd BufWritePre *.ts,*.tsx,*.jsx,*.js,*.json,*.css,*.scss,*.less,*.graphql PrettierAsync
