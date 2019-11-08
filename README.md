@@ -1,25 +1,33 @@
 # dotfile
 
-## Install all
-`sudo apt-get install git-core`
+## Do all in one line
+It will end with the ssh-keygen
 
-clone this repo
+```
+sudo apt-get install git-core make && git clone https://github.com/AnatoleLucet/dotfile.git ~/dotfile && cd ~/dotfile && make install && make config/all && make ssh
+```
 
-`sudo apt install make`
+---
 
-`make all`
+## Setup
+```
+sudo apt-get install git-core make
+git clone https://github.com/AnatoleLucet/dotfile.git ~/dotfile
+cd ~/dotfile
+```
 
+## Install softs
+```
+make install
+```
+
+## Import configs
+```
+make config/all
+```
 
 ## Setup ssh key
+```
+make ssh
+```
 
-`make ssh`
-
-it will return you your ssh key
-
-## Import / Export atom package
-
-### Export
-`apm list --installed --bare > atom/atom-packages.list`
-
-### Import
-`apm install --packages-file atom/atom-packages.list`
