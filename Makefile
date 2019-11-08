@@ -150,8 +150,15 @@ config/vim/export:
 
 config/vim/import:
 	echo "${RED} Importing the vim config ${NC}"
+	# for YouCompleteMe plugin
+	sudo apt-get install python-dev
+	# install vim-plug
+	curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+	https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+	# import vimrc
 	cp -f ./vim/.vimrc ~/
-	cp -rf ./vim/.vim ~/
+	# install plugins
+	vim +PlugInstall +qall
 
 config/tmux/export:
 	echo "${RED} Exporting the tmux config ${NC}"
