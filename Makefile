@@ -87,9 +87,13 @@ install:
 	echo "${RED} install yarn ${NC}"
 	sudo npm -g i yarn
 	
-	# install vim
-	echo "${RED} install vim ${NC}"
-	sudo apt-get install vim-gtk -y
+	# install neovim
+	echo "${RED} install neovim ${NC}"
+	sudo add-apt-repository ppa:neovim-ppa/unstable
+	sudo apt-get update
+	sudo apt-get install neovim
+	# deps for neovim
+	sudo apt-get install python-dev python-pip python3-dev python3-pip
 
 	# install tmux
 	echo "${RED} install tmux ${NC}"
@@ -118,7 +122,7 @@ config/all:
 	make config/code/import
 	make config/i3/import
 	make config/zsh/import
-	make config/vim/import
+	make config/nvim/import
 	make config/tmux/import
 
 
@@ -161,22 +165,22 @@ config/zsh/import:
 	echo "${RED} Importing the zsh config ${NC}"
 	cp -f zsh/.zshrc ~/
 
-# Vim
-config/vim/export:
-	echo "${RED} Exporting the vim config ${NC}"
-	cp -f ~/.vimrc vim/
+# Neovim
+config/nvim/export:
+	echo "${RED} Exporting the neovim config ${NC}"
+	cp -f ~/.config/nvim/init.vim nvim/
+	cp -f ~/.config/nvim/coc-settings.json nvim/
 
-config/vim/import:
-	echo "${RED} Importing the vim config ${NC}"
-	# for YouCompleteMe plugin
-	sudo apt-get install python-dev -y
+config/nvim/import:
+	echo "${RED} Importing the neovim config ${NC}"
 	# install vim-plug
-	curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+	curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
 	https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-	# import vimrc
-	cp -f ./vim/.vimrc ~/
+	# import config files
+	cp -f nvim/init.vim ~/.config/nvim/
+	cp -f nvim/coc-settings.json ~/.config/nvim/
 	# install plugins
-	vim +PlugInstall +qall
+	nvim +PlugInstall +qall
 
 # Tmux
 config/tmux/export:
