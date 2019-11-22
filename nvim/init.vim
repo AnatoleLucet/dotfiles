@@ -16,6 +16,7 @@ Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'fatih/vim-go', { 'tag': '*' }
 Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
 Plug '~/my-prototype-plugin'
+Plug 'dense-analysis/ale'
 
 call plug#end()
 
@@ -29,6 +30,19 @@ set relativenumber
 set noswapfile
 
 set mouse=a
+
+nnoremap <ESC> :nohlsearch<CR>
+
+" Go
+let g:go_highlight_build_constraints = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_types = 1
+let g:go_fmt_command = "goimports"
 
 
 " disable indent line for json
@@ -59,11 +73,7 @@ colorscheme palenight
 
 " CtrlP
 let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist)|(\.(swp|ico|git|svn))$'
-
-" autocmd FileType javascript let g:ale_linters = findfile('.eslintrc', '.;') != '' ? {'javascript': ['eslint']} : {'javascript': ['']}
-
-" let g:prettier#autoformat = 0
-" autocmd BufWritePre *.ts,*.tsx,*.jsx,*.js,*.json,*.css,*.scss,*.less,*.graphql PrettierAsync
+let g:ctrlp_show_hidden = 1
 
 
 " Colors things
