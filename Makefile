@@ -163,6 +163,9 @@ config/zsh/export:
 
 config/zsh/import:
 	echo "${RED} Importing the zsh config ${NC}"
+	# install syntax-highlighting
+	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+	# import config file
 	cp -f zsh/.zshrc ~/
 
 # Neovim
