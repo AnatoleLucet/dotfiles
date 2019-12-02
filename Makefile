@@ -134,6 +134,7 @@ config/git/import:
 	echo "${RED} Importing the git config ${NC}"
 	git config --global user.email "lucet.anatole@gmail.com"
 	git config --global user.name "AnatoleLucet"
+	git config --global core.editor nvim
 
 # Code
 config/code/export:
