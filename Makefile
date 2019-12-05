@@ -6,6 +6,19 @@ RED=\033[0;31m
 NC=\033[0m
 
 
+# All
+# ----------
+all:
+	make install
+
+	make config/all
+
+	make ssh
+
+	# open zsh at the end
+	zsh
+
+
 # Install
 # ----------
 
