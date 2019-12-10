@@ -4,7 +4,7 @@
 It will end with the ssh-keygen
 
 ```
-sudo apt-get install git-core make && git clone https://github.com/AnatoleLucet/dotfile.git ~/dotfile && cd ~/dotfile && make install && make config/all && make ssh
+sudo apt-get install git-core make && git clone https://github.com/AnatoleLucet/dotfile.git ~/dotfile && cd ~/dotfile && make all
 ```
 
 ---

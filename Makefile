@@ -5,6 +5,19 @@ RED=\033[0;31m
 NC=\033[0m
 
 
+# All
+# ----------
+all:
+	make install
+
+	make config/all
+
+	make ssh
+
+	# open zsh at the end
+	zsh
+
+
 # Install
 # ----------
 
@@ -207,7 +220,7 @@ config/tmux/import:
 	# import tmux.conf
 	cp -f tmux/.tmux.conf ~/
 	# install plugins
-	/bin/bash ~/.tmux/plugins/tpm/scripts/install_plugins.sh
+	tmux start-server && tmux new-session -d && ~/.tmux/plugins/tpm/scripts/install_plugins.sh && tmux kill-server
 
 # St
 config/st/export:
