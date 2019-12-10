@@ -1,4 +1,3 @@
-
 # Vars
 # ----------
 
@@ -98,6 +97,14 @@ install:
 	# install tmux
 	echo "${RED} install tmux ${NC}"
 	sudo apt-get install tmux -y
+
+	# install XServer 
+	sudo apt-get install xorg openbox
+
+	# install st
+	cp -r ./st ~/
+	cd ~/st
+	sudo make install
 
 	# setting up scripts
 	echo "${RED} setting up scripts ${NC}"
@@ -201,4 +208,18 @@ config/tmux/import:
 	cp -f tmux/.tmux.conf ~/
 	# install plugins
 	/bin/bash ~/.tmux/plugins/tpm/scripts/install_plugins.sh
+
+# St
+config/st/export:
+	echo "${RED} Exporting the st config ${NC}"
+	cp -r ~/st ./
+
+config/st/import:
+	echo "${RED} Importing the st config ${NC}"
+	# importing st
+	sudo cp -r ./st ~/
+	cd ~/st; \
+	sudo make install; \
+	xrdb -merge .Xresources; \
+	xrdb -edit ~/.Xresources
 
