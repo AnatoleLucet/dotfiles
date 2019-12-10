@@ -149,6 +149,7 @@ config/all:
 	make config/zsh/import
 	make config/nvim/import
 	make config/tmux/import
+	make config/st/import
 
 
 # Configs
