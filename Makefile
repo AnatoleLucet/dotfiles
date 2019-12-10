@@ -114,6 +114,9 @@ install:
 	# install XServer 
 	sudo apt-get install xorg openbox
 
+	# install feh
+	sudo apt-get install feh
+
 	# install st
 	cp -r ./st ~/
 	cd ~/st
