@@ -117,6 +117,8 @@ install:
 	# install st
 	cp -r ./st ~/
 	cd ~/st
+	sudo apt-get install libfontconfig1-dev fontconfig libfreetype6-dev 
+	sudo apt-get install fxlrg xserver-xorg-core xserver-xorg xorg xorg openbox ubuntu-desktop libxft-dev libx11-dev
 	sudo make install
 
 	# setting up scripts
@@ -230,7 +232,8 @@ config/st/export:
 config/st/import:
 	echo "${RED} Importing the st config ${NC}"
 	# importing st
-	sudo cp -r ./st ~/
+	rm -rf ~/st
+	cp -r ./st ~/
 	cd ~/st; \
 	sudo make install; \
 	xrdb -merge .Xresources; \
