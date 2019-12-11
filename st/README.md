@@ -1,4 +1,4 @@
-### I'm using the [Luke Smith's st build](https://github.com/lukesmithxyz/st), here is the original readme :
+### I'm using [Luke Smith's st build](https://github.com/lukesmithxyz/st), here is the original readme :
 
 ---
 
