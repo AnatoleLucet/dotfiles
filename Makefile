@@ -105,23 +105,22 @@ install:
 	sudo apt-get update
 	sudo apt-get install neovim
 	# deps for neovim
-	sudo apt-get install python-dev python-pip python3-dev python3-pip
+	sudo apt-get install -y python-dev python-pip python3-dev python3-pip
 
 	# install tmux
 	echo "${RED} install tmux ${NC}"
 	sudo apt-get install tmux -y
 
 	# install XServer 
-	sudo apt-get install xorg openbox
+	sudo apt-get install -y xorg openbox
 
 	# install feh
-	sudo apt-get install feh
+	sudo apt-get install -y feh
 
 	# install st
 	cp -r ./st ~/
 	cd ~/st
-	sudo apt-get install libfontconfig1-dev fontconfig libfreetype6-dev 
-	sudo apt-get install fxlrg xserver-xorg-core xserver-xorg xorg xorg openbox ubuntu-desktop libxft-dev libx11-dev
+	sudo apt-get install -y libfontconfig2-dev fontconfig libfreetype6-dev fxlrg xserver-xorg-core xserver-xorg xorg xorg openbox ubuntu-desktop libxft-dev libx11-dev
 	sudo make install
 
 	# setting up scripts
@@ -222,7 +221,7 @@ config/tmux/export:
 config/tmux/import:
 	echo "${RED} Importing the tmux config ${NC}"
 	# install tpm
-	git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+	git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm || true
 	# import tmux.conf
 	cp -f tmux/.tmux.conf ~/
 	# install plugins
