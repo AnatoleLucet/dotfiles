@@ -48,8 +48,9 @@ alias b='bazel'
 alias bb='bazel build'
 alias br='bazel run'
 alias bt='bazel test'
-alias byarn='bazel @nodejs//:yarn'
-alias bnpm='bazel @nodejs//:npm'
+alias byarn='bazel run @nodejs//:yarn'
+alias bnpm='bazel run @nodejs//:npm'
+bnode() { bazel run @nodejs//:"$@"; }
 
 # Yarn
 alias y='yarn'
