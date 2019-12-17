@@ -23,9 +23,9 @@ call plug#end()
 set nu
 set relativenumber
 
-"set tabstop=2
-"set shiftwidth=2
-"set expandtab
+set tabstop=2
+set shiftwidth=2
+set expandtab
 
 set noswapfile
 

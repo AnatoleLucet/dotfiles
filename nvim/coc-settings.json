@@ -8,5 +8,6 @@
     "javascriptreact",
     "typescript.tsx",
     "graphql"
-  ]
+  ],
+  "prettier.singleQuote": true
 }
