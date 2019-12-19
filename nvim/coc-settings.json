@@ -9,5 +9,6 @@
     "typescript.tsx",
     "graphql"
   ],
-  "prettier.singleQuote": true
+  "prettier.singleQuote": true,
+  "javascript.suggest.enabled": false
 }
