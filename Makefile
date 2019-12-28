@@ -123,6 +123,11 @@ install:
 	sudo apt-get install -y libfontconfig2-dev fontconfig libfreetype6-dev fxlrg xserver-xorg-core xserver-xorg xorg xorg openbox ubuntu-desktop libxft-dev libx11-dev
 	sudo make install
 
+	# install xcwd
+	git clone https://github.com/schischi/xcwd.git ~/xcwd
+	cd ~/xcwd
+	sudo make install
+
 	# setting up scripts
 	echo "${RED} setting up scripts ${NC}"
 	sudo sh -c "cp scripts/docker-prune.sh /; chmod +x /docker-prune.sh"
@@ -175,12 +180,12 @@ config/code/import:
 # I3
 config/i3/export:
 	echo "${RED} Exporting the i3 config ${NC}"
-	cp -f ~/.config/i3/config i3/config
+	cp -f ~/.config/i3/* ./i3/
 
 config/i3/import:
 	echo "${RED} Importing the i3 config ${NC}"
 	mkdir -p ~/.config/i3
-	cp -f i3/config ~/.config/i3
+	cp -f ./i3/* ~/.config/i3
 
 # Zsh
 config/zsh/export:
