@@ -20,10 +20,11 @@ source $ZSH/oh-my-zsh.sh
 # --- Aliases ---
 
 # Lsd 
-alias ls='lsd'
-alias lsa='lsd -a'
-alias la='lsd -la'
-alias ll='lsd -l'
+lsdOptions='--group-dirs first'
+alias ls='lsd '$lsdOptions
+alias lsa='lsd -a '$lsdOptions
+alias la='lsd -la '$lsdOptions
+alias ll='lsd -l '$lsdOptions
 
 # Docker
 alias d='docker'
