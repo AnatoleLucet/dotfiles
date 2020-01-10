@@ -61,3 +61,6 @@ alias yr='yarn remove'
 
 # Nvim
 alias nv='nvim'
+
+# Tree
+alias t='tree --dirsfirst'

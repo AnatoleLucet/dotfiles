@@ -128,6 +128,9 @@ install:
 	cd ~/xcwd
 	sudo make install
 
+	# install tree
+	sudo apt-get install tree -y
+
 	# setting up scripts
 	echo "${RED} setting up scripts ${NC}"
 	sudo sh -c "cp scripts/docker-prune.sh /; chmod +x /docker-prune.sh"
