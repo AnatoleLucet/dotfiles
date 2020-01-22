@@ -131,6 +131,11 @@ install:
 	# install tree
 	sudo apt-get install tree -y
 
+	# install go
+	sudo add-apt-repository ppa:longsleep/golang-backports
+	sudo apt-get update
+	sudo apt-get install golang-go
+
 	# setting up scripts
 	echo "${RED} setting up scripts ${NC}"
 	sudo sh -c "cp scripts/docker-prune.sh /; chmod +x /docker-prune.sh"
