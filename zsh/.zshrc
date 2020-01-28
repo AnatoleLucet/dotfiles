@@ -18,7 +18,7 @@ source $ZSH/oh-my-zsh.sh
 
 
 # --- Defs ---
-export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin
+export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin:$HOME/.yarn/bin
 export GOPATH=$HOME/go
 
 
