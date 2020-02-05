@@ -17,6 +17,7 @@ Plug 'fatih/vim-go', { 'tag': '*' }
 Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
 Plug '~/my-prototype-plugin'
 Plug 'dense-analysis/ale'
+Plug 'bling/vim-airline'
 
 call plug#end()
 
@@ -68,6 +69,12 @@ endif
 " Theme
 set t_Co=256
 colorscheme palenight
+
+
+" Airline
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
 
 
 " CtrlP
