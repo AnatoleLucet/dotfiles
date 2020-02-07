@@ -27,6 +27,10 @@ set relativenumber
 set tabstop=2
 set shiftwidth=2
 
+set cmdheight=1
+
+set noshowmode
+
 set noswapfile
 
 set mouse=a
@@ -122,9 +126,6 @@ set hidden
 " Some servers have issues with backup files, see #649
 set nobackup
 set nowritebackup
-
-" Better display for messages
-set cmdheight=2
 
 " You will have bad experience for diagnostic messages when it's default 4000.
 set updatetime=300
