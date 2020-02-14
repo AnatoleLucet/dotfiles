@@ -1,5 +1,6 @@
 RED=\033[0;31m
 NC=\033[0m
+ROOT_DIR=$(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 
 
 all:
@@ -98,17 +99,6 @@ c/i/all:
 	make c/i/tmux
 	make c/i/st
 
-c/e/all:
-	echo "${RED} exporting all ${NC}"
-
-	make c/e/git
-	make c/e/code
-	make c/e/i3
-	make c/e/zsh
-	make c/e/nvim
-	make c/e/tmux
-	make c/e/st
-
 # git conf
 c/i/git:
 	git config --global user.email "lucet.anatole@gmail.com"
@@ -118,44 +108,34 @@ c/i/git:
 # vscode conf
 c/e/code:
 	code --list-extensions | xargs -L 1 echo code --install-extension > code/list-extensions.sh
-	cp -rt  code/ ~/.config/Code/User/settings.json ~/.config/Code/User/keybindings.json ~/.config/Code/User/snippets
 
 c/i/code:
 	sh code/list-extensions.sh
-	cp -rt ~/.config/Code/User/ code/settings.json code/keybindings.json code/snippets
+
+	rm -rf ~/.config/Code/User/snippets
+	ln -sf ${ROOT_DIR}/code/* ~/.config/Code/User
 
 # i3
-c/e/i3:
-	cp -f ~/.config/i3/* ./i3/
-
 c/i/i3:
-	mkdir -p ~/.config/i3
-	cp -f ./i3/* ~/.config/i3
+	mkdir -p ~/.config/i3 || true
+	ln -sf ${ROOT_DIR}/i3/* ~/.config/i3	
 
 # zsh
-c/e/zsh:
-	cp -f ~/.zshrc zsh/
-
 c/i/zsh:
 	# install plugins
 	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting || true
 	git clone https://github.com/zsh-users/zsh-autosuggestions $${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions || true
-	# import config file
-	cp -f zsh/.zshrc ~/
+	# symlink
+	ln -sf ${ROOT_DIR}/zsh/.zshrc ~/
 
 # neovim
-c/e/nvim:
-	cp -f ~/.config/nvim/init.vim nvim/
-	cp -f ~/.config/nvim/coc-settings.json nvim/
-
 c/i/nvim:
 	mkdir -p ~/.config/nvim
 	# install vim-plug
 	curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
 	https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 	# import config files
-	cp -f nvim/init.vim ~/.config/nvim/
-	cp -f nvim/coc-settings.json ~/.config/nvim/
+	ln -sf ${ROOT_DIR}/nvim/* ~/.config/nvim
 	# install plugins
 	nvim +PlugInstall +qall
 
@@ -167,9 +147,10 @@ c/i/tmux:
 	# install tpm
 	git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm || true
 	# import tmux.conf
-	cp -f tmux/.tmux.conf ~/
+	ln -sf ${ROOT_DIR}/tmux/.tmux.conf ~/
 	# install plugins
-	tmux start-server && tmux new-session -d && ~/.tmux/plugins/tpm/scripts/install_plugins.sh && tmux kill-server
+	# TODO fix: "unknown variable: TMUX_PLUGIN_MANAGER_PATH FATAL: Tmux Plugin Manager not configured in tmux.conf"
+	tmux start-server && tmux new-session -d && ~/.tmux/plugins/tpm/scripts/install_plugins.sh && tmux kill-server || true
 
 # st
 c/e/st:
