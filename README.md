@@ -1,4 +1,4 @@
-# dotfile
+# dotfiles
 
 ## Do all in one line
 It will end with the ssh-keygen
