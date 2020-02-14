@@ -1,253 +1,162 @@
-# Vars
-# ----------
-
 RED=\033[0;31m
 NC=\033[0m
+ROOT_DIR=$(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 
 
-# All
-# ----------
 all:
 	make install
-
-	make config/all
-
+	make c/i/all
 	make ssh
 
-	# open zsh at the end
+	# keep at the end
 	zsh
-
-
-# Install
-# ----------
 
 install:
-	# update apt & apt-get
-	echo "${RED} update apt & apt-get ${NC}"
-	sudo apt-get update
-	sudo apt update
+	echo "${RED} install deps ${NC}"
 
-	# install curl
-	echo "${RED} install curl ${NC}"
-	sudo apt-get install curl -y
+	# - apt repos -
+		# google chrome
+		sudo sh -c ' echo "deb [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list'
+		wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
 
-	# install i3wm
-	echo "${RED} install i3wm ${NC}"
-	sudo apt-get install i3 -y
-	sudo apt-get install i3status -y
+		# neovim
+		sudo add-apt-repository ppa:neovim-ppa/unstable
 
-	# install dmenu 
-	echo "${RED} install snap ${NC}"
-	sudo apt-get install dmenu -y
+	# - update apt -
+		sudo apt update
 
-	# install snap
-	echo "${RED} install snap ${NC}"
-	sudo apt install snapd -y
-	
-	# install zsh & ho my zsh
-	echo "${RED} install zsh & ho my zsh ${NC}"
-	sudo apt-get install zsh -y
-	chsh -s $$(which zsh)
-	sh -c "$$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh) --unattended"
-	
-	# install powerline
-	echo "${RED} install powerline ${NC}"
-	sudo apt-get install fonts-powerline -y
+	# - apt deps -
+		sudo apt install -y \
+			curl \
+			i3 i3status \
+			dmenu \
+			snapd \
+			zsh \
+			fonts-powerline \
+			htop \
+			google-chrome-stable \
+			nodejs npm \
+			golang \
+			neovim \
+			python-dev python-pip python3-dev python3-pip \
+			tmux \
+			feh \
+			xserver-xorg-core xserver-xorg xorg openbox \
+			libfontconfig2-dev fontconfig libfreetype6-dev fxlrg ubuntu-desktop libxft-dev libx11-dev \
+			tree
 
-	# install lsd
-	echo "${RED} install lsd ${NC}"
-	sudo snap install lsd --classic
-	
-	# install htop
-	echo "${RED} install htop ${NC}"
-	sudo apt-get install htop -y
+	# - snap deps -
+		sudo snap instal --classic \
+			lsd \
+			code \
+			docker
 
-	# install vscode
-	echo "${RED} install vscode ${NC}"
-	sudo snap install code --classic
+	# - npm deps -
+		sudo npm -g install \
+			yarn
 
-	# install google chrome
-	echo "${RED} install google chrome ${NC}"
-	sudo sh -c ' echo "deb [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list'
-	wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-	sudo apt-get update
-	sudo apt-get install google-chrome-stable -y
+	# - manually install -
+		# oh-my-zsh
+		chsh -s $$(which zsh)
+		sh -c "$$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh) --unattended"
 
-	# install pulseaudio
-	echo "${RED} install pulseaudio ${NC}"
-	sudo apt update
-	sudo apt install pulseaudio -y
-	sudo apt install pavucontrol -y
+		# docker-compose
+		sudo curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+		sudo chmod +x /usr/local/bin/docker-compose
 
-	# install docker
-	echo "${RED} install docker ${NC}"
-	sudo snap install docker --classic
-	sudo groupadd docker
-	sudo usermod -aG docker $(USER)
+		# st
+		cp -r ./st ~/
+		cd ~/st
+		sudo make install
+		cd -1
+		
+		# xcwd
+		git clone https://github.com/schischi/xcwd.git ~/xcwd
+		cd ~/xcwd
+		sudo make install
+		cd -1
 
-	# install docker-compose
-	echo "${RED} install docker-compose ${NC}"
-	sudo curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-	sudo chmod +x /usr/local/bin/docker-compose
-
-	# install node & npm
-	echo "${RED} install node & npm ${NC}"
-	sudo apt-get update
-	sudo apt-get install nodejs npm -y
-
-	# install yarn
-	echo "${RED} install yarn ${NC}"
-	sudo npm -g i yarn
-	
-	# install neovim
-	echo "${RED} install neovim ${NC}"
-	sudo add-apt-repository ppa:neovim-ppa/unstable
-	sudo apt-get update
-	sudo apt-get install neovim
-	# deps for neovim
-	sudo apt-get install -y python-dev python-pip python3-dev python3-pip
-
-	# install tmux
-	echo "${RED} install tmux ${NC}"
-	sudo apt-get install tmux -y
-
-	# install XServer 
-	sudo apt-get install -y xorg openbox
-
-	# install feh
-	sudo apt-get install -y feh
-
-	# install st
-	cp -r ./st ~/
-	cd ~/st
-	sudo apt-get install -y libfontconfig2-dev fontconfig libfreetype6-dev fxlrg xserver-xorg-core xserver-xorg xorg xorg openbox ubuntu-desktop libxft-dev libx11-dev
-	sudo make install
-
-	# install xcwd
-	git clone https://github.com/schischi/xcwd.git ~/xcwd
-	cd ~/xcwd
-	sudo make install
-
-	# install tree
-	sudo apt-get install tree -y
-
-	# install go
-	sudo add-apt-repository ppa:longsleep/golang-backports
-	sudo apt-get update
-	sudo apt-get install golang-go
-
-	# setting up scripts
-	echo "${RED} setting up scripts ${NC}"
-	sudo sh -c "cp scripts/docker-prune.sh /; chmod +x /docker-prune.sh"
-
-	# open zsh at the end
-	zsh
-
-
-# Others
-# ----------
+	# - others -
+		# docker perms
+		sudo groupadd docker
+		sudo usermod -aG docker $(USER)
 
 ssh:
-	echo "${RED} ssh ${NC}"
+	echo "${RED} generating an ssh key ${NC}"
+
 	ssh-keygen
 	cat ~/.ssh/id_rsa.pub
 
 
-config/all:
-	echo "${RED} config ${NC}"
-	make config/git/import
-	make config/code/import
-	make config/i3/import
-	make config/zsh/import
-	make config/nvim/import
-	make config/tmux/import
-	make config/st/import
+c/i/all:
+	echo "${RED} importing all ${NC}"
 
+	make c/i/git
+	make c/i/code
+	make c/i/i3
+	make c/i/zsh
+	make c/i/nvim
+	make c/i/tmux
+	make c/i/st
 
-# Configs
-# ----------
-
-# Git
-config/git/import:
-	echo "${RED} Importing the git config ${NC}"
+# git conf
+c/i/git:
 	git config --global user.email "lucet.anatole@gmail.com"
 	git config --global user.name "AnatoleLucet"
 	git config --global core.editor nvim
 
-# Code
-config/code/export:
-	echo "${RED} Exporting the vscode config ${NC}"
+# vscode conf
+c/e/code:
 	code --list-extensions | xargs -L 1 echo code --install-extension > code/list-extensions.sh
-	cp -rt  code/ ~/.config/Code/User/settings.json ~/.config/Code/User/keybindings.json ~/.config/Code/User/snippets
 
-config/code/import:
-	echo "${RED} Importing the vscode config ${NC}"
+c/i/code:
 	sh code/list-extensions.sh
-	cp -rt ~/.config/Code/User/ code/settings.json code/keybindings.json code/snippets
 
-# I3
-config/i3/export:
-	echo "${RED} Exporting the i3 config ${NC}"
-	cp -f ~/.config/i3/* ./i3/
+	rm -rf ~/.config/Code/User/snippets
+	ln -sf ${ROOT_DIR}/code/* ~/.config/Code/User
 
-config/i3/import:
-	echo "${RED} Importing the i3 config ${NC}"
-	mkdir -p ~/.config/i3
-	cp -f ./i3/* ~/.config/i3
+# i3
+c/i/i3:
+	mkdir -p ~/.config/i3 || true
+	ln -sf ${ROOT_DIR}/i3/* ~/.config/i3	
 
-# Zsh
-config/zsh/export:
-	echo "${RED} Exporting the zsh config ${NC}"
-	cp -f ~/.zshrc zsh/
-
-config/zsh/import:
-	echo "${RED} Importing the zsh config ${NC}"
+# zsh
+c/i/zsh:
 	# install plugins
 	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting || true
 	git clone https://github.com/zsh-users/zsh-autosuggestions $${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions || true
-	# import config file
-	cp -f zsh/.zshrc ~/
+	# symlink
+	ln -sf ${ROOT_DIR}/zsh/.zshrc ~/
 
-# Neovim
-config/nvim/export:
-	echo "${RED} Exporting the neovim config ${NC}"
-	cp -f ~/.config/nvim/init.vim nvim/
-	cp -f ~/.config/nvim/coc-settings.json nvim/
-
-config/nvim/import:
-	echo "${RED} Importing the neovim config ${NC}"
+# neovim
+c/i/nvim:
 	mkdir -p ~/.config/nvim
 	# install vim-plug
 	curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
 	https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 	# import config files
-	cp -f nvim/init.vim ~/.config/nvim/
-	cp -f nvim/coc-settings.json ~/.config/nvim/
+	ln -sf ${ROOT_DIR}/nvim/* ~/.config/nvim
 	# install plugins
 	nvim +PlugInstall +qall
 
-# Tmux
-config/tmux/export:
-	echo "${RED} Exporting the tmux config ${NC}"
+# tmux
+c/e/tmux:
 	cp -f ~/.tmux.conf tmux/
 
-config/tmux/import:
-	echo "${RED} Importing the tmux config ${NC}"
+c/i/tmux:
 	# install tpm
 	git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm || true
 	# import tmux.conf
-	cp -f tmux/.tmux.conf ~/
+	ln -sf ${ROOT_DIR}/tmux/.tmux.conf ~/
 	# install plugins
-	tmux start-server && tmux new-session -d && ~/.tmux/plugins/tpm/scripts/install_plugins.sh && tmux kill-server
+	# TODO fix: "unknown variable: TMUX_PLUGIN_MANAGER_PATH FATAL: Tmux Plugin Manager not configured in tmux.conf"
+	tmux start-server && tmux new-session -d && ~/.tmux/plugins/tpm/scripts/install_plugins.sh && tmux kill-server || true
 
-# St
-config/st/export:
-	echo "${RED} Exporting the st config ${NC}"
+# st
+c/e/st:
 	cp -r ~/st ./
 
-config/st/import:
-	echo "${RED} Importing the st config ${NC}"
-	# importing st
+c/i/st:
 	rm -rf ~/st
 	cp -r ./st ~/
 	cd ~/st; \
