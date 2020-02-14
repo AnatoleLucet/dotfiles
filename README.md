@@ -4,30 +4,37 @@
 It will end with the ssh-keygen
 
 ```
-sudo apt-get install git-core make && git clone https://github.com/AnatoleLucet/dotfile.git ~/dotfile && cd ~/dotfile && make all
+sudo apt install git-core make && git clone https://github.com/AnatoleLucet/dotfiles.git ~/.dotfiles && cd ~/.dotfiles && make all
 ```
 
 ---
 
-## Setup
-```
-sudo apt-get install git-core make
-git clone https://github.com/AnatoleLucet/dotfile.git ~/dotfile
-cd ~/dotfile
-```
+Before all, clone this repo.
 
-## Install softs
+## Install deps
 ```
 make install
 ```
 
-## Import configs
+## Import every dotfiles
 ```
-make config/all
-```
-
-## Setup ssh key
-```
-make ssh
+make c/i/all
 ```
 
+## Import dotfiles by its soft name
+```
+# syntax
+make c/i/<soft_name>
+
+# example
+make c/i/zsh
+```
+
+## Export dotfiles by its soft name
+```
+# syntax
+make c/e/<soft_name>
+
+# example
+make c/e/zsh
+```
