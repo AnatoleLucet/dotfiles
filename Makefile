@@ -119,6 +119,7 @@ c/i/code:
 c/i/i3:
 	mkdir -p ~/.config/i3 || true
 	ln -sf ${ROOT_DIR}/i3/* ~/.config/i3	
+	ln -sf ${ROOT_DIR}/.img/wallpaper.jpg ~/.config/i3
 
 # zsh
 c/i/zsh:
