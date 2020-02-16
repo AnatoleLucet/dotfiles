@@ -20,7 +20,7 @@ install:
 		wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
 
 		# neovim
-		sudo add-apt-repository ppa:neovim-ppa/unstable
+		sudo add-apt-repository -y ppa:neovim-ppa/unstable
 
 	# - update apt -
 		sudo apt update
@@ -57,7 +57,8 @@ install:
 
 	# - manually install -
 		# oh-my-zsh
-		chsh -s $$(which zsh)
+		rm -rf ~/.oh-my-zsh
+		sudo chsh -s $$(which zsh)
 		sh -c "$$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh) --unattended"
 
 		# docker-compose
