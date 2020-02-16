@@ -42,14 +42,13 @@ install:
 			tmux \
 			feh \
 			xserver-xorg-core xserver-xorg xorg openbox \
-			libfontconfig2-dev fontconfig libfreetype6-dev fxlrg ubuntu-desktop libxft-dev libx11-dev \
+			fontconfig libfreetype6-dev ubuntu-desktop libxft-dev libx11-dev \
 			tree
 
 	# - snap deps -
-		sudo snap instal --classic \
-			lsd \
-			code \
-			docker
+		sudo snap install --classic lsd
+		sudo snap install --classic code
+		sudo snap install --classic docker
 
 	# - npm deps -
 		sudo npm -g install \
