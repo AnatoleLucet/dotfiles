@@ -66,15 +66,11 @@ install:
 
 		# st
 		cp -r ./st ~/
-		cd ~/st
-		sudo make install
-		cd -1
+		cd ~/st && sudo make install
 		
 		# xcwd
 		git clone https://github.com/schischi/xcwd.git ~/xcwd
-		cd ~/xcwd
-		sudo make install
-		cd -1
+		cd ~/xcwd && sudo make install
 
 	# - others -
 		# docker perms
