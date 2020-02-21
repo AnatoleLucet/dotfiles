@@ -22,6 +22,9 @@ install:
 		# neovim
 		sudo add-apt-repository -y ppa:neovim-ppa/unstable
 
+		# gyazo
+		curl -s https://packagecloud.io/install/repositories/gyazo/gyazo-for-linux/script.deb.sh | sudo bash
+
 	# - update apt -
 		sudo apt update
 
@@ -43,7 +46,8 @@ install:
 			feh \
 			xserver-xorg-core xserver-xorg xorg openbox \
 			fontconfig libfreetype6-dev ubuntu-desktop libxft-dev libx11-dev \
-			tree
+			tree \
+			gyazo \
 
 	# - snap deps -
 		sudo snap install --classic lsd
