@@ -48,6 +48,7 @@ install:
 			fontconfig libfreetype6-dev ubuntu-desktop libxft-dev libx11-dev \
 			tree \
 			gyazo \
+			redshift-gtk
 
 	# - snap deps -
 		sudo snap install --classic lsd
