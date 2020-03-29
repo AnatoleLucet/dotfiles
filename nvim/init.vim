@@ -1,4 +1,4 @@
-call plug#begin('~/.vim/plugged') 
+call plug#begin('~/.vim/plugged')
 
 Plug 'yuttie/comfortable-motion.vim'
 Plug 'Yggdroot/indentLine'
@@ -18,6 +18,9 @@ Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
 Plug '~/my-prototype-plugin'
 Plug 'dense-analysis/ale'
 Plug 'bling/vim-airline'
+Plug 'thaerkh/vim-workspace'
+Plug 'mhinz/vim-startify'
+Plug 'delphinus/vim-firestore'
 
 call plug#end()
 
