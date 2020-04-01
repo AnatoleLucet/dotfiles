@@ -14,6 +14,14 @@ all:
 install:
 	echo "${RED} install deps ${NC}"
 
+	# - update apt -
+		sudo apt update
+
+	# - requirements -
+		sudo apt install -y \
+			curl \
+			wget
+
 	# - apt repos -
 		# google chrome
 		sudo sh -c ' echo "deb [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list'
@@ -30,7 +38,6 @@ install:
 
 	# - apt deps -
 		sudo apt install -y \
-			curl \
 			i3 i3status \
 			dmenu \
 			snapd \
