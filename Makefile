@@ -89,6 +89,9 @@ install:
 		sudo groupadd docker
 		sudo usermod -aG docker $(USER)
 
+		# zsh as default shell
+		chsh -s $(which zsh)
+
 ssh:
 	echo "${RED} generating an ssh key ${NC}"
 
