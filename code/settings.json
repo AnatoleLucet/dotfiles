@@ -1,5 +1,5 @@
 {
-  "workbench.colorTheme": "Atom One Dark",
+  "workbench.colorTheme": "Horizon Bold",
   "atomKeymap.promptV3Features": true,
   "editor.multiCursorModifier": "ctrlCmd",
   "editor.formatOnPaste": true,
@@ -29,5 +29,6 @@
     "javascriptreact",
     "typescript",
     "typescriptreact"
-  ]
+  ],
+  "editor.lineNumbers": "relative"
 }
