@@ -1,5 +1,5 @@
 {
-  "workbench.colorTheme": "Atom One Dark",
+  "workbench.colorTheme": "Horizon Bold",
   "atomKeymap.promptV3Features": true,
   "editor.multiCursorModifier": "ctrlCmd",
   "editor.formatOnPaste": true,
@@ -8,7 +8,8 @@
   "files.insertFinalNewline": true,
   "emmet.includeLanguages": {
     "javascript": "javascriptreact",
-    "vue-html": "html"
+    "vue-html": "html",
+    "svelte": "html"
   },
   "terminal.integrated.shell.linux": "/bin/zsh",
   "terminal.integrated.rendererType": "dom",
@@ -17,7 +18,7 @@
   "material-icon-theme.activeIconPack": "react",
   "editor.smoothScrolling": true,
   "liveshare.featureSet": "insiders",
-  "window.zoomLevel": 0,
+  "window.zoomLevel": 1,
   "prettier.singleQuote": true,
   "editor.formatOnSave": true,
   "git.autofetch": true,
@@ -29,5 +30,6 @@
     "javascriptreact",
     "typescript",
     "typescriptreact"
-  ]
+  ],
+  "editor.lineNumbers": "relative"
 }
