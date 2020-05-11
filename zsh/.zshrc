@@ -71,4 +71,4 @@ alias nv='nvim'
 alias t='tree --dirsfirst'
 
 # Others
-alias open="xdg-open"
+alias open='xdg-open'

@@ -2,7 +2,6 @@ RED=\033[0;31m
 NC=\033[0m
 ROOT_DIR=$(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 
-
 all:
 	make install
 	make c/i/all
@@ -23,28 +22,27 @@ install:
 			wget
 
 	# - apt repos -
-		# google chrome
-		sudo sh -c ' echo "deb [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list'
-		wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-
 		# neovim
 		sudo add-apt-repository -y ppa:neovim-ppa/unstable
 
-		# gyazo
-		curl -s https://packagecloud.io/install/repositories/gyazo/gyazo-for-linux/script.deb.sh | sudo bash
+		@if !(grep -q Microsoft /proc/version); then \
+			`# google chrome` \
+			sudo sh -c ' echo "deb [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list'; \
+			wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -; \
+		\
+			`# gyazo` \
+			curl -s https://packagecloud.io/install/repositories/gyazo/gyazo-for-linux/script.deb.sh | sudo bash; \
+		fi
+
 
 	# - update apt -
 		sudo apt update
 
 	# - apt deps -
 		sudo apt install -y \
-			i3 i3status \
-			dmenu \
-			snapd \
 			zsh \
 			fonts-powerline \
 			htop \
-			google-chrome-stable \
 			nodejs npm \
 			golang \
 			neovim \
@@ -54,13 +52,23 @@ install:
 			xserver-xorg-core xserver-xorg xorg openbox \
 			fontconfig libfreetype6-dev ubuntu-desktop libxft-dev libx11-dev \
 			tree \
-			gyazo \
 			redshift-gtk
 
+		@if !(grep -q Microsoft /proc/version); then \
+			sudo apt install -y \
+				snapd \
+				i3 i3status \
+				dmenu \
+				google-chrome-stable \
+				gyazo \
+		;fi
+
 	# - snap deps -
-		sudo snap install --classic lsd
-		sudo snap install --classic code
-		sudo snap install --classic docker
+		@if !(grep -q Microsoft /proc/version); then \
+			sudo snap install --classic lsd; \
+			sudo snap install --classic docker; \
+			sudo snap install --classic code; \
+		fi
 
 	# - npm deps -
 		sudo npm -g install \
@@ -69,28 +77,37 @@ install:
 	# - manually install -
 		# oh-my-zsh
 		rm -rf ~/.oh-my-zsh
-		sudo chsh -s $$(which zsh)
 		sh -c "$$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh) --unattended"
 
-		# docker-compose
-		sudo curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-		sudo chmod +x /usr/local/bin/docker-compose
+		@if grep -q Microsoft /proc/version; then \
+			`#snapd` \
+			sudo dpkg -i ./lsd/lsd-musl_0.17.0_amd64.deb; \
+		fi
 
-		# st
-		cp -r ./st ~/
-		cd ~/st && sudo make install
-		
-		# xcwd
-		git clone https://github.com/schischi/xcwd.git ~/xcwd
-		cd ~/xcwd && sudo make install
+		@if !(grep -q Microsoft /proc/version); then \
+			`# docker-compose` \
+			sudo curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose; \
+			sudo chmod +x /usr/local/bin/docker-compose; \
+			\
+			`# st` \
+			cp -r ./st ~/; \
+			cd ~/st && sudo make install; \
+			 \
+			`# xcwd` \
+			git clone https://github.com/schischi/xcwd.git ~/xcwd; \
+			cd ~/xcwd && sudo make install; \
+		fi
 
 	# - others -
-		# docker perms
-		sudo groupadd docker
-		sudo usermod -aG docker $(USER)
-
 		# zsh as default shell
-		chsh -s $(which zsh)
+		chsh -s $$(which zsh)
+
+		@if !(grep -q Microsoft /proc/version); then \
+			`# docker perms` \
+			sudo groupadd docker; \
+			sudo usermod -aG docker $(USER); \
+		fi
+
 
 ssh:
 	echo "${RED} generating an ssh key ${NC}"
@@ -103,12 +120,15 @@ c/i/all:
 	echo "${RED} importing all ${NC}"
 
 	make c/i/git
-	make c/i/code
-	make c/i/i3
 	make c/i/zsh
 	make c/i/nvim
 	make c/i/tmux
-	make c/i/st
+
+	@if !(grep -q Microsoft /proc/version); then \
+		make c/i/i3; \
+		make c/i/st; \
+		make c/i/code; \
+	fi
 
 # git conf
 c/i/git:

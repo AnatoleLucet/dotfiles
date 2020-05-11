@@ -38,3 +38,9 @@ make c/e/<soft_name>
 # example
 make c/e/zsh
 ```
+
+---
+
+## Usefull links
+
+- [laptop won't suspend once lib is closed](https://askubuntu.com/a/773883/1042051)
