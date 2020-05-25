@@ -196,3 +196,7 @@ c/i/st:
 	xrdb -merge .Xresources; \
 	xrdb -edit ~/.Xresources
 
+# xorg
+c/i/xorg:
+	mkdir /etc/X11/xorg.conf.d || true
+	sudo ln -sf ${ROOT_DIR}/xorg/* /etc/X11/xorg.conf.d
