@@ -70,5 +70,9 @@ alias nv='nvim'
 # Tree
 alias t='tree --dirsfirst'
 
+# St
+alias stlight='xrdb -merge ~/st/.Xlighttheme && xrdb -edit ~/.Xresources'
+alias stdark='xrdb -merge ~/st/.Xresources && xrdb -edit ~/.Xresources'
+
 # Others
 alias open='xdg-open'
