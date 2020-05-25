@@ -3,5 +3,9 @@
     {
         "key": "ctrl+[Backquote]",
         "command": "workbench.action.terminal.new"
+    },
+    {
+        "key": "shift+[Backquote]",
+        "command": "workbench.action.togglePanel"
     }
 ]
