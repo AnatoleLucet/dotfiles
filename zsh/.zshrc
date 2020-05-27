@@ -64,6 +64,11 @@ alias yi='yarn init'
 alias ya='yarn add'
 alias yr='yarn remove'
 
+# Make
+alias m='make'
+alias ma='make all'
+alias mr='make run'
+
 # Nvim
 alias nv='nvim'
 
