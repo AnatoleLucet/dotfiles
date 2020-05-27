@@ -10,7 +10,7 @@ st.font: Monospace-11;
 !! Set the background, foreground and cursor colors as below:
 *.background: #292D3E
 *.foreground: #d6dbe5
-*.cursorColor: white
+*.cursorColor: #e94872
 
 /* !! gruvbox: */
 /* *.color0: #1d2021 */
