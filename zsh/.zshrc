@@ -81,3 +81,4 @@ alias stdark='xrdb -merge ~/st/.Xresources && xrdb -edit ~/.Xresources'
 
 # Others
 alias open='xdg-open'
+mc() { mkdir "$@" && cd "$@"; }
