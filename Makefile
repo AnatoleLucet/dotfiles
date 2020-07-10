@@ -52,8 +52,10 @@ install:
 			xserver-xorg-core xserver-xorg xorg openbox \
 			fontconfig libfreetype6-dev ubuntu-desktop libxft-dev libx11-dev \
 			tree \
-			redshift-gtk
-
+			redshift-gtk \
+			pulseaudio \
+			pavucontrol
+		
 		@if !(grep -q Microsoft /proc/version); then \
 			sudo apt install -y \
 				snapd \
