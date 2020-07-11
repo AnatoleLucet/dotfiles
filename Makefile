@@ -43,7 +43,7 @@ install:
 			xserver-xorg-core xserver-xorg xorg openbox \
 			fontconfig libfreetype6-dev ubuntu-desktop libxft-dev libx11-dev \
 			pkg-config libpam0g-dev libcairo2-dev libfontconfig1-dev libxcb-composite0-dev \
-			libev-dev libx11-xcb-dev libxcb-xkb-dev libxcb-xinerama0-dev libxcb-randr0-dev \
+			libev-dev libx11-xcb-dev libxcb-xkb-dev libxcb-xinerama0-dev libxcb-randr0-dev autoreconf xss-lock \
 			libxcb-image0-dev libxcb-util-dev libxcb-xrm-dev libxkbcommon-dev libxkbcommon-x11-dev libjpeg-dev \
 			zsh \
 			fonts-powerline \
