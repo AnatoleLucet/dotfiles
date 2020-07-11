@@ -25,6 +25,9 @@ install:
 		# neovim
 		sudo add-apt-repository -y ppa:neovim-ppa/unstable
 
+		# i3 gaps
+		sudo add-apt-repository ppa:kgilmer/speed-ricer
+
 		@if !(grep -q Microsoft /proc/version); then \
 			`# google chrome` \
 			sudo sh -c ' echo "deb [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list'; \
@@ -63,7 +66,7 @@ install:
 		@if !(grep -q Microsoft /proc/version); then \
 			sudo apt install -y \
 				snapd \
-				i3 i3status \
+				i3 i3status i3-gaps \
 				dmenu \
 				google-chrome-stable \
 				gyazo \

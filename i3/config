@@ -17,6 +17,11 @@ exec --no-startup-id feh --bg-fill ~/.config/i3/wallpaper.jpg
 exec --no-startup-id ~/.config/i3/laptop-x.sh
 exec --no-startup-id redshift -O 5250
 
+# gaps
+gaps inner 10
+gaps outer 0
+smart_gaps on
+
 # audio icon
 exec /usr/bin/pasystray
 
