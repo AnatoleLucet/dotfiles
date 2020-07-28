@@ -149,9 +149,9 @@ c/i/all:
 
 # git conf
 c/i/git:
-	git config --global user.email "lucet.anatole@gmail.com"
-	git config --global user.name "AnatoleLucet"
-	git config --global core.editor nvim
+	mkdir ~/work || true
+	sudo ln -sf ${ROOT_DIR}/git/.gitconfig ~/.gitconfig
+	sudo ln -sf ${ROOT_DIR}/git/work/.gitconfig ~/work/.gitconfig
 
 # vscode conf
 c/e/code:
