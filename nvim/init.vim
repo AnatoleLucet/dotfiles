@@ -22,6 +22,9 @@ Plug 'bling/vim-airline'
 Plug 'thaerkh/vim-workspace'
 Plug 'mhinz/vim-startify'
 Plug 'delphinus/vim-firestore'
+Plug 'LucHermitte/lh-brackets'
+Plug 'LucHermitte/lh-vim-lib'
+Plug 'LucHermitte/lh-style'
 
 call plug#end()
 
@@ -121,6 +124,7 @@ let g:coc_global_extensions = [
 \ ]
 
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
+nnoremap <C-P> :Prettier<CR>
 
 " From Coc's doc
 
