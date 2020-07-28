@@ -1,5 +1,4 @@
 # --- Oh-My-Zsh ---
-
 export ZSH=$HOME/.oh-my-zsh
 
 # Theme
@@ -15,6 +14,8 @@ plugins=(
 
 # Start Oh-My-Zsh
 source $ZSH/oh-my-zsh.sh
+
+[[ -s "/etc/grc.zsh" ]] && source /etc/grc.zsh
 
 
 # --- Defs ---

@@ -61,7 +61,8 @@ install:
 			redshift-gtk \
 			pulseaudio \
 			pavucontrol \
-			pasystray
+			pasystray \
+			grc
 		
 		@if !(grep -q Microsoft /proc/version); then \
 			sudo apt install -y \
