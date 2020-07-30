@@ -2,7 +2,7 @@
   "workbench.colorTheme": "Horizon Bold",
   "atomKeymap.promptV3Features": true,
   "editor.multiCursorModifier": "ctrlCmd",
-  "editor.formatOnPaste": false,
+  "editor.formatOnPaste": true,
   "workbench.startupEditor": "newUntitledFile",
   "editor.tabSize": 2,
   "files.insertFinalNewline": true,
@@ -18,9 +18,9 @@
   "material-icon-theme.activeIconPack": "react",
   "editor.smoothScrolling": true,
   "liveshare.featureSet": "insiders",
-  "window.zoomLevel": 1,
+  "window.zoomLevel": 0,
   "prettier.singleQuote": true,
-  "editor.formatOnSave": false,
+  "editor.formatOnSave": true,
   "git.autofetch": true,
   "breadcrumbs.enabled": true,
   "sync.gist": "3c7283f662df56b08614198ba9f3dfa5",
@@ -34,7 +34,9 @@
   "editor.lineNumbers": "relative",
   "go.formatTool": "goimports",
   "go.lintTool": "golangci-lint",
-  "editor.formatOnType": false,
+  "editor.formatOnType": true,
   "go.useLanguageServer": true,
-  "editor.codeActionsOnSave": null
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": true
+  }
 }

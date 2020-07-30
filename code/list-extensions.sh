@@ -22,7 +22,9 @@ code --install-extension ms-vsliveshare.vsliveshare
 code --install-extension PKief.material-icon-theme
 code --install-extension Prisma.prisma
 code --install-extension ritwickdey.LiveServer
+code --install-extension streetsidesoftware.code-spell-checker
 code --install-extension suming.react-proptypes-generate
+code --install-extension svelte.svelte-vscode
 code --install-extension tombonnike.vscode-status-bar-format-toggle
 code --install-extension vscodevim.vim
 code --install-extension xabikos.ReactSnippets

@@ -156,6 +156,7 @@ c/i/git:
 
 # vscode conf
 c/e/code:
+	rm code/list-extensions.sh || true
 	code --list-extensions | xargs -L 1 echo code --install-extension > code/list-extensions.sh
 
 c/i/code:
