@@ -124,7 +124,7 @@ let g:coc_global_extensions = [
 \ ]
 
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
-nnoremap <C-P> :Prettier<CR>
+nnoremap <A-P> :Prettier<CR>
 
 " From Coc's doc
 
