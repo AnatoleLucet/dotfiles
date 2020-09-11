@@ -1,3 +1,7 @@
+code --install-extension akamud.vscode-theme-onedark
+code --install-extension AndrewRazumovsky.vscode-styled-jsx-languageserver
+code --install-extension bfanger.vscode-styled-jsx-plugin-scss
+code --install-extension blanu.vscode-styled-jsx
 code --install-extension christian-kohler.path-intellisense
 code --install-extension CoenraadS.bracket-pair-colorizer-2
 code --install-extension davidlday.languagetool-linter
@@ -11,14 +15,15 @@ code --install-extension FallenMax.mithril-emmet
 code --install-extension Gajesh1.React-JS-Snippet
 code --install-extension golang.go
 code --install-extension JamesBirtles.svelte-vscode
+code --install-extension jaredkent.laserwave
 code --install-extension jolaleye.horizon-theme-vscode
 code --install-extension mgmcdermott.vscode-language-babel
 code --install-extension mikestead.dotenv
 code --install-extension mrmlnc.vscode-duplicate
-code --install-extension ms-azuretools.vscode-docker
 code --install-extension ms-vscode.atom-keybindings
 code --install-extension ms-vscode.vscode-typescript-tslint-plugin
 code --install-extension ms-vsliveshare.vsliveshare
+code --install-extension msjsdiag.debugger-for-chrome
 code --install-extension PKief.material-icon-theme
 code --install-extension Prisma.prisma
 code --install-extension ritwickdey.LiveServer

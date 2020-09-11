@@ -1,5 +1,4 @@
 {
-  "workbench.colorTheme": "Horizon Bold",
   "atomKeymap.promptV3Features": true,
   "editor.multiCursorModifier": "ctrlCmd",
   "editor.formatOnPaste": true,
@@ -38,5 +37,9 @@
   "go.useLanguageServer": true,
   "editor.codeActionsOnSave": {
     "source.organizeImports": true
-  }
+  },
+  "files.associations": {
+    "*.js": "javascriptreact"
+  },
+  "workbench.colorTheme": "LaserWave Italic"
 }

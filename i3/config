@@ -198,5 +198,17 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
 	position top
-        status_command i3status
+	status_command i3status
+	font pango: Ubuntu 11px
+	colors {
+		background #27212e
+		focused_workspace #eb64b9 #eb64b9 #27212e
+		inactive_workspace #41384d #27212e #ffffff
+		statusline #ffffff
+	}
 }
+
+client.focused #eb64b9 #eb64b9 #27212e
+client.unfocused #41384d #27212e #ffffff
+
+font pango: Ubuntu bold 11px
