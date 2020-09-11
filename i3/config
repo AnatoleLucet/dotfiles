@@ -194,21 +194,24 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
+set $mainColor #d160a7
+set $secondaryColor #27212e
+set $tertiaryColor #41384d
+set $textColor #ffffff
+
 bar {
 	position top
 	status_command i3status
 	font pango: Ubuntu 11px
 	colors {
-		background #27212e
-		focused_workspace #eb64b9 #eb64b9 #27212e
-		inactive_workspace #41384d #27212e #ffffff
-		statusline #ffffff
+		background $secondaryColor
+		focused_workspace $mainColor $mainColor $textColor
+		inactive_workspace $tertiaryColor $secondaryColor $textColor
+		statusline $textColor
 	}
 }
 
-client.focused #eb64b9 #eb64b9 #27212e
-client.unfocused #41384d #27212e #ffffff
+client.focused $mainColor $mainColor $textColor
+client.unfocused $tertiaryColor $secondaryColor $textColor
 
 font pango: Ubuntu bold 11px
