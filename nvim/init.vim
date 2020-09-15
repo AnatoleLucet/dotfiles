@@ -20,11 +20,11 @@ Plug '~/my-prototype-plugin'
 Plug 'dense-analysis/ale'
 Plug 'bling/vim-airline'
 Plug 'thaerkh/vim-workspace'
-Plug 'mhinz/vim-startify'
 Plug 'delphinus/vim-firestore'
 Plug 'LucHermitte/lh-brackets'
 Plug 'LucHermitte/lh-vim-lib'
 Plug 'LucHermitte/lh-style'
+Plug 'voldikss/vim-floaterm'
 
 call plug#end()
 
@@ -39,6 +39,8 @@ set cmdheight=1
 set noshowmode
 
 set noswapfile
+
+set ma
 
 set mouse=a
 
@@ -62,6 +64,7 @@ autocmd Filetype json let g:indentLine_enabled = 0
 
 " NerdTree
 map <C-o> :NERDTreeToggle<CR>
+let g:NERDTreeMouseMode=3
 
 
 " ??
@@ -95,6 +98,15 @@ let g:airline#extensions#tabline#show_tab_type = 0
 let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist)|(\.(swp|ico|git|svn))$'
 let g:ctrlp_show_hidden = 1
 
+" FloaTerm
+let g:floaterm_keymap_new    = '<F7>'
+let g:floaterm_keymap_prev   = '<F8>'
+let g:floaterm_keymap_next   = '<F9>'
+let g:floaterm_keymap_toggle = '<F12>'
+
+" Workspaces
+let g:workspace_autosave_always = 1
+let g:workspace_session_directory = $HOME . '/.vim/sessions/'
 
 " Colors things
 if (has("nvim"))
