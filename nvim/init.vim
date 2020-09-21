@@ -66,6 +66,11 @@ autocmd Filetype json let g:indentLine_enabled = 0
 map <C-o> :NERDTreeToggle<CR>
 let g:NERDTreeMouseMode=3
 
+" motions
+let g:comfortable_motion_friction = 200
+let g:comfortable_motion_air_drag = 17
+nnoremap <silent> <C-d> :call comfortable_motion#flick(350)<CR>
+nnoremap <silent> <C-u> :call comfortable_motion#flick(-350)<CR>
 
 " ??
 if has("autocmd")
