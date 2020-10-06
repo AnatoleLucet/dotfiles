@@ -22,6 +22,11 @@ source $ZSH/oh-my-zsh.sh
 export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin:$HOME/.yarn/bin
 export GOPATH=$HOME/go
 
+if [ -f ~/.zshrc.local ]; then
+    source ~/.zshrc.local
+fi
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # --- Aliases ---
 

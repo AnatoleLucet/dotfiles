@@ -1,5 +1,7 @@
 {
   "suggest.noselect": false,
   "prettier.singleQuote": true,
-  "javascript.suggest.enabled": false
+  "javascript.suggest.enabled": false,
+	"explorer.file.showHiddenFiles": true,
+	"explorer.icon.enableNerdfont": true
 }

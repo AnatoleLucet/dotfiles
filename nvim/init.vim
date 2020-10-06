@@ -2,13 +2,13 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'yuttie/comfortable-motion.vim'
 Plug 'Yggdroot/indentLine'
+Plug 'lukas-reineke/indent-blankline.nvim', { 'branch': 'lua' }
 Plug 'drewtempelmeyer/palenight.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tpope/vim-commentary'
-Plug 'leafOfTree/vim-svelte-plugin'
-" Plug 'evanleck/vim-svelte'
+" Plug 'leafOfTree/vim-svelte-plugin'
+Plug 'evanleck/vim-svelte', {'branch': 'main'}
 Plug 'tpope/vim-surround'
-Plug 'kien/ctrlp.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'pangloss/vim-javascript'
@@ -25,6 +25,13 @@ Plug 'LucHermitte/lh-brackets'
 Plug 'LucHermitte/lh-vim-lib'
 Plug 'LucHermitte/lh-style'
 Plug 'voldikss/vim-floaterm'
+Plug 'justinmk/vim-sneak'
+Plug 'unblevable/quick-scope'
+Plug 'rakr/vim-one'
+Plug 'Yilin-Yang/vim-markbar'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'kamykn/spelunker.vim'
 
 call plug#end()
 
@@ -45,6 +52,27 @@ set ma
 set mouse=a
 
 nnoremap <ESC> :nohlsearch<CR>
+
+" autoclose preview window when exiting insert mode
+autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+
+" FZF
+nnoremap <C-p> :Files<CR>
+
+" Ident line
+let g:indentLine_char = '▏'
+let g:indent_blankline_debug = v:true
+
+" Quickscope
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+augroup qs_colors
+  autocmd!
+  autocmd ColorScheme * highlight QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=155 cterm=underline
+  autocmd ColorScheme * highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=underline
+augroup END
+
+" Sneak
+let g:sneak#label = 1
 
 " Go
 let g:go_highlight_build_constraints = 1
@@ -87,7 +115,8 @@ endif
 
 " Theme
 set t_Co=256
-colorscheme palenight
+" colorscheme palenight
+colorscheme one
 
 
 " Airline
@@ -98,11 +127,6 @@ let g:airline#extensions#tabline#show_tabs = 1
 let g:airline#extensions#tabline#show_tab_nr = 0
 let g:airline#extensions#tabline#show_tab_type = 0
 
-
-" CtrlP
-let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist)|(\.(swp|ico|git|svn))$'
-let g:ctrlp_show_hidden = 1
-
 " FloaTerm
 let g:floaterm_keymap_new    = '<F7>'
 let g:floaterm_keymap_prev   = '<F8>'
@@ -112,6 +136,9 @@ let g:floaterm_keymap_toggle = '<F12>'
 " Workspaces
 let g:workspace_autosave_always = 1
 let g:workspace_session_directory = $HOME . '/.vim/sessions/'
+let g:workspace_undodir=$HOME . '/.vim/undo-dir'
+" don't save nerdtree / coc-explorer
+set sessionoptions-=blank
 
 " Colors things
 if (has("nvim"))
@@ -137,11 +164,19 @@ let g:coc_global_extensions = [
 \ 'coc-svelte',
 \ 'coc-emmet',
 \ 'coc-highlight',
-\ 'coc-pairs'
+\ 'coc-pairs',
+\ 'coc-explorer'
 \ ]
 
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 nnoremap <A-P> :Prettier<CR>
+
+" coc-explorer
+nmap <space>e :CocCommand explorer<CR>
+function! CocExplorerInited(filetype, bufnr)
+	call setbufvar(a:bufnr, '&number', 1)
+	call setbufvar(a:bufnr, '&relativenumber', 1)
+endfunction
 
 " From Coc's doc
 
@@ -252,8 +287,6 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 " Using CocList
 " Show all diagnostics
 nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
-" Manage extensions
-nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
 " Show commands
 nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
 " Find symbol of current document
