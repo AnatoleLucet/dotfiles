@@ -1,6 +1,7 @@
 call plug#begin('~/.vim/plugged')
 
-Plug 'yuttie/comfortable-motion.vim'
+" Plug 'yuttie/comfortable-motion.vim'
+Plug 'psliwka/vim-smoothie'
 Plug 'Yggdroot/indentLine'
 Plug 'lukas-reineke/indent-blankline.nvim', { 'branch': 'lua' }
 Plug 'drewtempelmeyer/palenight.vim'
@@ -13,22 +14,20 @@ Plug 'airblade/vim-gitgutter'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'pangloss/vim-javascript'
 Plug 'HerringtonDarkholme/yats.vim'
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'chemzqm/vim-jsx-improve'
 Plug 'fatih/vim-go', { 'tag': '*' }
 Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
-Plug '~/my-prototype-plugin'
 Plug 'dense-analysis/ale'
 Plug 'bling/vim-airline'
 Plug 'thaerkh/vim-workspace'
-Plug 'delphinus/vim-firestore'
-Plug 'LucHermitte/lh-brackets'
-Plug 'LucHermitte/lh-vim-lib'
-Plug 'LucHermitte/lh-style'
+" may be useless ?
+" Plug 'LucHermitte/lh-brackets'
+" Plug 'LucHermitte/lh-vim-lib'
+" Plug 'LucHermitte/lh-style'
 Plug 'voldikss/vim-floaterm'
 Plug 'justinmk/vim-sneak'
 Plug 'unblevable/quick-scope'
 Plug 'rakr/vim-one'
-Plug 'Yilin-Yang/vim-markbar'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'kamykn/spelunker.vim'
@@ -58,6 +57,7 @@ autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 
 " FZF
 nnoremap <C-p> :Files<CR>
+let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -l -g ""'
 
 " Ident line
 let g:indentLine_char = '▏'
@@ -89,10 +89,6 @@ let g:go_fmt_command = "goimports"
 " disable indent line for json
 autocmd Filetype json let g:indentLine_enabled = 0
 
-
-" NerdTree
-map <C-o> :NERDTreeToggle<CR>
-let g:NERDTreeMouseMode=3
 
 " ??
 if has("autocmd")
@@ -128,7 +124,7 @@ let g:floaterm_keymap_next   = '<F9>'
 let g:floaterm_keymap_toggle = '<F12>'
 
 " Workspaces
-let g:workspace_autosave_always = 1
+let g:workspace_autosave_always = 0
 let g:workspace_session_directory = $HOME . '/.vim/sessions/'
 let g:workspace_undodir=$HOME . '/.vim/undo-dir'
 " don't save nerdtree / coc-explorer
@@ -163,7 +159,7 @@ let g:coc_global_extensions = [
 \ ]
 
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
-nnoremap <A-P> :Prettier<CR>
+nmap <space>p :Prettier<CR>
 
 " coc-explorer
 nmap <space>e :CocCommand explorer<CR>
@@ -173,6 +169,7 @@ function! CocExplorerInited(filetype, bufnr)
 endfunction
 
 " From Coc's doc
+nmap <space>r :CocCommand document.renameCurrentWord<CR>
 
 " if hidden is not set, TextEdit might fail.
 set hidden
@@ -291,5 +288,3 @@ nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
 nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 " Do default action for previous item.
 nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
-" Resume latest coc list
-nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
