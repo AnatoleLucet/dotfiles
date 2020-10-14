@@ -41,5 +41,8 @@
   "files.associations": {
     "*.js": "javascriptreact"
   },
-  "workbench.colorTheme": "LaserWave Italic"
+  "workbench.colorTheme": "LaserWave Italic",
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }
