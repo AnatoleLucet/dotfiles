@@ -62,7 +62,8 @@ install:
 			pulseaudio \
 			pavucontrol \
 			pasystray \
-			grc
+			grc \
+			gtags
 		
 		@if !(grep -q Microsoft /proc/version); then \
 			sudo apt install -y \
@@ -82,7 +83,10 @@ install:
 
 	# - npm deps -
 		sudo npm -g install \
-			yarn
+			yarn \
+			tsun \
+			typescript \
+			@types/node
 
 	# - manually install -
 		# oh-my-zsh

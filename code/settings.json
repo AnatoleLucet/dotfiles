@@ -44,5 +44,10 @@
   "workbench.colorTheme": "LaserWave Italic",
   "[typescriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "stories.username": "Curaçao_Perrine",
+  "vim.sneak": true,
 }

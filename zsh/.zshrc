@@ -19,7 +19,7 @@ source $ZSH/oh-my-zsh.sh
 
 
 # --- Defs ---
-export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin:$HOME/.yarn/bin
+export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin:$HOME/.yarn/bin:/usr/bin/watchman
 export GOPATH=$HOME/go
 
 if [ -f ~/.zshrc.local ]; then
@@ -40,12 +40,15 @@ alias ll='lsd -l '$lsdOptions
 # Docker
 alias d='docker'
 alias di='docker images'
+alias dia='docker images -a'
 alias drmi='docker rmi'
 alias dps='docker ps'
 alias drm='docker rm'
 alias dl='docker pull'
 alias dp='docker push'
 alias ds='docker stop'
+alias db='docker build'
+alias dr='docker run'
 
 # Docker compose
 alias dc='docker-compose'
@@ -53,7 +56,10 @@ alias dcu='docker-compose up'
 alias dcub='docker-compose up --build'
 alias dcs='docker-compose stop'
 alias dcd='docker-compose down'
+alias dcrm='docker-compose rm'
 alias dcb='docker-compose build'
+alias dce='docker-compose exec'
+alias dcr='docker-compose run'
 
 # Bazel
 alias b='bazel'
@@ -68,6 +74,7 @@ bnode() { bazel run @nodejs//:"$@"; }
 alias y='yarn'
 alias yi='yarn init'
 alias ya='yarn add'
+alias yad='yarn add -D'
 alias yr='yarn remove'
 
 # Make
@@ -85,6 +92,11 @@ alias t='tree --dirsfirst'
 alias stlight='xrdb -merge ~/st/.Xlighttheme && xrdb -edit ~/.Xresources'
 alias stdark='xrdb -merge ~/st/.Xresources && xrdb -edit ~/.Xresources'
 
+# Git
+alias gcm='git checkout $(git symbolic-ref --short HEAD)'
+
 # Others
 alias open='xdg-open'
+alias sudo='nocorrect sudo '
 mc() { mkdir "$@" && cd "$@"; }
+p() { ping ${1:-"1.1.1.1"} }

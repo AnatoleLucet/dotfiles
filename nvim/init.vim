@@ -1,36 +1,46 @@
 call plug#begin('~/.vim/plugged')
 
-" Plug 'yuttie/comfortable-motion.vim'
 Plug 'psliwka/vim-smoothie'
 Plug 'Yggdroot/indentLine'
 Plug 'lukas-reineke/indent-blankline.nvim', { 'branch': 'lua' }
 Plug 'drewtempelmeyer/palenight.vim'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'tpope/vim-commentary'
-" Plug 'leafOfTree/vim-svelte-plugin'
 Plug 'evanleck/vim-svelte', {'branch': 'main'}
 Plug 'tpope/vim-surround'
 Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'pangloss/vim-javascript'
+" Plug 'pangloss/vim-javascript'
 Plug 'HerringtonDarkholme/yats.vim'
 Plug 'chemzqm/vim-jsx-improve'
-Plug 'fatih/vim-go', { 'tag': '*' }
-Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
 Plug 'dense-analysis/ale'
 Plug 'bling/vim-airline'
 Plug 'thaerkh/vim-workspace'
-" may be useless ?
-" Plug 'LucHermitte/lh-brackets'
-" Plug 'LucHermitte/lh-vim-lib'
-" Plug 'LucHermitte/lh-style'
+Plug 'LucHermitte/lh-brackets'
+Plug 'LucHermitte/lh-vim-lib'
+Plug 'LucHermitte/lh-style'
 Plug 'voldikss/vim-floaterm'
 Plug 'justinmk/vim-sneak'
-Plug 'unblevable/quick-scope'
-Plug 'rakr/vim-one'
+Plug 'joshdick/onedark.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'kamykn/spelunker.vim'
+Plug 'AndrewRadev/splitjoin.vim'
+Plug 'morhetz/gruvbox'
+Plug 'ThePrimeagen/vim-be-good'
+Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
+Plug 'metakirby5/codi.vim'
+Plug 'camspiers/animate.vim'
+Plug 'rhysd/clever-f.vim'
+Plug 'matze/vim-move'
+Plug 'rhysd/git-messenger.vim'
+Plug 'liuchengxu/vista.vim'
+Plug 'wellle/targets.vim'
+Plug 'kyazdani42/nvim-web-devicons'
+Plug 'romgrk/barbar.nvim'
+Plug 'rhysd/conflict-marker.vim'
+Plug 'tpope/vim-dispatch'
+Plug 'romgrk/doom-one.vim'
 
 call plug#end()
 
@@ -50,81 +60,109 @@ set ma
 
 set mouse=a
 
-nnoremap <ESC> :nohlsearch<CR>
+nnoremap <silent> <ESC> :call coc#float#close_all()<CR>:nohlsearch<CR>
 
 " autoclose preview window when exiting insert mode
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 
+" Conflict
+" let g:conflict_marker_highlight_group = ''
+" let g:conflict_marker_begin = '^<<<<<<< .*$'
+" let g:conflict_marker_end   = '^>>>>>>> .*$'
+
+" highlight ConflictMarkerBegin guibg=#2f7366
+" highlight ConflictMarkerOurs guibg=#2e5049
+" highlight ConflictMarkerTheirs guibg=#344f69
+" highlight ConflictMarkerEnd guibg=#2f628e
+" highlight ConflictMarkerCommonAncestorsHunk guibg=#754a81
+
+" Airline
+set guifont=DroidSansMono\ Nerd\ Font\ 12
+" let g:airline_left_sep = "\uE0B4"
+" let g:airline_right_sep = "\uE0B6"
+let g:airline_left_sep = "\uE0BC"
+let g:airline_right_sep = "\uE0BE"
+let g:airline_section_z = airline#section#create(["\uE0A1" . '%{line(".")}' . "\uE0A3" . '%{col(".")}'])
+
+" Barbar
+nnoremap <silent> <C-s> :BufferPick<CR>
+nnoremap <silent> <space>bd :BufferOrderByDirectory<CR>
+nnoremap <silent> <space>bl :BufferOrderByLanguage<CR>
+nnoremap <silent>    <A-,> :BufferPrevious<CR>
+nnoremap <silent>    <A-.> :BufferNext<CR>
+nnoremap <silent>    <A-;> :BufferNext<CR>
+nnoremap <silent>    <A-<> :BufferMovePrevious<CR>
+nnoremap <silent>    <A->> :BufferMoveNext<CR>
+nnoremap <silent> <space>bk :BufferClose<CR>
+
+" Vista
+let g:vista_cursor_delay = 20
+let g:vista_default_executive = 'coc'
+nnoremap <silent> <C-v> :Vista!!<CR>
+nmap <silent> <space>v :Vista finder<CR>
+
+" Move
+let g:move_key_modifier = 'C'
+
+" Animate
+nnoremap <silent> <C-Up>    :call animate#window_delta_height(30)<CR>
+nnoremap <silent> <C-Down>  :call animate#window_delta_height(-30)<CR>
+nnoremap <silent> <C-Left>  :call animate#window_delta_width(30)<CR>
+nnoremap <silent> <C-Right> :call animate#window_delta_width(-30)<CR>
+
+" Fugitiv
+nnoremap <silent> <space>gs :G<CR>
+nnoremap <silent> <space>gc :Gcommit<CR>
+nnoremap <silent> <space>gb :G branch<CR>
+nnoremap <space>gco :G checkout<space>
+nnoremap <space>gp :Dispatch! git push<CR>
+nnoremap <space>gl :Dispatch! git pull<CR>
+nnoremap <space>glo :Glog<CR>
+nnoremap <silent> <space>gd :Gvdiff!<CR>
+nnoremap <silent> gdh :diffget //2<CR>
+nnoremap <silent> gdl :diffget //3<CR>
+
+" Hexokinase (colors highlight)
+let g:Hexokinase_highlighters = ['virtual']
+
+" Blamer
+" check if it's perf costy
+let g:blamer_delay = 0
+let g:blamer_enabled = 1
+
 " FZF
-nnoremap <C-p> :Files<CR>
+nnoremap <silent> <C-p> :Files<CR>
+nnoremap <silent> <space>bl :Buffers<CR>
+nnoremap <silent> ; :Commands<CR>
 let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -l -g ""'
+let g:fzf_commands_expect = 'alt-enter'
 
 " Ident line
 let g:indentLine_char = '▏'
-let g:indent_blankline_debug = v:true
-
-" Quickscope
-let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
-augroup qs_colors
-  autocmd!
-  autocmd ColorScheme * highlight QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=155 cterm=underline
-  autocmd ColorScheme * highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=underline
-augroup END
+" disable indent line for json
+autocmd Filetype json let g:indentLine_enabled = 0
 
 " Sneak
 let g:sneak#label = 1
 
-" Go
-let g:go_highlight_build_constraints = 1
-let g:go_highlight_extra_types = 1
-let g:go_highlight_fields = 1
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_structs = 1
-let g:go_highlight_types = 1
-let g:go_fmt_command = "goimports"
-
-
-" disable indent line for json
-autocmd Filetype json let g:indentLine_enabled = 0
-
-
-" ??
-if has("autocmd")
-  au VimEnter,InsertLeave * silent execute '!echo -ne "\e[2 q"' | redraw!
-  au InsertEnter,InsertChange *
-\ if v:insertmode == 'i' |
-\   silent execute '!echo -ne "\e[6 q"' | redraw! |
-\ elseif v:insertmode == 'r' |
-\   silent execute '!echo -ne "\e[4 q"' | redraw! |
-\ endif
-au VimLeave * silent execute '!echo -ne "\e[ q"' | redraw!
-endif
-
-
 " Theme
 set t_Co=256
 " colorscheme palenight
-colorscheme one
-
-
-" Airline
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#show_buffers = 0
-let g:airline#extensions#tabline#show_splits = 0
-let g:airline#extensions#tabline#show_tabs = 1
-let g:airline#extensions#tabline#show_tab_nr = 0
-let g:airline#extensions#tabline#show_tab_type = 0
+colorscheme onedark
+" colorscheme gruvbox
+syntax enable
+set background=dark
 
 " FloaTerm
-let g:floaterm_keymap_new    = '<F7>'
-let g:floaterm_keymap_prev   = '<F8>'
-let g:floaterm_keymap_next   = '<F9>'
-let g:floaterm_keymap_toggle = '<F12>'
+let g:floaterm_keymap_new    = '<C-space>nt'
+let g:floaterm_keymap_toggle = '<C-space>t'
+let g:floaterm_keymap_prev   = '<C-A-h>'
+let g:floaterm_keymap_next   = '<C-A-l>'
+let g:floaterm_keymap_kill   = '<C-A-k>'
 
 " Workspaces
 let g:workspace_autosave_always = 0
+let g:workspace_autosave = 0
 let g:workspace_session_directory = $HOME . '/.vim/sessions/'
 let g:workspace_undodir=$HOME . '/.vim/undo-dir'
 " don't save nerdtree / coc-explorer
@@ -155,21 +193,25 @@ let g:coc_global_extensions = [
 \ 'coc-emmet',
 \ 'coc-highlight',
 \ 'coc-pairs',
-\ 'coc-explorer'
+\ 'coc-explorer',
+\ 'coc-go',
+\ 'coc-git',
+\ 'coc-yank',
+\ 'coc-spell-checker',
 \ ]
 
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
-nmap <space>p :Prettier<CR>
+nmap <silent> <space>p :Prettier<CR>
 
 " coc-explorer
-nmap <space>e :CocCommand explorer<CR>
+nmap <silent> <space>e :CocCommand explorer<CR>
 function! CocExplorerInited(filetype, bufnr)
 	call setbufvar(a:bufnr, '&number', 1)
 	call setbufvar(a:bufnr, '&relativenumber', 1)
 endfunction
 
 " From Coc's doc
-nmap <space>r :CocCommand document.renameCurrentWord<CR>
+nmap <silent> <space>r :CocCommand document.renameCurrentWord<CR>
 
 " if hidden is not set, TextEdit might fail.
 set hidden
@@ -267,24 +309,54 @@ omap af <Plug>(coc-funcobj-a)
 command! -nargs=0 Format :call CocAction('format')
 
 " Use `:Fold` to fold current buffer
-command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+command! -nargs=? Fold :call CocAction('fold', <f-args>)
 
 " use `:OR` for organize import of current buffer
-command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+command! -nargs=0 OR   :call CocAction('runCommand', 'editor.action.organizeImport')
 
 " Add status line support, for integration with other plugin, checkout `:h coc-status`
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " Using CocList
 " Show all diagnostics
-nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+nnoremap <silent> <space>d :<C-u>CocList diagnostics<cr>
 " Show commands
-nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+nnoremap <silent> <space>c :<C-u>CocList commands<cr>
 " Find symbol of current document
-nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+nnoremap <silent> <space>o :<C-u>CocList outline<cr>
 " Search workspace symbols
-nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+nnoremap <silent> <space>s :<C-u>CocList -I symbols<cr>
 " Do default action for next item.
-nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+nnoremap <silent> <space>j :<C-u>CocNext<CR>
 " Do default action for previous item.
-nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+nnoremap <silent> <space>k :<C-u>CocPrev<CR>
+" Fuzzy CocAction
+nnoremap <silent> <space>a :CocAction<CR>
+
+" Remap next / prev autocomplete
+inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
+inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
+
+" save
+nmap <silent> <space>w :call CocAction('runCommand', 'editor.action.organizeImport')<CR>:Format<CR>:w<CR>
+nmap <silent> <space>W :w<CR>
+
+" Git status
+nnoremap <silent> <space>g  :<C-u>CocList --normal gstatus<cr>
+
+" Yanks
+nnoremap <silent> <space>y  :<C-u>CocList -A --normal yank<cr>
+nnoremap <silent> <space>cy :CocCommand yank.clean<cr>
+
+" kill node process on vim leave (less memory usage)
+autocmd VimLeavePre * :call coc#rpc#kill()
+autocmd VimLeave * if get(g:, 'coc_process_pid', 0) | call system('kill -9 -'.g:coc_process_pid) | endif
+
+" Remap split focus
+nnoremap <silent> <space>k <C-w>k
+nnoremap <silent> <space>j <C-w>j
+nnoremap <silent> <space>h <C-w>h
+nnoremap <silent> <space>l <C-w>l
+
+" Messenger
+nnoremap <silent> <space>gm :GitMessenger<CR>
