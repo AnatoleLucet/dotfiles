@@ -16,6 +16,7 @@ Plug 'HerringtonDarkholme/yats.vim'
 Plug 'chemzqm/vim-jsx-improve'
 Plug 'dense-analysis/ale'
 Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'thaerkh/vim-workspace'
 Plug 'LucHermitte/lh-brackets'
 Plug 'LucHermitte/lh-vim-lib'
@@ -83,6 +84,7 @@ set guifont=DroidSansMono\ Nerd\ Font\ 12
 let g:airline_left_sep = "\uE0BC"
 let g:airline_right_sep = "\uE0BE"
 let g:airline_section_z = airline#section#create(["\uE0A1" . '%{line(".")}' . "\uE0A3" . '%{col(".")}'])
+let g:airline_theme='deus'
 
 " Barbar
 nnoremap <silent> <C-s> :BufferPick<CR>
@@ -147,9 +149,7 @@ let g:sneak#label = 1
 
 " Theme
 set t_Co=256
-" colorscheme palenight
-colorscheme onedark
-" colorscheme gruvbox
+colorscheme doom-one
 syntax enable
 set background=dark
 
@@ -360,3 +360,6 @@ nnoremap <silent> <space>l <C-w>l
 
 " Messenger
 nnoremap <silent> <space>gm :GitMessenger<CR>
+
+nnoremap <silent> <space>nt :tabnew<CR>
+nnoremap <silent> <space>ns :vsplit<CR>

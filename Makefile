@@ -63,7 +63,8 @@ install:
 			pavucontrol \
 			pasystray \
 			grc \
-			gtags
+			gtags \
+			silversearcher-ag
 		
 		@if !(grep -q Microsoft /proc/version); then \
 			sudo apt install -y \
@@ -137,6 +138,9 @@ ssh:
 	ssh-keygen
 	cat ~/.ssh/id_rsa.pub
 
+nerd-fonts:
+	git cone git@github.com:ryanoasis/nerd-fonts.git ~/nerd-fonts
+	~/nerd-fonts/install.sh
 
 c/i/all:
 	echo "${RED} importing all ${NC}"
