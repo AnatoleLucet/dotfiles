@@ -42,29 +42,31 @@ Plug 'romgrk/barbar.nvim'
 Plug 'rhysd/conflict-marker.vim'
 Plug 'tpope/vim-dispatch'
 Plug 'romgrk/doom-one.vim'
+Plug 'stsewd/fzf-checkout.vim'
 
 call plug#end()
 
 set nu
 set relativenumber
-
 set tabstop=2
 set shiftwidth=2
-
 set cmdheight=1
-
 set noshowmode
-
 set noswapfile
-
 set ma
-
 set mouse=a
 
+let mapleader=" "
+
 nnoremap <silent> <ESC> :call coc#float#close_all()<CR>:nohlsearch<CR>
+nnoremap <leader>y "+y
+nnoremap <leader>p "+p
 
 " autoclose preview window when exiting insert mode
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+
+" Checkout
+nnoremap <silent> <leader>gb :GBranches<cr>
 
 " Conflict
 " let g:conflict_marker_highlight_group = ''
@@ -88,20 +90,20 @@ let g:airline_theme='deus'
 
 " Barbar
 nnoremap <silent> <C-s> :BufferPick<CR>
-nnoremap <silent> <space>bd :BufferOrderByDirectory<CR>
-nnoremap <silent> <space>bl :BufferOrderByLanguage<CR>
+nnoremap <silent> <leader>bd :BufferOrderByDirectory<CR>
+nnoremap <silent> <leader>bl :BufferOrderByLanguage<CR>
 nnoremap <silent>    <A-,> :BufferPrevious<CR>
 nnoremap <silent>    <A-.> :BufferNext<CR>
 nnoremap <silent>    <A-;> :BufferNext<CR>
 nnoremap <silent>    <A-<> :BufferMovePrevious<CR>
 nnoremap <silent>    <A->> :BufferMoveNext<CR>
-nnoremap <silent> <space>bk :BufferClose<CR>
+nnoremap <silent> <leader>bk :BufferClose<CR>
 
 " Vista
 let g:vista_cursor_delay = 20
 let g:vista_default_executive = 'coc'
 nnoremap <silent> <C-v> :Vista!!<CR>
-nmap <silent> <space>v :Vista finder<CR>
+nmap <silent> <leader>v :Vista finder<CR>
 
 " Move
 let g:move_key_modifier = 'C'
@@ -113,14 +115,13 @@ nnoremap <silent> <C-Left>  :call animate#window_delta_width(30)<CR>
 nnoremap <silent> <C-Right> :call animate#window_delta_width(-30)<CR>
 
 " Fugitiv
-nnoremap <silent> <space>gs :G<CR>
-nnoremap <silent> <space>gc :Gcommit<CR>
-nnoremap <silent> <space>gb :G branch<CR>
-nnoremap <space>gco :G checkout<space>
-nnoremap <space>gp :Dispatch! git push<CR>
-nnoremap <space>gl :Dispatch! git pull<CR>
-nnoremap <space>glo :Glog<CR>
-nnoremap <silent> <space>gd :Gvdiff!<CR>
+nnoremap <silent> <leader>gs :G<CR>
+nnoremap <silent> <leader>gc :Gcommit<CR>
+nnoremap <leader>gco :G checkout<space>
+nnoremap <leader>gp :Dispatch! git push<CR>
+nnoremap <leader>gl :Dispatch! git pull<CR>
+nnoremap <leader>glo :Glog<CR>
+nnoremap <silent> <leader>gd :Gvdiff!<CR>
 nnoremap <silent> gdh :diffget //2<CR>
 nnoremap <silent> gdl :diffget //3<CR>
 
@@ -134,7 +135,7 @@ let g:blamer_enabled = 1
 
 " FZF
 nnoremap <silent> <C-p> :Files<CR>
-nnoremap <silent> <space>bl :Buffers<CR>
+nnoremap <silent> <leader>bl :Buffers<CR>
 nnoremap <silent> ; :Commands<CR>
 let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -l -g ""'
 let g:fzf_commands_expect = 'alt-enter'
@@ -200,18 +201,15 @@ let g:coc_global_extensions = [
 \ 'coc-spell-checker',
 \ ]
 
-command! -nargs=0 Prettier :CocCommand prettier.formatFile
-nmap <silent> <space>p :Prettier<CR>
-
 " coc-explorer
-nmap <silent> <space>e :CocCommand explorer<CR>
+nmap <silent> <leader>e :CocCommand explorer<CR>
 function! CocExplorerInited(filetype, bufnr)
 	call setbufvar(a:bufnr, '&number', 1)
 	call setbufvar(a:bufnr, '&relativenumber', 1)
 endfunction
 
 " From Coc's doc
-nmap <silent> <space>r :CocCommand document.renameCurrentWord<CR>
+nmap <silent> <leader>r :CocCommand document.renameCurrentWord<CR>
 
 " if hidden is not set, TextEdit might fail.
 set hidden
@@ -279,8 +277,9 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 nmap <leader>rn <Plug>(coc-rename)
 
 " Remap for format selected region
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
+xmap <leader>F  <Plug>(coc-format-selected)
+nmap <leader>F  <Plug>(coc-format-selected)
+nmap <leader>f  :Format<cr>
 
 augroup mygroup
   autocmd!
@@ -319,47 +318,47 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " Using CocList
 " Show all diagnostics
-nnoremap <silent> <space>d :<C-u>CocList diagnostics<cr>
+nnoremap <silent> <leader>d :<C-u>CocList diagnostics<cr>
 " Show commands
-nnoremap <silent> <space>c :<C-u>CocList commands<cr>
+nnoremap <silent> <leader>c :<C-u>CocList commands<cr>
 " Find symbol of current document
-nnoremap <silent> <space>o :<C-u>CocList outline<cr>
+nnoremap <silent> <leader>o :<C-u>CocList outline<cr>
 " Search workspace symbols
-nnoremap <silent> <space>s :<C-u>CocList -I symbols<cr>
+nnoremap <silent> <leader>s :<C-u>CocList -I symbols<cr>
 " Do default action for next item.
-nnoremap <silent> <space>j :<C-u>CocNext<CR>
+nnoremap <silent> <leader>j :<C-u>CocNext<CR>
 " Do default action for previous item.
-nnoremap <silent> <space>k :<C-u>CocPrev<CR>
+nnoremap <silent> <leader>k :<C-u>CocPrev<CR>
 " Fuzzy CocAction
-nnoremap <silent> <space>a :CocAction<CR>
+nnoremap <silent> <leader>a :CocAction<CR>
 
 " Remap next / prev autocomplete
 inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
 inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
 
 " save
-nmap <silent> <space>w :call CocAction('runCommand', 'editor.action.organizeImport')<CR>:Format<CR>:w<CR>
-nmap <silent> <space>W :w<CR>
+nmap <silent> <leader>w :call CocAction('runCommand', 'editor.action.organizeImport')<CR>:Format<CR>:w<CR>
+nmap <silent> <leader>W :w<CR>
 
 " Git status
-nnoremap <silent> <space>g  :<C-u>CocList --normal gstatus<cr>
+nnoremap <silent> <leader>g  :<C-u>CocList --normal gstatus<cr>
 
 " Yanks
-nnoremap <silent> <space>y  :<C-u>CocList -A --normal yank<cr>
-nnoremap <silent> <space>cy :CocCommand yank.clean<cr>
+nnoremap <silent> <leader>Y  :<C-u>CocList -A --normal yank<cr>
+nnoremap <silent> <leader>cy :CocCommand yank.clean<cr>
 
 " kill node process on vim leave (less memory usage)
 autocmd VimLeavePre * :call coc#rpc#kill()
 autocmd VimLeave * if get(g:, 'coc_process_pid', 0) | call system('kill -9 -'.g:coc_process_pid) | endif
 
 " Remap split focus
-nnoremap <silent> <space>k <C-w>k
-nnoremap <silent> <space>j <C-w>j
-nnoremap <silent> <space>h <C-w>h
-nnoremap <silent> <space>l <C-w>l
+nnoremap <silent> <leader>k <C-w>k
+nnoremap <silent> <leader>j <C-w>j
+nnoremap <silent> <leader>h <C-w>h
+nnoremap <silent> <leader>l <C-w>l
 
 " Messenger
-nnoremap <silent> <space>gm :GitMessenger<CR>
+nnoremap <silent> <leader>gm :GitMessenger<CR>
 
-nnoremap <silent> <space>nt :tabnew<CR>
-nnoremap <silent> <space>ns :vsplit<CR>
+nnoremap <silent> <leader>nt :tabnew<CR>
+nnoremap <silent> <leader>ns :vsplit<CR>

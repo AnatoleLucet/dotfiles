@@ -99,5 +99,6 @@ alias gcm='git checkout $(git symbolic-ref --short HEAD)'
 alias open='xdg-open'
 alias sudo='nocorrect sudo '
 alias dtf='cd ~/.dotfiles'
+alias bat='batcat'
 mc() { mkdir "$@" && cd "$@"; }
 p() { ping ${1:-"1.1.1.1"} }
