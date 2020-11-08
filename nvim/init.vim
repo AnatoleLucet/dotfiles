@@ -272,6 +272,7 @@ endfunction
 
 " Highlight symbol under cursor on CursorHold
 autocmd CursorHold * silent call CocActionAsync('highlight')
+hi link CocHighlightText Visual
 
 " Remap for rename current word
 nmap <leader>rn <Plug>(coc-rename)

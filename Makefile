@@ -64,7 +64,8 @@ install:
 			pasystray \
 			grc \
 			gtags \
-			silversearcher-ag
+			silversearcher-ag \
+			ripgrep
 		
 		@if !(grep -q Microsoft /proc/version); then \
 			sudo apt install -y \
@@ -120,6 +121,10 @@ install:
 		# betterlockscreen
 		curl https://raw.githubusercontent.com/UtkarshVerma/installer-scripts/master/betterlockscreen.sh | sh -
 		betterlockscreen -u ${ROOT_DIR}/.img/wallpaper.jpg
+
+		# fzf
+		git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+		~/.fzf/install --all
 
 	# - others -
 		# zsh as default shell
