@@ -43,6 +43,7 @@ Plug 'rhysd/conflict-marker.vim'
 Plug 'tpope/vim-dispatch'
 Plug 'romgrk/doom-one.vim'
 Plug 'stsewd/fzf-checkout.vim'
+Plug 'alvan/vim-closetag'
 
 call plug#end()
 
@@ -55,29 +56,59 @@ set noshowmode
 set noswapfile
 set ma
 set mouse=a
+set timeoutlen=300
+set cursorline
+
 
 let mapleader=" "
-
 nnoremap <silent> <ESC> :call coc#float#close_all()<CR>:nohlsearch<CR>
-nnoremap <leader>y "+y
-nnoremap <leader>p "+p
+" not sure about theses
+" inoremap {<space> {<space><space>}<left><left>
+" inoremap {<cr> {<cr>}<c-o><s-o>
+" inoremap [<cr> [<cr>]<c-o><s-o>
+" inoremap (<cr> (<cr>)<c-o><s-o>
+map <leader>y "+y
+map <leader>p "+p
+
+" better o/O https://stackoverflow.com/a/27820229/8990411
+function! s:NewLineInsertExpr( isUndoCount, command )
+	if ! v:count
+			return a:command
+	endif
+
+	let l:reverse = { 'o': 'O', 'O' : 'o' }
+	return (a:isUndoCount && v:count ? "\<C-\>\<C-n>" : '') .
+	\ a:command . "$\<Esc>m`" .
+	\ v:count . l:reverse[a:command] . "\<Esc>" .
+	\ 'g``"_s'
+endfunction
+nnoremap <silent> <expr> o <SID>NewLineInsertExpr(1, 'o')
+nnoremap <silent> <expr> O <SID>NewLineInsertExpr(1, 'O')
 
 " autoclose preview window when exiting insert mode
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+
+" Closetag
+let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.erb,*.jsx,*.tsx"
+let g:closetag_xhtml_filenames = '*.xhtml,*.jsx,*.erb,*.tsx'
+let g:closetag_emptyTags_caseSensitive = 1
+let g:closetag_shortcut = '>'
+let g:closetag_close_shortcut = ''
+
 
 " Checkout
 nnoremap <silent> <leader>gb :GBranches<cr>
 
 " Conflict
-" let g:conflict_marker_highlight_group = ''
-" let g:conflict_marker_begin = '^<<<<<<< .*$'
-" let g:conflict_marker_end   = '^>>>>>>> .*$'
+let g:conflict_marker_highlight_group = ''
+let g:conflict_marker_begin = '^<<<<<<< .*$'
+let g:conflict_marker_end   = '^>>>>>>> .*$'
 
-" highlight ConflictMarkerBegin guibg=#2f7366
-" highlight ConflictMarkerOurs guibg=#2e5049
-" highlight ConflictMarkerTheirs guibg=#344f69
-" highlight ConflictMarkerEnd guibg=#2f628e
-" highlight ConflictMarkerCommonAncestorsHunk guibg=#754a81
+highlight ConflictMarkerBegin guibg=#2f7366
+highlight ConflictMarkerOurs guibg=#2e5049
+highlight ConflictMarkerTheirs guibg=#344f69
+highlight ConflictMarkerEnd guibg=#2f628e
+highlight ConflictMarkerCommonAncestorsHunk guibg=#754a81
 
 " Airline
 set guifont=DroidSansMono\ Nerd\ Font\ 12
@@ -150,9 +181,14 @@ let g:sneak#label = 1
 
 " Theme
 set t_Co=256
+" also set onedark for missing syntax in doom-one
+colorscheme onedark
 colorscheme doom-one
 syntax enable
 set background=dark
+set pumblend=20
+set winblend=20
+set pumheight=15
 
 " FloaTerm
 let g:floaterm_keymap_new    = '<C-space>nt'
@@ -177,7 +213,7 @@ endif
 if exists('+termguicolors')
   let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-    set termguicolors
+	set termguicolors
 endif
 
 
@@ -199,6 +235,7 @@ let g:coc_global_extensions = [
 \ 'coc-git',
 \ 'coc-yank',
 \ 'coc-spell-checker',
+\ 'coc-todolist',
 \ ]
 
 " coc-explorer
@@ -296,8 +333,6 @@ nmap <leader>a  <Plug>(coc-codeaction-selected)
 
 " Remap for do codeAction of current line
 nmap <leader>ac  <Plug>(coc-codeaction)
-" Fix autofix problem of current line
-nmap <leader>qf  <Plug>(coc-fix-current)
 
 " Create mappings for function text object, requires document symbols feature of languageserver.
 xmap if <Plug>(coc-funcobj-i)
@@ -363,3 +398,13 @@ nnoremap <silent> <leader>gm :GitMessenger<CR>
 
 nnoremap <silent> <leader>nt :tabnew<CR>
 nnoremap <silent> <leader>ns :vsplit<CR>
+
+" Todos
+nnoremap <silent> <leader>tl :CocList todolist<cr>
+nnoremap <silent> <leader>tn :CocCommand todolist.create<cr>
+nnoremap <silent> <leader>tc :CocCommand todolist.clear<cr>
+nnoremap <silent> <leader>tw :w<cr>:q!<cr>
+
+" keep at end
+hi tsxTagName guifg=#51afef
+hi Directory gui=bold guifg=#51afef

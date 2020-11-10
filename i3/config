@@ -13,8 +13,8 @@ set $mod Mod4
 
 new_window 1pixel
 
-exec --no-startup-id feh --bg-fill ~/.config/i3/wallpaper.jpg
-exec --no-startup-id ~/.config/i3/laptop-x.sh
+exec_always feh --bg-fill ~/.config/i3/wallpaper.jpg --bg-fill ~/.config/i3/wallpaper.jpg
+exec_always ~/.config/i3/laptop-x.sh
 exec --no-startup-id redshift -O 5250
 
 # gaps
@@ -23,13 +23,15 @@ gaps outer 0
 # smart_gaps on
 
 # audio icon
-exec /usr/bin/pasystray
+exec_always --no-startup-id /usr/bin/pasystray
 
 # lock keybind
 bindsym $mod+Escape exec betterlockscreen -l
 
 # lock on lid close
-exec --no-startup-id xss-lock -- ~/.config/i3/lock.sh
+exec_always --no-startup-id xss-lock -- ~/.config/i3/lock.sh
+
+exec_always compton
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -40,7 +42,7 @@ exec --no-startup-id xss-lock -- ~/.config/i3/lock.sh
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
-exec --no-startup-id nm-applet
+exec_always --no-startup-id nm-applet
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status

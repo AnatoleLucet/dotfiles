@@ -1,4 +1,5 @@
 {
+  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true,
   "suggest.noselect": false,
   "prettier.singleQuote": true,
   "javascript.suggest.enabled": false,
@@ -13,12 +14,16 @@
   "cSpell.userWords": [
     "Boilerplate",
     "Elems",
+    "Logged",
     "Props",
     "Purchases",
     "Sliding",
     "Spinner",
+    "Tablet",
     "Verif",
     "doesn't",
+    "english",
+    "greeting",
     "icons",
     "marjane",
     "menus",
@@ -26,8 +31,13 @@
     "notif",
     "painting",
     "recover",
+    "thickness",
     "tickets"
   ],
-	"cSpell.language": "fr",
-	"cSpell.diagnosticLevel": "Hint"
+  "cSpell.language": "fr",
+  "cSpell.diagnosticLevel": "Hint",
+	"go.goplsOptions": {
+		"completeUnimported": true,
+		"gofumpt": true
+	}
 }

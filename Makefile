@@ -189,6 +189,7 @@ c/i/zsh:
 	# install plugins
 	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting || true
 	git clone https://github.com/zsh-users/zsh-autosuggestions $${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions || true
+	git clone https://github.com/softmoth/zsh-vim-mode $${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-vim-mode || true
 	# symlink
 	ln -sf ${ROOT_DIR}/zsh/.zshrc ~/
 

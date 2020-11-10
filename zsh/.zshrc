@@ -10,6 +10,7 @@ plugins=(
 	emoji
 	zsh-syntax-highlighting
 	zsh-autosuggestions
+	zsh-vim-mode
 )
 
 # Start Oh-My-Zsh
@@ -27,6 +28,8 @@ if [ -f ~/.zshrc.local ]; then
 fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+MODE_CURSOR_VIINS="blinking bar"
 
 # --- Aliases ---
 
@@ -60,6 +63,7 @@ alias dcrm='docker-compose rm'
 alias dcb='docker-compose build'
 alias dce='docker-compose exec'
 alias dcr='docker-compose run'
+alias dcl='docker-compose logs'
 
 # Bazel
 alias b='bazel'
