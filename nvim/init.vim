@@ -56,7 +56,7 @@ set noshowmode
 set noswapfile
 set ma
 set mouse=a
-set timeoutlen=300
+set timeoutlen=500
 set cursorline
 
 
@@ -87,6 +87,9 @@ nnoremap <silent> <expr> O <SID>NewLineInsertExpr(1, 'O')
 
 " autoclose preview window when exiting insert mode
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+
+" Gutter
+let g:gitgutter_map_keys = 0
 
 " Closetag
 let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.erb,*.jsx,*.tsx"
@@ -145,7 +148,7 @@ nnoremap <silent> <C-Down>  :call animate#window_delta_height(-30)<CR>
 nnoremap <silent> <C-Left>  :call animate#window_delta_width(30)<CR>
 nnoremap <silent> <C-Right> :call animate#window_delta_width(-30)<CR>
 
-" Fugitiv
+" Fugitive
 nnoremap <silent> <leader>gs :G<CR>
 nnoremap <silent> <leader>gc :Gcommit<CR>
 nnoremap <leader>gco :G checkout<space>
@@ -159,11 +162,6 @@ nnoremap <silent> gdl :diffget //3<CR>
 " Hexokinase (colors highlight)
 let g:Hexokinase_highlighters = ['virtual']
 
-" Blamer
-" check if it's perf costy
-let g:blamer_delay = 0
-let g:blamer_enabled = 1
-
 " FZF
 nnoremap <silent> <C-p> :Files<CR>
 nnoremap <silent> <leader>bl :Buffers<CR>
@@ -173,6 +171,7 @@ let g:fzf_commands_expect = 'alt-enter'
 
 " Ident line
 let g:indentLine_char = '▏'
+set list lcs=tab:▏\ 
 " disable indent line for json
 autocmd Filetype json let g:indentLine_enabled = 0
 

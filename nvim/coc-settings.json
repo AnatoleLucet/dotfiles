@@ -13,6 +13,7 @@
   "snippets.priority": 100,
   "cSpell.userWords": [
     "Boilerplate",
+    "Completion",
     "Elems",
     "Logged",
     "Props",
@@ -22,6 +23,7 @@
     "Tablet",
     "Verif",
     "doesn't",
+    "easy",
     "english",
     "greeting",
     "icons",
@@ -32,7 +34,8 @@
     "painting",
     "recover",
     "thickness",
-    "tickets"
+    "tickets",
+    "your"
   ],
   "cSpell.language": "fr",
   "cSpell.diagnosticLevel": "Hint",
