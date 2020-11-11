@@ -21,26 +21,40 @@
     "Sliding",
     "Spinner",
     "Tablet",
+    "Unable",
     "Verif",
+    "before",
+    "checksum",
+    "checksums",
+    "cloned",
+    "darwin",
+    "docs",
     "doesn't",
     "easy",
     "english",
+    "exists",
     "greeting",
     "icons",
+    "manually",
     "marjane",
     "menus",
+    "need",
     "newsletter",
     "notif",
     "painting",
     "recover",
+    "replacements",
+    "resolves",
+    "splits",
+    "sure",
     "thickness",
     "tickets",
     "your"
   ],
   "cSpell.language": "fr",
   "cSpell.diagnosticLevel": "Hint",
-	"go.goplsOptions": {
-		"completeUnimported": true,
-		"gofumpt": true
-	}
+  "go.goplsOptions": {
+    "completeUnimported": true,
+    "gofumpt": true
+  }
 }
