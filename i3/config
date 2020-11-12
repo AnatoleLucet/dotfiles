@@ -14,7 +14,7 @@ set $mod Mod4
 new_window 1pixel
 
 exec_always feh --bg-fill ~/.config/i3/wallpaper.jpg --bg-fill ~/.config/i3/wallpaper.jpg
-exec_always ~/.config/i3/laptop-x.sh
+exec_always ~/.config/i3/boot.sh
 exec --no-startup-id redshift -O 5250
 
 # gaps
