@@ -157,6 +157,7 @@ c/i/all:
 
 	@if !(grep -q Microsoft /proc/version); then \
 		make c/i/i3; \
+		make c/i/compton; \
 		make c/i/st; \
 		make c/i/code; \
 	fi
@@ -183,6 +184,11 @@ c/i/i3:
 	mkdir -p ~/.config/i3 || true
 	ln -sf ${ROOT_DIR}/i3/* ~/.config/i3	
 	ln -sf ${ROOT_DIR}/.img/wallpaper.jpg ~/.config/i3
+
+# compton
+c/i/compton:
+	mkdir -p ~/.config/compton || true
+	ln -sf ${ROOT_DIR}/compton/* ~/.config/compton	
 
 # zsh
 c/i/zsh:

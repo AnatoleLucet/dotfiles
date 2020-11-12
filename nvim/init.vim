@@ -44,6 +44,7 @@ Plug 'tpope/vim-dispatch'
 Plug 'romgrk/doom-one.vim'
 Plug 'stsewd/fzf-checkout.vim'
 Plug 'alvan/vim-closetag'
+Plug 'vimlab/split-term.vim'
 
 call plug#end()
 
@@ -58,17 +59,14 @@ set ma
 set mouse=a
 set timeoutlen=500
 set cursorline
-
+set fileencodings=utf-8
 
 let mapleader=" "
 nnoremap <silent> <ESC> :call coc#float#close_all()<CR>:nohlsearch<CR>
-" not sure about theses
-" inoremap {<space> {<space><space>}<left><left>
-" inoremap {<cr> {<cr>}<c-o><s-o>
-" inoremap [<cr> [<cr>]<c-o><s-o>
-" inoremap (<cr> (<cr>)<c-o><s-o>
 map <leader>y "+y
 map <leader>p "+p
+map <silent> <leader>q :q<cr>
+map <silent> <leader>Q :q!<cr>
 
 " better o/O https://stackoverflow.com/a/27820229/8990411
 function! s:NewLineInsertExpr( isUndoCount, command )
@@ -88,6 +86,9 @@ nnoremap <silent> <expr> O <SID>NewLineInsertExpr(1, 'O')
 " autoclose preview window when exiting insert mode
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 
+" Term
+nnoremap <silent> <A-t> :VTerm<cr>
+
 " Gutter
 let g:gitgutter_map_keys = 0
 
@@ -97,7 +98,6 @@ let g:closetag_xhtml_filenames = '*.xhtml,*.jsx,*.erb,*.tsx'
 let g:closetag_emptyTags_caseSensitive = 1
 let g:closetag_shortcut = '>'
 let g:closetag_close_shortcut = ''
-
 
 " Checkout
 nnoremap <silent> <leader>gb :GBranches<cr>
@@ -131,7 +131,7 @@ nnoremap <silent>    <A-.> :BufferNext<CR>
 nnoremap <silent>    <A-;> :BufferNext<CR>
 nnoremap <silent>    <A-<> :BufferMovePrevious<CR>
 nnoremap <silent>    <A->> :BufferMoveNext<CR>
-nnoremap <silent> <leader>bk :BufferClose<CR>
+nnoremap <silent> <leader>bk :BufferClose!<CR>
 
 " Vista
 let g:vista_cursor_delay = 20

@@ -18,9 +18,7 @@ exec_always ~/.config/i3/laptop-x.sh
 exec --no-startup-id redshift -O 5250
 
 # gaps
-gaps inner 10
-gaps outer 0
-# smart_gaps on
+gaps inner 17
 
 # audio icon
 exec_always --no-startup-id /usr/bin/pasystray
@@ -154,7 +152,7 @@ bindsym $mod+8 workspace number $ws8
 bindsym $mod+ccedilla workspace number $ws9
 bindsym $mod+9 workspace number $ws9
 bindsym $mod+agrave workspace number $ws10
-bindsym $mod+0 number $ws10
+bindsym $mod+0 workspace number $ws10
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace number $ws1
