@@ -1,0 +1,26 @@
+[global]
+word_wrap = yes
+follow = mouse
+font = "Ubuntu 11"
+alignment = center
+line_height = 0
+separator_height = 2
+padding = 13
+horizontal_padding = 2
+geometry = "270x20-40+60"
+transparency = 10 
+corner_radius = 3
+
+[frame]
+width = 1
+color = "#d160a7"
+
+[urgency_low]
+background = "#27212e"
+foreground = "#ffffff"
+timeout = 10
+
+[urgency_normal]
+background = "#27212e"
+foreground = "#ffffff"
+timeout = 10

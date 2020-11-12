@@ -65,7 +65,7 @@ let mapleader=" "
 nnoremap <silent> <ESC> :call coc#float#close_all()<CR>:nohlsearch<CR>
 map <leader>y "+y
 map <leader>p "+p
-map <silent> <leader>q :q<cr>
+map <silent> <leader>q :w<cr>:q<cr>
 map <silent> <leader>Q :q!<cr>
 
 " better o/O https://stackoverflow.com/a/27820229/8990411

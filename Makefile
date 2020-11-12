@@ -158,6 +158,7 @@ c/i/all:
 	@if !(grep -q Microsoft /proc/version); then \
 		make c/i/i3; \
 		make c/i/compton; \
+		make c/i/dunst; \
 		make c/i/st; \
 		make c/i/code; \
 	fi
@@ -189,6 +190,11 @@ c/i/i3:
 c/i/compton:
 	mkdir -p ~/.config/compton || true
 	ln -sf ${ROOT_DIR}/compton/* ~/.config/compton	
+
+# dunst
+c/i/dunst:
+	mkdir -p ~/.config/dunst || true
+	ln -sf ${ROOT_DIR}/dunst/* ~/.config/dunst	
 
 # zsh
 c/i/zsh:
