@@ -1,4 +1,5 @@
 [global]
+allow_markup = yes
 word_wrap = yes
 follow = mouse
 font = "Ubuntu 11"

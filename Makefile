@@ -118,9 +118,13 @@ install:
 		git clone https://github.com/Raymo111/i3lock-color.git ~/i3lock-color
 		sh ~/i3lock-color/build.sh
 
-		# betterlockscreen
-		curl https://raw.githubusercontent.com/UtkarshVerma/installer-scripts/master/betterlockscreen.sh | sh -
-		betterlockscreen -u ${ROOT_DIR}/.img/wallpaper.jpg
+		# multilockscreen
+		git clone https://github.com/jeffmhubbard/multilockscreen ~/multilockscreen
+		cd ~/multilockscreen
+		sudo install -Dm 755 multilockscreen /usr/local/bin/multilockscreen
+		cd -
+		rm ~/multilockscreen
+		multilockscreen -u ${ROOT_DIR}/.img/wallpaper.jpg
 
 		# fzf
 		git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf

@@ -24,7 +24,7 @@ gaps inner 17
 exec_always --no-startup-id /usr/bin/pasystray
 
 # lock keybind
-bindsym $mod+Escape exec betterlockscreen -l
+bindsym $mod+Escape exec multilockscreen -l
 
 # lock on lid close
 exec_always --no-startup-id xss-lock -- ~/.config/i3/lock.sh
