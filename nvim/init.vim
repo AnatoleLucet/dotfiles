@@ -2,7 +2,7 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'psliwka/vim-smoothie'
 Plug 'Yggdroot/indentLine'
-Plug 'lukas-reineke/indent-blankline.nvim', { 'branch': 'lua' }
+" Plug 'lukas-reineke/indent-blankline.nvim', { 'branch': 'lua' }
 Plug 'drewtempelmeyer/palenight.vim'
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'tpope/vim-commentary'
@@ -24,6 +24,7 @@ Plug 'LucHermitte/lh-style'
 Plug 'voldikss/vim-floaterm'
 Plug 'justinmk/vim-sneak'
 Plug 'joshdick/onedark.vim'
+Plug 'rakr/vim-one'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'AndrewRadev/splitjoin.vim'
@@ -45,6 +46,7 @@ Plug 'romgrk/doom-one.vim'
 Plug 'stsewd/fzf-checkout.vim'
 Plug 'alvan/vim-closetag'
 Plug 'vimlab/split-term.vim'
+Plug 'vim-scripts/guicolorscheme.vim'
 
 call plug#end()
 
@@ -143,10 +145,10 @@ nmap <silent> <leader>v :Vista finder<CR>
 let g:move_key_modifier = 'C'
 
 " Animate
-nnoremap <silent> <C-Up>    :call animate#window_delta_height(30)<CR>
-nnoremap <silent> <C-Down>  :call animate#window_delta_height(-30)<CR>
-nnoremap <silent> <C-Left>  :call animate#window_delta_width(30)<CR>
-nnoremap <silent> <C-Right> :call animate#window_delta_width(-30)<CR>
+nnoremap <silent> <C-Up>    :call animate#window_delta_height(10)<CR>
+nnoremap <silent> <C-Down>  :call animate#window_delta_height(-10)<CR>
+nnoremap <silent> <C-Left>  :call animate#window_delta_width(10)<CR>
+nnoremap <silent> <C-Right> :call animate#window_delta_width(-10)<CR>
 
 " Fugitive
 nnoremap <silent> <leader>gs :G<CR>
@@ -155,7 +157,7 @@ nnoremap <leader>gco :G checkout<space>
 nnoremap <leader>gp :Dispatch! git push<CR>
 nnoremap <leader>gl :Dispatch! git pull<CR>
 nnoremap <leader>glo :Glog<CR>
-nnoremap <silent> <leader>gd :Gvdiff!<CR>
+nnoremap <silent> <leader>gd :Gvdiff!<CR><C-w>J
 nnoremap <silent> gdh :diffget //2<CR>
 nnoremap <silent> gdl :diffget //3<CR>
 
@@ -166,6 +168,7 @@ let g:Hexokinase_highlighters = ['virtual']
 nnoremap <silent> <C-p> :Files<CR>
 nnoremap <silent> <leader>bl :Buffers<CR>
 nnoremap <silent> ; :Commands<CR>
+nnoremap <silent> <leader>gmc :Ag <<<<<<< HEAD<CR>
 let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -l -g ""'
 let g:fzf_commands_expect = 'alt-enter'
 
@@ -181,7 +184,7 @@ let g:sneak#label = 1
 " Theme
 set t_Co=256
 " also set onedark for missing syntax in doom-one
-colorscheme onedark
+" colorscheme one
 colorscheme doom-one
 syntax enable
 set background=dark
@@ -407,3 +410,19 @@ nnoremap <silent> <leader>tw :w<cr>:q!<cr>
 " keep at end
 hi tsxTagName guifg=#51afef
 hi Directory gui=bold guifg=#51afef
+
+
+com! SynStack              call SyntaxStack()
+fu! SyntaxStack() "                                                          {{{
+    let synNames = []
+    let lastID       = 0
+    for id in synstack(line("."), col("."))
+        call add(synNames, synIDattr(id, "name"))
+        let lastID = id
+    endfor
+    if lastID == 0 | return | end
+    echohl synIDattr(synIDtrans(lastID), "name")
+    echon synIDattr(synIDtrans(lastID), "name")
+    echon ' ' . string(synNames)
+    echohl None
+endfu "

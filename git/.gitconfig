@@ -8,5 +8,5 @@
 [url "git@github.com:"]
 	insteadOf = https://github.com/
 
-[includeIf "gitdir:~/work/"]
-    path = ~/work/.gitconfig
+[includeIf "gitdir:~/dev/git.ayaline.com/"]
+	path = ~/dev/git.ayaline.com/.gitconfig

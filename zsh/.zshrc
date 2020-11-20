@@ -27,9 +27,33 @@ if [ -f ~/.zshrc.local ]; then
     source ~/.zshrc.local
 fi
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
 MODE_CURSOR_VIINS="blinking bar"
+
+# --- fzf ---
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+alias dv='cd $(fd --max-depth 3 . ~/dev | fzf)'
+f() {
+    sels=( "${(@f)$(fd "${fd_default[@]}" "${@:2}"| fzf)}" )
+    test -n "$sels" && print -z -- "$1 ${sels[@]:q:q}"
+}
+# Deps
+alias fz="fzf-noempty --bind 'tab:toggle,shift-tab:toggle+beginning-of-line+kill-line,ctrl-j:toggle+beginning-of-line+kill-line,ctrl-t:top' --color=light -1 -m"
+fzf-noempty () {
+	local in="$(</dev/stdin)"
+	test -z "$in" && (
+		exit 130
+	) || {
+		ec "$in" | fzf "$@"
+	}
+}
+ec () {
+	if [[ -n $ZSH_VERSION ]]
+	then
+		print -r -- "$@"
+	else
+		echo -E -- "$@"
+	fi
+}
 
 # --- Aliases ---
 
@@ -104,5 +128,7 @@ alias open='xdg-open'
 alias sudo='nocorrect sudo '
 alias dtf='cd ~/.dotfiles'
 alias bat='batcat'
+alias fd='fdfind'
 mc() { mkdir "$@" && cd "$@"; }
 p() { ping ${1:-"1.1.1.1"} }
+

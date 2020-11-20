@@ -162,6 +162,7 @@ c/i/all:
 	@if !(grep -q Microsoft /proc/version); then \
 		make c/i/i3; \
 		make c/i/compton; \
+		make c/i/gterm; \
 		make c/i/dunst; \
 		make c/i/st; \
 		make c/i/code; \
@@ -249,3 +250,10 @@ c/i/st:
 c/i/xorg:
 	mkdir /etc/X11/xorg.conf.d || true
 	sudo ln -sf ${ROOT_DIR}/xorg/* /etc/X11/xorg.conf.d
+
+# gnome terminal
+c/e/gterm:
+	dconf dump /org/gnome/terminal/legacy/profiles:/ > ${ROOT_DIR}/gnome-terminal/conf.dconf
+
+c/i/gterm:
+	dconf dump /org/gnome/terminal/legacy/profiles:/ < ${ROOT_DIR}/gnome-terminal/conf.dconf
