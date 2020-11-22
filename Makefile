@@ -151,6 +151,10 @@ nerd-fonts:
 	git cone git@github.com:ryanoasis/nerd-fonts.git ~/nerd-fonts
 	~/nerd-fonts/install.sh
 
+fonts:
+	cp -r ${ROOT_DIR}/.fonts ~/
+	fc-cache -f -v
+
 c/i/all:
 	echo "${RED} importing all ${NC}"
 
@@ -256,4 +260,4 @@ c/e/gterm:
 	dconf dump /org/gnome/terminal/legacy/profiles:/ > ${ROOT_DIR}/gnome-terminal/conf.dconf
 
 c/i/gterm:
-	dconf dump /org/gnome/terminal/legacy/profiles:/ < ${ROOT_DIR}/gnome-terminal/conf.dconf
+	dconf load /org/gnome/terminal/legacy/profiles:/ < ${ROOT_DIR}/gnome-terminal/conf.dconf

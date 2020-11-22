@@ -5,15 +5,21 @@ Plug 'Yggdroot/indentLine'
 " Plug 'lukas-reineke/indent-blankline.nvim', { 'branch': 'lua' }
 Plug 'drewtempelmeyer/palenight.vim'
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+" https://github.com/coc-extensions/coc-svelte/issues/13
+Plug 'coc-extensions/coc-svelte', {'do': 'yarn install --frozen-lockfile'}
 Plug 'tpope/vim-commentary'
-Plug 'evanleck/vim-svelte', {'branch': 'main'}
+
+" Plug 'evanleck/vim-svelte', {'branch': 'main'}
+"
 Plug 'tpope/vim-surround'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 Plug 'editorconfig/editorconfig-vim'
 " Plug 'pangloss/vim-javascript'
+
 Plug 'HerringtonDarkholme/yats.vim'
-Plug 'chemzqm/vim-jsx-improve'
+" Plug 'chemzqm/vim-jsx-improve'
+
 Plug 'dense-analysis/ale'
 Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -47,6 +53,10 @@ Plug 'stsewd/fzf-checkout.vim'
 Plug 'alvan/vim-closetag'
 Plug 'vimlab/split-term.vim'
 Plug 'vim-scripts/guicolorscheme.vim'
+Plug 'ghifarit53/tokyonight-vim'
+
+Plug 'sheerun/vim-polyglot'
+Plug 'ghifarit53/daycula-vim' , {'branch' : 'main'}
 
 call plug#end()
 
@@ -88,6 +98,10 @@ nnoremap <silent> <expr> O <SID>NewLineInsertExpr(1, 'O')
 " autoclose preview window when exiting insert mode
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 
+" Typescript
+" let g:typescript_ignore_typescriptdoc = 0
+let g:yats_host_keyword = 1
+
 " Term
 nnoremap <silent> <A-t> :VTerm<cr>
 
@@ -123,6 +137,7 @@ let g:airline_left_sep = "\uE0BC"
 let g:airline_right_sep = "\uE0BE"
 let g:airline_section_z = airline#section#create(["\uE0A1" . '%{line(".")}' . "\uE0A3" . '%{col(".")}'])
 let g:airline_theme='deus'
+let g:airline_theme = "tokyonight"
 
 " Barbar
 nnoremap <silent> <C-s> :BufferPick<CR>
@@ -185,7 +200,7 @@ let g:sneak#label = 1
 set t_Co=256
 " also set onedark for missing syntax in doom-one
 " colorscheme one
-colorscheme doom-one
+" colorscheme doom-one
 syntax enable
 set background=dark
 set pumblend=20
@@ -228,7 +243,6 @@ let g:coc_global_extensions = [
 \ 'coc-json',
 \ 'coc-html',
 \ 'coc-css',
-\ 'coc-svelte',
 \ 'coc-emmet',
 \ 'coc-highlight',
 \ 'coc-pairs',
@@ -408,12 +422,12 @@ nnoremap <silent> <leader>tc :CocCommand todolist.clear<cr>
 nnoremap <silent> <leader>tw :w<cr>:q!<cr>
 
 " keep at end
-hi tsxTagName guifg=#51afef
-hi Directory gui=bold guifg=#51afef
+let g:tokyonight_style = 'storm'
+let g:tokyonight_enable_italic = 1
+colorscheme tokyonight
 
-
-com! SynStack              call SyntaxStack()
-fu! SyntaxStack() "                                                          {{{
+com! SynStack call SyntaxStack()
+fu! SyntaxStack() 
     let synNames = []
     let lastID       = 0
     for id in synstack(line("."), col("."))
