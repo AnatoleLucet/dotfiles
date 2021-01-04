@@ -1,2 +1,2 @@
-gnome-terminal --working-directory=$(xcwd)
+alacritty --working-directory=$(xcwd)
 

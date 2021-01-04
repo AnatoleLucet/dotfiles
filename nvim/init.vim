@@ -17,7 +17,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'editorconfig/editorconfig-vim'
 " Plug 'pangloss/vim-javascript'
 
-Plug 'HerringtonDarkholme/yats.vim'
+" Plug 'HerringtonDarkholme/yats.vim'
 " Plug 'chemzqm/vim-jsx-improve'
 
 Plug 'dense-analysis/ale'
@@ -58,6 +58,18 @@ Plug 'ghifarit53/tokyonight-vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'ghifarit53/daycula-vim' , {'branch' : 'main'}
 
+Plug 'kkvh/vim-docker-tools'
+Plug 'mbbill/undotree'
+
+Plug 'liuchengxu/vim-which-key'
+Plug 'junkblocker/git-time-lapse'
+
+Plug 'terryma/vim-multiple-cursors'
+Plug 'bronson/vim-visual-star-search'
+Plug 'chaoren/vim-wordmotion'
+
+Plug 'tpope/vim-abolish'
+
 call plug#end()
 
 set nu
@@ -72,13 +84,18 @@ set mouse=a
 set timeoutlen=500
 set cursorline
 set fileencodings=utf-8
+set ignorecase
+set infercase
+set guifont=MonoLisa\ Nerd\ Font\ 12
 
 let mapleader=" "
 nnoremap <silent> <ESC> :call coc#float#close_all()<CR>:nohlsearch<CR>
 map <leader>y "+y
 map <leader>p "+p
-map <silent> <leader>q :w<cr>:q<cr>
-map <silent> <leader>Q :q!<cr>
+nnoremap <silent> <leader>q :w<cr>:q<cr>
+nnoremap <silent> <leader>Q :q!<cr>
+vnoremap <leader>\ y:%s/<C-r>"//g<left><left>
+nnoremap <leader>\ y:%s/<C-r><C-w>//g<left><left>
 
 " better o/O https://stackoverflow.com/a/27820229/8990411
 function! s:NewLineInsertExpr( isUndoCount, command )
@@ -130,14 +147,12 @@ highlight ConflictMarkerEnd guibg=#2f628e
 highlight ConflictMarkerCommonAncestorsHunk guibg=#754a81
 
 " Airline
-set guifont=DroidSansMono\ Nerd\ Font\ 12
 " let g:airline_left_sep = "\uE0B4"
 " let g:airline_right_sep = "\uE0B6"
-let g:airline_left_sep = "\uE0BC"
-let g:airline_right_sep = "\uE0BE"
+" let g:airline_left_sep = "\uE0BC"
+" let g:airline_right_sep = "\uE0BE"
 let g:airline_section_z = airline#section#create(["\uE0A1" . '%{line(".")}' . "\uE0A3" . '%{col(".")}'])
-let g:airline_theme='deus'
-let g:airline_theme = "tokyonight"
+let g:airline_theme="deus"
 
 " Barbar
 nnoremap <silent> <C-s> :BufferPick<CR>
@@ -171,7 +186,7 @@ nnoremap <silent> <leader>gc :Gcommit<CR>
 nnoremap <leader>gco :G checkout<space>
 nnoremap <leader>gp :Dispatch! git push<CR>
 nnoremap <leader>gl :Dispatch! git pull<CR>
-nnoremap <leader>glo :Glog<CR>
+nnoremap <leader>glo :tabnew<CR>:Glog<CR>
 nnoremap <silent> <leader>gd :Gvdiff!<CR><C-w>J
 nnoremap <silent> gdh :diffget //2<CR>
 nnoremap <silent> gdl :diffget //3<CR>
@@ -183,7 +198,7 @@ let g:Hexokinase_highlighters = ['virtual']
 nnoremap <silent> <C-p> :Files<CR>
 nnoremap <silent> <leader>bl :Buffers<CR>
 nnoremap <silent> ; :Commands<CR>
-nnoremap <silent> <leader>gmc :Ag <<<<<<< HEAD<CR>
+nnoremap <silent> <leader>gmc :Ag <<<<<<<<CR>
 let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -l -g ""'
 let g:fzf_commands_expect = 'alt-enter'
 
@@ -195,14 +210,14 @@ autocmd Filetype json let g:indentLine_enabled = 0
 
 " Sneak
 let g:sneak#label = 1
+autocmd ColorScheme * hi! link Sneak Search
 
 " Theme
 set t_Co=256
 " also set onedark for missing syntax in doom-one
 " colorscheme one
-" colorscheme doom-one
+colorscheme doom-one
 syntax enable
-set background=dark
 set pumblend=20
 set winblend=20
 set pumheight=15
@@ -252,6 +267,11 @@ let g:coc_global_extensions = [
 \ 'coc-yank',
 \ 'coc-spell-checker',
 \ 'coc-todolist',
+\ 'coc-docker',
+\ 'coc-vimlsp',
+\ 'coc-marketplace',
+\ 'coc-sh',
+\ 'coc-phpls',
 \ ]
 
 " coc-explorer
@@ -272,7 +292,7 @@ set nobackup
 set nowritebackup
 
 " You will have bad experience for diagnostic messages when it's default 4000.
-set updatetime=300
+set updatetime=100
 
 " don't give |ins-completion-menu| messages.
 set shortmess+=c
@@ -370,9 +390,7 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " Using CocList
 " Show all diagnostics
-nnoremap <silent> <leader>d :<C-u>CocList diagnostics<cr>
-" Show commands
-nnoremap <silent> <leader>c :<C-u>CocList commands<cr>
+nnoremap <silent> <leader>c :<C-u>CocList diagnostics<cr>
 " Find symbol of current document
 nnoremap <silent> <leader>o :<C-u>CocList outline<cr>
 " Search workspace symbols
@@ -421,10 +439,19 @@ nnoremap <silent> <leader>tn :CocCommand todolist.create<cr>
 nnoremap <silent> <leader>tc :CocCommand todolist.clear<cr>
 nnoremap <silent> <leader>tw :w<cr>:q!<cr>
 
+" Docker
+nnoremap <silent> <leader>d :DockerToolsToggle<cr>
+let g:dockertools_default_all = 0
+let g:dockertools_term_position = 'lefta'
+let g:dockertools_logs_position = 'lefta'
+
+" Ag
+nnoremap <silent> <leader>/ :Ag<cr>
+
 " keep at end
-let g:tokyonight_style = 'storm'
-let g:tokyonight_enable_italic = 1
-colorscheme tokyonight
+" let g:tokyonight_style = 'storm'
+" let g:tokyonight_enable_italic = 1
+" colorscheme tokyonight
 
 com! SynStack call SyntaxStack()
 fu! SyntaxStack() 

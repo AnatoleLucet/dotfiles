@@ -1,0 +1,30 @@
+extends typescript
+
+snippet rnfc "[React New Functional Component] FC, Props interface, default export" b
+import React from "react";
+
+interface ${1:Comp}Props {
+	${2}
+}
+
+const ${1}: React.FC<${1}Props> = ({ $3 }) => {
+	return (
+		${4}
+	);
+};
+
+export default ${1}
+endsnippet
+
+snippet rfc "[React Functional Component] FC, Props interface" b
+interface ${1:comp}Props {
+	${2}
+}
+
+const ${1}: react.fc<${1}Props> = ({ $3 }) => {
+	return (
+		${4}
+	);
+};
+endsnippet
+

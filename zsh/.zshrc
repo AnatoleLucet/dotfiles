@@ -20,8 +20,10 @@ source $ZSH/oh-my-zsh.sh
 
 
 # --- Defs ---
-export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin:$HOME/.yarn/bin:/usr/bin/watchman
+export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin:$HOME/.yarn/bin:/usr/bin/watchman:/home/linuxbrew/.linuxbrew/bin:$HOME/.cargo/bin
 export GOPATH=$HOME/go
+# to fix some issues with termbox
+export TERM=xterm-256color
 
 if [ -f ~/.zshrc.local ]; then
     source ~/.zshrc.local
@@ -31,7 +33,8 @@ MODE_CURSOR_VIINS="blinking bar"
 
 # --- fzf ---
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-alias dv='cd $(fd --max-depth 3 . ~/dev | fzf)'
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*" --glob "!node_modules/*" --glob "!vendor/*" 2> /dev/null'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 f() {
     sels=( "${(@f)$(fd "${fd_default[@]}" "${@:2}"| fzf)}" )
     test -n "$sels" && print -z -- "$1 ${sels[@]:q:q}"
@@ -114,7 +117,7 @@ alias mr='make run'
 alias nv='nvim'
 
 # Tree
-alias t='tree --dirsfirst'
+alias t='tree --dirsfirst -C'
 
 # St
 alias stlight='xrdb -merge ~/st/.Xlighttheme && xrdb -edit ~/.Xresources'
@@ -122,6 +125,8 @@ alias stdark='xrdb -merge ~/st/.Xresources && xrdb -edit ~/.Xresources'
 
 # Git
 alias gcm='git checkout $(git symbolic-ref --short HEAD)'
+alias fgco='git checkout $(git branch --color=always | fzf --ansi --reverse)'
+alias fgr='git revert $(git log --oneline --decorate --color=always | fzf --ansi --reverse)'
 
 # Others
 alias open='xdg-open'
@@ -131,4 +136,27 @@ alias bat='batcat'
 alias fd='fdfind'
 mc() { mkdir "$@" && cd "$@"; }
 p() { ping ${1:-"1.1.1.1"} }
+alias fortune='fortune -n 200 | cowsay | lolcat'
+alias dv='cd ${$(fd --max-depth 3 . ~/dev | fzf --reverse):-$(pwd)}'
 
+nmcli() {
+    if [[ $@ == "n r" ]]; then
+        command nmcli n off && nmcli n on
+    else
+        command nmcli "$@"
+    fi
+}
+
+fssh() {
+    file="$HOME/ssh-hosts"
+    key=$(cat $file | cut -f 1 -d "=" | fzf)
+
+		printf -v formatted_key "%q" $key
+		command=$(cat $file | grep $formatted_key | cut -f 2- -d "=" )
+
+    eval $command
+}
+
+bindkey -s '^p' 'dv^M'
+
+fortune

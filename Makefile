@@ -261,3 +261,8 @@ c/e/gterm:
 
 c/i/gterm:
 	dconf load /org/gnome/terminal/legacy/profiles:/ < ${ROOT_DIR}/gnome-terminal/conf.dconf
+
+# alacritty
+c/i/alacritty:
+	mkdir ~/.config/alacritty || true
+	sudo ln -sf ${ROOT_DIR}/alacritty/* ~/.config/alacritty

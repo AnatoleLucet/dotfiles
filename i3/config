@@ -53,8 +53,12 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec gnome-terminal
+# bindsym $mod+Return exec gnome-terminal
+bindsym $mod+Return exec alacritty
 bindsym $mod+Shift+Return exec zsh ~/.config/i3/open-term-in-last-dir.sh
+
+# emacs
+bindsym $mod+o exec emacs
 
 # gnome screenshot
 bindsym $mod+Shift+i exec gnome-screenshot -a -i
@@ -62,12 +66,7 @@ bindsym $mod+Shift+i exec gnome-screenshot -a -i
 # kill focused window
 bindsym $mod+Shift+A kill
 
-# start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run
-# There also is the (new) i3-dmenu-desktop which only displays applications
-# shipping a .desktop file. It is a wrapper around dmenu, so you need that
-# installed.
-# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+bindsym $mod+d exec rofi -show run
 
 # change focus
 bindsym $mod+j focus left
@@ -133,25 +132,27 @@ set $ws9 "9"
 set $ws10 "10"
 
 # switch to workspace
-bindsym $mod+ampersand workspace number $ws1
+# azerty
+# bindsym $mod+ampersand workspace number $ws1
+# bindsym $mod+eacute workspace number $ws2
+# bindsym $mod+quotedbl workspace number $ws3
+# bindsym $mod+apostrophe workspace number $ws4
+# bindsym $mod+parenleft workspace number $ws5
+# bindsym $mod+minus workspace number $ws6
+# bindsym $mod+egrave workspace number $ws7
+# bindsym $mod+underscore workspace number $ws8
+# bindsym $mod+ccedilla workspace number $ws9
+# bindsym $mod+agrave workspace number $ws10
+# qwerty
 bindsym $mod+1 workspace number $ws1
-bindsym $mod+eacute workspace number $ws2
 bindsym $mod+2 workspace number $ws2
-bindsym $mod+quotedbl workspace number $ws3
 bindsym $mod+3 workspace number $ws3
-bindsym $mod+apostrophe workspace number $ws4
 bindsym $mod+4 workspace number $ws4
-bindsym $mod+parenleft workspace number $ws5
 bindsym $mod+5 workspace number $ws5
-bindsym $mod+minus workspace number $ws6
 bindsym $mod+6 workspace number $ws6
-bindsym $mod+egrave workspace number $ws7
 bindsym $mod+7 workspace number $ws7
-bindsym $mod+underscore workspace number $ws8
 bindsym $mod+8 workspace number $ws8
-bindsym $mod+ccedilla workspace number $ws9
 bindsym $mod+9 workspace number $ws9
-bindsym $mod+agrave workspace number $ws10
 bindsym $mod+0 workspace number $ws10
 
 # move focused container to workspace
@@ -226,3 +227,4 @@ client.focused $mainColor $secondaryColor $textColor
 client.unfocused $tertiaryColor $secondaryColor $textColor
 
 font pango: Ubuntu bold 11px
+
