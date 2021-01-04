@@ -65,7 +65,9 @@ install:
 			grc \
 			gtags \
 			silversearcher-ag \
-			ripgrep
+			ripgrep \
+			cowsay \
+			fortune
 		
 		@if !(grep -q Microsoft /proc/version); then \
 			sudo apt install -y \
@@ -74,6 +76,7 @@ install:
 				dmenu \
 				google-chrome-stable \
 				gyazo \
+				lolcat \
 		;fi
 
 	# - snap deps -
@@ -112,6 +115,14 @@ install:
 			`# xcwd` \
 			git clone https://github.com/schischi/xcwd.git ~/xcwd; \
 			cd ~/xcwd && sudo make install; \
+			\
+			`# alacritty` \
+			curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --no-modify-path \
+			git clone https://github.com/alacritty/alacritty.git ~/alacritty \
+			cd ~/alacritty \
+			ssh-add \
+			cargo build --release \
+			sudo cp target/release/alacritty /usr/bin \
 		fi
 
 		# i3lock-color
