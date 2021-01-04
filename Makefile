@@ -77,6 +77,7 @@ install:
 				google-chrome-stable \
 				gyazo \
 				lolcat \
+				rofi \
 		;fi
 
 	# - snap deps -
@@ -181,6 +182,8 @@ c/i/all:
 		make c/i/dunst; \
 		make c/i/st; \
 		make c/i/code; \
+		make c/i/alacritty; \
+		make c/i/rofi; \
 	fi
 
 # git conf
@@ -277,3 +280,8 @@ c/i/gterm:
 c/i/alacritty:
 	mkdir ~/.config/alacritty || true
 	sudo ln -sf ${ROOT_DIR}/alacritty/* ~/.config/alacritty
+
+# rofi
+c/i/rofi:
+	mkdir ~/.config/rofi || true
+	sudo ln -sf ${ROOT_DIR}/rofi/* ~/.config/rofi
