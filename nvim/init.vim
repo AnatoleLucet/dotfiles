@@ -69,6 +69,7 @@ Plug 'bronson/vim-visual-star-search'
 Plug 'chaoren/vim-wordmotion'
 
 Plug 'tpope/vim-abolish'
+Plug 'markonm/traces.vim'
 
 call plug#end()
 
@@ -467,3 +468,4 @@ fu! SyntaxStack()
     echon ' ' . string(synNames)
     echohl None
 endfu "
+
