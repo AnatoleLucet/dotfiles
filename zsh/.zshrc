@@ -119,10 +119,6 @@ alias nv='nvim'
 # Tree
 alias t='tree --dirsfirst -C'
 
-# St
-alias stlight='xrdb -merge ~/st/.Xlighttheme && xrdb -edit ~/.Xresources'
-alias stdark='xrdb -merge ~/st/.Xresources && xrdb -edit ~/.Xresources'
-
 # Git
 alias gcm='git checkout $(git symbolic-ref --short HEAD)'
 alias fgco='git checkout $(git branch --color=always | fzf --ansi --reverse)'

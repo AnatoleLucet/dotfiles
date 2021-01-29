@@ -109,10 +109,6 @@ install:
 			sudo curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose; \
 			sudo chmod +x /usr/local/bin/docker-compose; \
 			\
-			`# st` \
-			cp -r ./st ~/; \
-			cd ~/st && sudo make install; \
-			 \
 			`# xcwd` \
 			git clone https://github.com/schischi/xcwd.git ~/xcwd; \
 			cd ~/xcwd && sudo make install; \
@@ -180,7 +176,6 @@ c/i/all:
 		make c/i/compton; \
 		make c/i/gterm; \
 		make c/i/dunst; \
-		make c/i/st; \
 		make c/i/code; \
 		make c/i/alacritty; \
 		make c/i/rofi; \
@@ -251,18 +246,6 @@ c/i/tmux:
 	# install plugins
 	# TODO fix: "unknown variable: TMUX_PLUGIN_MANAGER_PATH FATAL: Tmux Plugin Manager not configured in tmux.conf"
 	tmux start-server && tmux new-session -d && ~/.tmux/plugins/tpm/scripts/install_plugins.sh && tmux kill-server || true
-
-# st
-c/e/st:
-	cp -r ~/st ./
-
-c/i/st:
-	rm -rf ~/st
-	cp -r ./st ~/
-	cd ~/st; \
-	sudo make install; \
-	xrdb -merge .Xresources; \
-	xrdb -edit ~/.Xresources
 
 # xorg
 c/i/xorg:
