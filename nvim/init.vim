@@ -44,7 +44,7 @@ Plug 'matze/vim-move'
 Plug 'rhysd/git-messenger.vim'
 Plug 'liuchengxu/vista.vim'
 Plug 'wellle/targets.vim'
-Plug 'kyazdani42/nvim-web-devicons'
+Plug 'kyazdani42/nvim-web-devicons', { 'commit': 'cadf0c30659acc8c60fec8100b81ea0fd92a8a9c' }
 Plug 'romgrk/barbar.nvim'
 Plug 'rhysd/conflict-marker.vim'
 Plug 'tpope/vim-dispatch'
@@ -66,7 +66,7 @@ Plug 'junkblocker/git-time-lapse'
 
 Plug 'terryma/vim-multiple-cursors'
 Plug 'bronson/vim-visual-star-search'
-Plug 'chaoren/vim-wordmotion'
+" Plug 'chaoren/vim-wordmotion'
 
 Plug 'tpope/vim-abolish'
 Plug 'markonm/traces.vim'
@@ -97,6 +97,8 @@ nnoremap <silent> <leader>q :w<cr>:q<cr>
 nnoremap <silent> <leader>Q :q!<cr>
 vnoremap <leader>\ y:%s/<C-r>"//g<left><left>
 nnoremap <leader>\ y:%s/<C-r><C-w>//g<left><left>
+map +y "+y
+map +p "+p
 
 " better o/O https://stackoverflow.com/a/27820229/8990411
 function! s:NewLineInsertExpr( isUndoCount, command )

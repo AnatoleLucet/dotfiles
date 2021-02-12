@@ -153,6 +153,18 @@ fssh() {
     eval $command
 }
 
+codi() {
+  local syntax="${1:-typescript}"
+  shift
+  nvim -c \
+    "set bt=nofile showtabline=0 |\
+    hi ColorColumn ctermbg=NONE |\
+    hi VertSplit ctermbg=NONE |\
+    hi NonText ctermfg=0 |\
+		let g:workspace_session_name='' |\
+    Codi $syntax" "$@"
+}
+
 bindkey -s '^p' 'dv^M'
 
 fortune
