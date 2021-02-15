@@ -67,7 +67,8 @@ install:
 			silversearcher-ag \
 			ripgrep \
 			cowsay \
-			fortune
+			fortune \
+			fd-find
 		
 		@if !(grep -q Microsoft /proc/version); then \
 			sudo apt install -y \

@@ -52,5 +52,5 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "stories.username": "Curaçao_Perrine",
-  "vim.sneak": true,
+  "vim.sneak": true
 }

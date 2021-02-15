@@ -2,7 +2,7 @@ font:
   size: 9
   normal:
     family: MonoLisa Nerd Font
-    style: Bold
+    style: Normal
   bold:
     family: MonoLisa Nerd Font
     style: Bold

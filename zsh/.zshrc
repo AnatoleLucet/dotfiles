@@ -20,8 +20,9 @@ source $ZSH/oh-my-zsh.sh
 
 
 # --- Defs ---
-export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin:$HOME/.yarn/bin:/usr/bin/watchman:/home/linuxbrew/.linuxbrew/bin:$HOME/.cargo/bin
+export DENO_INSTALL="/home/anatole/.deno"
 export GOPATH=$HOME/go
+export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin:$HOME/.yarn/bin:/usr/bin/watchman:/home/linuxbrew/.linuxbrew/bin:$HOME/.cargo/bin:$DENO_INSTALL/bin
 # to fix some issues with termbox
 export TERM=xterm-256color
 
@@ -133,7 +134,7 @@ alias fd='fdfind'
 mc() { mkdir "$@" && cd "$@"; }
 p() { ping ${1:-"1.1.1.1"} }
 alias fortune='fortune -n 200 | cowsay | lolcat'
-alias dv='cd ${$(fd --max-depth 3 . ~/dev | fzf --reverse):-$(pwd)}'
+alias dv='cd ${$(fd --hidden --type d .git ~/dev | rev | cut -d "/" -f 2- | rev | fzf --reverse):-$(pwd)}'
 
 nmcli() {
     if [[ $@ == "n r" ]]; then
@@ -168,3 +169,5 @@ codi() {
 bindkey -s '^p' 'dv^M'
 
 fortune
+
+eval $(thefuck --alias)

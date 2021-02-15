@@ -66,10 +66,21 @@ Plug 'junkblocker/git-time-lapse'
 
 Plug 'terryma/vim-multiple-cursors'
 Plug 'bronson/vim-visual-star-search'
+
+" meh
 " Plug 'chaoren/vim-wordmotion'
 
 Plug 'tpope/vim-abolish'
 Plug 'markonm/traces.vim'
+
+Plug 'junegunn/goyo.vim'
+
+Plug 'glepnir/dashboard-nvim'
+
+Plug 'RishabhRD/popfix'
+Plug 'RishabhRD/nvim-cheat.sh'
+Plug 'chr4/nginx.vim'
+Plug 'szw/vim-maximizer'
 
 call plug#end()
 
@@ -80,6 +91,7 @@ set shiftwidth=2
 set cmdheight=1
 set noshowmode
 set noswapfile
+set nocompatible
 set ma
 set mouse=a
 set timeoutlen=500
@@ -99,6 +111,7 @@ vnoremap <leader>\ y:%s/<C-r>"//g<left><left>
 nnoremap <leader>\ y:%s/<C-r><C-w>//g<left><left>
 map +y "+y
 map +p "+p
+tnoremap <silent><F3> <C-\><C-n>:MaximizerToggle<CR>i
 
 " better o/O https://stackoverflow.com/a/27820229/8990411
 function! s:NewLineInsertExpr( isUndoCount, command )
@@ -117,6 +130,9 @@ nnoremap <silent> <expr> O <SID>NewLineInsertExpr(1, 'O')
 
 " autoclose preview window when exiting insert mode
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+
+" Goyo
+let g:goyo_width = '65%'
 
 " Typescript
 " let g:typescript_ignore_typescriptdoc = 0
@@ -208,8 +224,7 @@ let g:fzf_commands_expect = 'alt-enter'
 " Ident line
 let g:indentLine_char = '▏'
 set list lcs=tab:▏\ 
-" disable indent line for json
-autocmd Filetype json let g:indentLine_enabled = 0
+let g:indentLine_fileTypeExclude = ['dashboard', 'json']
 
 " Sneak
 let g:sneak#label = 1
@@ -410,7 +425,7 @@ inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
 inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
 
 " save
-nmap <silent> <leader>w :call CocAction('runCommand', 'editor.action.organizeImport')<CR>:Format<CR>:w<CR>
+nmap <silent> <leader>w :<C-u>silent! call CocAction('runCommand', 'editor.action.organizeImport')<CR>:<C-u>silent! Format<CR>:w<CR>
 nmap <silent> <leader>W :w<CR>
 
 " Git status
