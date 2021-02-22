@@ -25,6 +25,7 @@ export GOPATH=$HOME/go
 export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin:$HOME/.yarn/bin:/usr/bin/watchman:/home/linuxbrew/.linuxbrew/bin:$HOME/.cargo/bin:$DENO_INSTALL/bin
 # to fix some issues with termbox
 export TERM=xterm-256color
+export MANPAGER="sh -c 'col -bx | batcat -l man -p'"
 
 if [ -f ~/.zshrc.local ]; then
     source ~/.zshrc.local
