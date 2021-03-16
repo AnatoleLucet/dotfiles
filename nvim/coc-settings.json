@@ -12,7 +12,7 @@
   "git.enableGutters": false,
   "snippets.priority": 100,
   "snippets.userSnippetsDirectory": "~/.config/nvim/snippets",
-  "cSpell.language": "fr",
+  "cSpell.language": "en",
   "cSpell.diagnosticLevel": "Hint",
   "go.goplsOptions": {
     "completeUnimported": true,

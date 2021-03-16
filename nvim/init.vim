@@ -7,7 +7,8 @@ Plug 'drewtempelmeyer/palenight.vim'
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 " https://github.com/coc-extensions/coc-svelte/issues/13
 Plug 'coc-extensions/coc-svelte', {'do': 'yarn install --frozen-lockfile'}
-Plug 'tpope/vim-commentary'
+" Plug 'tpope/vim-commentary'
+Plug 'b3nj5m1n/kommentary'
 
 " Plug 'evanleck/vim-svelte', {'branch': 'main'}
 "
@@ -82,6 +83,12 @@ Plug 'RishabhRD/nvim-cheat.sh'
 Plug 'chr4/nginx.vim'
 Plug 'szw/vim-maximizer'
 
+Plug 'xolox/vim-notes'
+" vim-notes deps
+Plug 'xolox/vim-misc'
+
+Plug 'puremourning/vimspector', {'do': './install_gadget.py --enable-c --enable-python'}
+
 call plug#end()
 
 set nu
@@ -130,6 +137,29 @@ nnoremap <silent> <expr> O <SID>NewLineInsertExpr(1, 'O')
 
 " autoclose preview window when exiting insert mode
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+
+" Vimspector
+nnoremap <leader>dd :call vimspector#Launch()<CR>
+nnoremap <leader>de :call vimspector#Reset()<CR>
+nmap <leader>dl <Plug>VimspectorStepInto
+nmap <leader>dj <Plug>VimspectorStepOver
+nmap <leader>dk <Plug>VimspectorStepOut
+nmap <leader>d_ <Plug>VimspectorRestart
+nnoremap <leader>d<space> :call vimspector#Continue()<CR>
+nmap <leader>drc <Plug>VimspectorRunToCursor
+nmap <leader>dbp <Plug>VimspectorToggleBreakpoint
+nmap <leader>dcbp <Plug>VimspectorToggleConditionalBreakpoint
+nmap <leader>di <Plug>VimspectorBalloonEval
+
+let g:vimspector_sign_priority = {
+  \    'vimspectorBP':         40,
+  \    'vimspectorBPCond':     9,
+  \    'vimspectorBPDisabled': 8,
+  \    'vimspectorPC':         999,
+  \ }
+
+" Notes
+command FNotes :FZF ~/.vim/plugged/vim-notes/misc/notes/user
 
 " Goyo
 let g:goyo_width = '65%'
@@ -458,7 +488,7 @@ nnoremap <silent> <leader>tc :CocCommand todolist.clear<cr>
 nnoremap <silent> <leader>tw :w<cr>:q!<cr>
 
 " Docker
-nnoremap <silent> <leader>d :DockerToolsToggle<cr>
+" nnoremap <silent> <leader>d :DockerToolsToggle<cr>
 let g:dockertools_default_all = 0
 let g:dockertools_term_position = 'lefta'
 let g:dockertools_logs_position = 'lefta'
