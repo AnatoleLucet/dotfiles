@@ -45,7 +45,7 @@ Plug 'matze/vim-move'
 Plug 'rhysd/git-messenger.vim'
 Plug 'liuchengxu/vista.vim'
 Plug 'wellle/targets.vim'
-Plug 'kyazdani42/nvim-web-devicons', { 'commit': 'cadf0c30659acc8c60fec8100b81ea0fd92a8a9c' }
+Plug 'kyazdani42/nvim-web-devicons'
 Plug 'romgrk/barbar.nvim'
 Plug 'rhysd/conflict-marker.vim'
 Plug 'tpope/vim-dispatch'
@@ -83,11 +83,20 @@ Plug 'RishabhRD/nvim-cheat.sh'
 Plug 'chr4/nginx.vim'
 Plug 'szw/vim-maximizer'
 
-Plug 'xolox/vim-notes'
-" vim-notes deps
-Plug 'xolox/vim-misc'
-
 Plug 'puremourning/vimspector', {'do': './install_gadget.py --enable-c --enable-python'}
+
+Plug 'itchyny/vim-gitbranch'
+Plug 'chrisbra/csv.vim'
+
+Plug 'glepnir/zephyr-nvim'
+
+Plug 'vimwiki/vimwiki'
+
+Plug 'tpope/vim-vinegar'
+
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
 
 call plug#end()
 
@@ -158,8 +167,16 @@ let g:vimspector_sign_priority = {
   \    'vimspectorPC':         999,
   \ }
 
-" Notes
-command FNotes :FZF ~/.vim/plugged/vim-notes/misc/notes/user
+" Wiki
+if has("gui_running") || has('nvim-0.4')
+  hi def VimwikiDelText term=strikethrough cterm=strikethrough gui=strikethrough
+endif
+
+" Dashboard
+let g:dashboard_default_executive = 'fzf'
+
+" lh brackets
+let g:marker_define_jump_mappings = 0
 
 " Goyo
 let g:goyo_width = '65%'
@@ -167,9 +184,6 @@ let g:goyo_width = '65%'
 " Typescript
 " let g:typescript_ignore_typescriptdoc = 0
 let g:yats_host_keyword = 1
-
-" Term
-nnoremap <silent> <A-t> :VTerm<cr>
 
 " Gutter
 let g:gitgutter_map_keys = 0
@@ -183,6 +197,18 @@ let g:closetag_close_shortcut = ''
 
 " Checkout
 nnoremap <silent> <leader>gb :GBranches<cr>
+nnoremap <silent> <leader>gco :GBranches checkout<cr>
+let g:fzf_checkout_merge_settings = v:false
+let g:fzf_branch_actions = {
+\ 'checkout': {
+\   'prompt': 'Checkout> ',
+\   'execute': 'echo system("{git} checkout -t {branch}")',
+\   'multiple': v:false,
+\   'keymap': 'enter',
+\   'required': ['branch'],
+\   'confirm': v:false,
+\ },
+\}
 
 " Conflict
 let g:conflict_marker_highlight_group = ''
@@ -232,13 +258,23 @@ nnoremap <silent> <C-Right> :call animate#window_delta_width(-10)<CR>
 " Fugitive
 nnoremap <silent> <leader>gs :G<CR>
 nnoremap <silent> <leader>gc :Gcommit<CR>
-nnoremap <leader>gco :G checkout<space>
 nnoremap <leader>gp :Dispatch! git push<CR>
 nnoremap <leader>gl :Dispatch! git pull<CR>
 nnoremap <leader>glo :tabnew<CR>:Glog<CR>
 nnoremap <silent> <leader>gd :Gvdiff!<CR><C-w>J
 nnoremap <silent> gdh :diffget //2<CR>
 nnoremap <silent> gdl :diffget //3<CR>
+command! Gf :Dispatch! git fetch
+command! Gl :Dispatch! git pull
+command! Gp :Git push
+command! Gpf :Git push -f
+command! -nargs=1 Grb :Git rebase <args>
+command! Grbc :Git rebase --continue
+command! Grba :Git rebase --abort
+command! Grbs :Git rebase --skip
+command! -nargs=1 Gcb :Git checkout -b <args>
+command! -nargs=* Gb :Git branch<args>
+command! Gpsup :execute "Git push --set-upstream origin " . gitbranch#name()
 
 " Hexokinase (colors highlight)
 let g:Hexokinase_highlighters = ['virtual']
@@ -320,6 +356,7 @@ let g:coc_global_extensions = [
 \ 'coc-marketplace',
 \ 'coc-sh',
 \ 'coc-phpls',
+\ 'coc-flutter',
 \ ]
 
 " coc-explorer
@@ -451,8 +488,8 @@ nnoremap <silent> <leader>k :<C-u>CocPrev<CR>
 nnoremap <silent> <leader>a :CocAction<CR>
 
 " Remap next / prev autocomplete
-inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
-inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
+imap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
+imap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
 
 " save
 nmap <silent> <leader>w :<C-u>silent! call CocAction('runCommand', 'editor.action.organizeImport')<CR>:<C-u>silent! Format<CR>:w<CR>
@@ -516,3 +553,4 @@ fu! SyntaxStack()
     echohl None
 endfu "
 
+set incsearch

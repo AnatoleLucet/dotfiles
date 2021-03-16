@@ -10,7 +10,6 @@ plugins=(
 	emoji
 	zsh-syntax-highlighting
 	zsh-autosuggestions
-	zsh-vim-mode
 )
 
 # Start Oh-My-Zsh
@@ -20,6 +19,7 @@ source $ZSH/oh-my-zsh.sh
 
 
 # --- Defs ---
+export EDITOR="nvim"
 export DENO_INSTALL="/home/anatole/.deno"
 export GOPATH=$HOME/go
 export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin:$HOME/.yarn/bin:/usr/bin/watchman:/home/linuxbrew/.linuxbrew/bin:$HOME/.cargo/bin:$DENO_INSTALL/bin
@@ -30,8 +30,6 @@ export MANPAGER="sh -c 'col -bx | batcat -l man -p'"
 if [ -f ~/.zshrc.local ]; then
     source ~/.zshrc.local
 fi
-
-MODE_CURSOR_VIINS="blinking bar"
 
 # --- fzf ---
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -132,7 +130,7 @@ alias sudo='nocorrect sudo '
 alias dtf='cd ~/.dotfiles'
 alias bat='batcat'
 alias fd='fdfind'
-mc() { mkdir "$@" && cd "$@"; }
+mcd() { mkdir -p "$@" && cd "$@"; }
 p() { ping ${1:-"1.1.1.1"} }
 alias fortune='fortune -n 200 | cowsay | lolcat'
 alias dv='cd ${$(fd --hidden --type d .git ~/dev | rev | cut -d "/" -f 2- | rev | fzf --reverse):-$(pwd)}'
@@ -164,11 +162,11 @@ codi() {
     hi VertSplit ctermbg=NONE |\
     hi NonText ctermfg=0 |\
 		let g:workspace_session_name='' |\
+		let g:dashboard_disable_at_vimenter = 1 |\
+		cd ~ |\
     Codi $syntax" "$@"
 }
 
 bindkey -s '^p' 'dv^M'
-
-fortune
 
 eval $(thefuck --alias)
