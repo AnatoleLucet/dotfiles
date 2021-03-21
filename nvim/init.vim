@@ -280,7 +280,7 @@ command! Gpsup :execute "Git push --set-upstream origin " . gitbranch#name()
 let g:Hexokinase_highlighters = ['virtual']
 
 " FZF
-nnoremap <silent> <C-p> :Files<CR>
+nnoremap <silent> <C-p> :Telescope find_files<CR>
 nnoremap <silent> <leader>bl :Buffers<CR>
 nnoremap <silent> ; :Commands<CR>
 nnoremap <silent> <leader>gmc :Ag <<<<<<<<CR>
@@ -530,8 +530,7 @@ let g:dockertools_default_all = 0
 let g:dockertools_term_position = 'lefta'
 let g:dockertools_logs_position = 'lefta'
 
-" Ag
-nnoremap <silent> <leader>/ :Ag<cr>
+nnoremap <silent> <leader>/ :Telescope live_grep<cr>
 
 " keep at end
 " let g:tokyonight_style = 'storm'
