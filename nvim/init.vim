@@ -280,7 +280,7 @@ command! Gpsup :execute "Git push --set-upstream origin " . gitbranch#name()
 let g:Hexokinase_highlighters = ['virtual']
 
 " FZF
-nnoremap <silent> <C-p> :Telescope find_files<CR>
+nnoremap <silent> <C-p> :Telescope find_files find_command=rg,--ignore,--hidden,--files<CR>
 nnoremap <silent> <leader>bl :Buffers<CR>
 nnoremap <silent> ; :Commands<CR>
 nnoremap <silent> <leader>gmc :Ag <<<<<<<<CR>
