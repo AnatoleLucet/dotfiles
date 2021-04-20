@@ -141,6 +141,10 @@ install:
 		git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 		~/.fzf/install --all
 
+		# weather
+		cp ${ROOT_DIR}/.scripts/weather /usr/bin
+		sudo chmod +x /usr/bin/weather
+
 	# - others -
 		# zsh as default shell
 		chsh -s $$(which zsh)
