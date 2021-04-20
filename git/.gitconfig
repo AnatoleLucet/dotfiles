@@ -5,8 +5,6 @@
 	editor = nvim
 [pull]
 	rebase = true
-[url "git@github.com:"]
-	insteadOf = https://github.com/
 
 [includeIf "gitdir:~/dev/git.ayaline.com/"]
 	path = ~/dev/git.ayaline.com/.gitconfig

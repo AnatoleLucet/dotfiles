@@ -68,7 +68,9 @@ install:
 			ripgrep \
 			cowsay \
 			fortune \
-			fd-find
+			fd-find \
+			picom \
+			polybar
 		
 		@if !(grep -q Microsoft /proc/version); then \
 			sudo apt install -y \
@@ -175,6 +177,7 @@ c/i/all:
 	@if !(grep -q Microsoft /proc/version); then \
 		make c/i/i3; \
 		make c/i/compton; \
+		make c/i/polybar; \
 		make c/i/gterm; \
 		make c/i/dunst; \
 		make c/i/code; \
@@ -210,6 +213,11 @@ c/i/compton:
 	mkdir -p ~/.config/compton || true
 	ln -sf ${ROOT_DIR}/compton/* ~/.config/compton	
 
+# polybar
+c/i/polybar:
+	mkdir -p ~/.config/polybar || true
+	ln -sf ${ROOT_DIR}/polybar/* ~/.config/polybar	
+
 # dunst
 c/i/dunst:
 	mkdir -p ~/.config/dunst || true
@@ -221,6 +229,7 @@ c/i/zsh:
 	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting || true
 	git clone https://github.com/zsh-users/zsh-autosuggestions $${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions || true
 	git clone https://github.com/softmoth/zsh-vim-mode $${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-vim-mode || true
+	git clone https://github.com/Aloxaf/fzf-tab $${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/fzf-tab || true
 	# symlink
 	ln -sf ${ROOT_DIR}/zsh/.zshrc ~/
 

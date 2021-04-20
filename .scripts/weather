@@ -1,0 +1,5 @@
+#!/bin/bash
+
+#curl -s http://wttr.in/\?format\=3\&\?m
+curl -s http://wttr.in/?format=%m%20%l:+%c+%t
+

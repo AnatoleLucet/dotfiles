@@ -160,6 +160,9 @@ nmap <leader>dbp <Plug>VimspectorToggleBreakpoint
 nmap <leader>dcbp <Plug>VimspectorToggleConditionalBreakpoint
 nmap <leader>di <Plug>VimspectorBalloonEval
 
+command! CopyFilePathAndLine let @+ = join([expand('%'),  line(".")], ':')
+command! CopyFilePath let @+ = expand('%')
+
 let g:vimspector_sign_priority = {
   \    'vimspectorBP':         40,
   \    'vimspectorBPCond':     9,

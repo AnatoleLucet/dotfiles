@@ -10,6 +10,7 @@ plugins=(
 	emoji
 	zsh-syntax-highlighting
 	zsh-autosuggestions
+	fzf-tab
 )
 
 # Start Oh-My-Zsh

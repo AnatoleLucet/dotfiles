@@ -21,7 +21,7 @@ exec --no-startup-id redshift -O 5250
 gaps inner 17
 
 # audio icon
-exec_always --no-startup-id /usr/bin/pasystray
+# exec_always --no-startup-id /usr/bin/pasystray
 
 # lock keybind
 bindsym $mod+Escape exec multilockscreen -l
@@ -29,7 +29,8 @@ bindsym $mod+Escape exec multilockscreen -l
 # lock on lid close
 exec_always --no-startup-id xss-lock -- ~/.config/i3/lock.sh
 
-exec_always compton
+exec_always picom
+exec_always polybar main
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -40,14 +41,14 @@ exec_always compton
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
-exec_always --no-startup-id nm-applet
+# exec_always --no-startup-id nm-applet
 
 # Use pactl to adjust volume in PulseAudio.
-set $refresh_i3status killall -SIGUSR1 i3status
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
-bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+# set $refresh_i3status killall -SIGUSR1 i3status
+# bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
+# bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
+# bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+# bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -205,26 +206,57 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-set $mainColor #d160a7
-set $secondaryColor #27212e
-set $tertiaryColor #41384d
-set $textColor #ffffff
+# set $mainColor #d160a7
+# set $secondaryColor #27212e
+# set $tertiaryColor #41384d
+# set $textColor #ffffff
 
-bar {
-	tray_output primary
-	position top
-	status_command i3status
-	font pango: Ubuntu 11px
-	colors {
-		background $secondaryColor
-		focused_workspace $mainColor $secondaryColor $textColor
-		inactive_workspace $tertiaryColor $secondaryColor $textColor
-		statusline $textColor
-	}
-}
+# bar {
+# 	tray_output primary
+# 	position top
+# 	status_command i3status
+# 	font pango: Ubuntu 11px
+# 	colors {
+# 		background $secondaryColor
+# 		focused_workspace $mainColor $secondaryColor $textColor
+# 		inactive_workspace $tertiaryColor $secondaryColor $textColor
+# 		statusline $textColor
+# 	}
+# }
 
-client.focused $mainColor $secondaryColor $textColor
-client.unfocused $tertiaryColor $secondaryColor $textColor
+# client.focused $mainColor $secondaryColor $textColor
+# client.unfocused $tertiaryColor $secondaryColor $textColor
 
 font pango: Ubuntu bold 11px
 
+set $bg-color 	         #20212B
+set $inactive-bg-color	 #20212B
+set $text-color          #f3f4f5
+set $inactive-text-color #676E7D
+set $urgent-bg-color     #E53935
+set $indicator           #1F5379
+
+#window colors
+#                         border                background           text                   indicator
+client.focused            $urgent-bg-color      $urgnet-bg-color     $text-color            $indicator
+client.unfocused          $inactive-bg-color    $inactive-bg-color   $inactive-text-color   $indicator
+client.focused_inactive   $inactive-bg-color    $inactive-bg-color   $inactive-text-color   $indicator
+client.urgent             $urgent-bg-color      $urgent-bg-color     $text-color            $indicator
+
+# disable window titlebars and add border
+smart_borders on
+hide_edge_borders smart_no_gaps
+
+border_radius 5
+
+for_window [class=".*"] border pixel 4
+
+# switch gaps by bindsym
+set $mode_gaps Toggle gaps: (1) on (2) off
+bindsym $mod+equal mode "$mode_gaps"; exec notify-send -a "Gaps mode" " " "(1) - enable \n(2) - disable" -t 1000
+mode "$mode_gaps" {
+    bindsym 1 mode "default", gaps inner all set 30, gaps outer all set 10, exec picom, exec $HOME/.config/polybar/launch.sh
+    bindsym 2 mode "default", gaps inner all set 1, gaps outer all set 1, exec pkill picom, exec $HOME/.config/polybar/launch.sh
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
