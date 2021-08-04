@@ -1,2 +1,0 @@
-alacritty --working-directory=$(xcwd)
-
