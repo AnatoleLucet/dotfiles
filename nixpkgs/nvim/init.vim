@@ -261,7 +261,7 @@ lua << EOF
 local null_ls = require("null-ls")
 
 local sources = {
-    null_ls.builtins.formatting.prettierd,
+    null_ls.builtins.formatting.prettier,
     null_ls.builtins.eslint_d,
     null_ls.builtins.diagnostics.write_good,
     null_ls.builtins.diagnostics.eslint.with({ command = "eslint_d" })

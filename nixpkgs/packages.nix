@@ -17,7 +17,9 @@
     yarn
     nodePackages.tsun
     nodePackages.typescript
+    nodePackages.typescript-language-server
     nodePackages.prettier
+    nodePackages.eslint_d
     xcwd
     thefuck
     curl
