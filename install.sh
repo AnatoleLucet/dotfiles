@@ -55,3 +55,4 @@ fi
 # set zsh as the default shell
 which zsh | sudo tee -a /etc/shells
 sudo chsh -s $(which zsh)
+sudo usermod -s $(which zsh) $USER

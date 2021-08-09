@@ -4,6 +4,7 @@
     ./zsh/zsh.nix
     ./kitty/kitty.nix
     ./git/git.nix
+    ./bat/bat.nix
   ];
 
   programs.home-manager.enable = true;

@@ -23,6 +23,7 @@
     xcwd
     thefuck
     curl
+    tokei
 
     # TUIs
     neovim
@@ -43,6 +44,8 @@
     dunst
     betterlockscreen
     insomnia
+    robo3t
+    android-studio
 
     # Langs/runtimes/compilers
     nodejs

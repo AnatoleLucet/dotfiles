@@ -113,6 +113,7 @@ alias dv='cd ${$(fd --hidden --type d "^.git$" ~/dev | rev | cut -d "/" -f 2- | 
 alias extip='curl https://ipinfo.io/ip; echo'
 alias kitty='nixGL kitty'
 alias picom='nixGL picom'
+alias android-studio='nixGL android-studio'
 
 nmcli() {
     if [[ $@ == "n r" ]]; then
