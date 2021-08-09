@@ -32,13 +32,24 @@ home-manager switch
 curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 nvim --headless +PlugInstall +qall 2> /dev/null
 
-# install i3-gaps
-sudo add-apt-repository -y ppa:kgilmer/speed-ricer
-sudo apt install -y i3-gaps 
+if lsb_release -d | grep -q "Ubuntu"; then
+	sudo apt update
 
-# set docker perms
-sudo groupadd docker
-sudo usermod -aG docker $USER
+	# install i3-gaps
+	sudo add-apt-repository -y ppa:kgilmer/speed-ricer
+	sudo apt install -y i3-gaps 
+
+	# install docker
+	curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+	echo \
+		"deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
+		$(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+	sudo apt-get install docker-ce docker-ce-cli containerd.io
+	sudo groupadd docker
+	sudo usermod -aG docker $USER
+else 
+	echo "[WARN] Unsupported linux distro. You need to install docker and i3-gaps manually."
+fi
 
 # set zsh as the default shell
 which zsh | sudo tee -a /etc/shells

@@ -3,7 +3,7 @@
     # CLIs
     curl
     wget
-    docker
+    # docker
     docker-compose
     feh
     tree

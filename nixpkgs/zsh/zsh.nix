@@ -49,7 +49,7 @@
         "grc"
         "kubectl"
         "thefuck"
-        "vi-mode"
+        # "vi-mode"
       ];
     };
   };
