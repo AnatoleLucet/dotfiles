@@ -90,4 +90,4 @@ if ! [ -e $HOME/.oh-my-zsh ]; then
 fi
 
 # set zsh as the default shell
-echo "\nzsh" >> $HOME/.bashrc
+printf "\nzsh" >> $HOME/.bashrc
