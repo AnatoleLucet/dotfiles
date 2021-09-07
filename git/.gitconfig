@@ -1,0 +1,15 @@
+[user]
+  email = anatole@hey.com
+  name = "AnatoleLucet"
+
+[core]
+  editor = "nvim"
+
+[pull]
+  rebase = true
+
+[init]
+  defaultBranch = "main";
+
+[includeIf "gitdir:~/dev/git.ayaline.com/"]
+  path = "~/.gitconfigs/ayaline"

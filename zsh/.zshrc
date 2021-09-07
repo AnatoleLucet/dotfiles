@@ -1,3 +1,25 @@
+# oh-my-zsh
+export ZSH=$HOME/.oh-my-zsh
+ZSH_THEME="robbyrussell"
+plugins=(
+	git
+	emoji
+	zsh-syntax-highlighting
+	zsh-autosuggestions
+	fzf-tab
+  bazel
+  extract
+  git
+  emoji
+  docker
+  gitfast
+  golang
+  grc
+  kubectl
+  thefuck
+)
+source $ZSH/oh-my-zsh.sh
+
 # GRC
 [[ -s "$HOME/.nix-profile/etc/grc.zsh" ]] && source ~/.nix-profile/etc/grc.zsh
 
@@ -111,9 +133,6 @@ alias fortune='fortune -n 200 | cowsay | lolcat'
 alias dv='cd ${$(fd --hidden --type d "^.git$" ~/dev | rev | cut -d "/" -f 2- | rev | fzf --reverse --height=15):-$(pwd)}'
 # alias dv='cd ${$(echo $HOME/dev/$(fd --hidden --type d "^.git$" ~/dev | rev | cut -d "/" -f 2- | rev | sed "s/${HOME//\//\\/}\/dev\///g" | fzf --reverse --height=15)):-$(pwd)}'
 alias extip='curl https://ipinfo.io/ip; echo'
-alias kitty='nixGL kitty'
-alias picom='nixGL picom'
-alias android-studio='nixGL android-studio'
 
 nmcli() {
     if [[ $@ == "n r" ]]; then

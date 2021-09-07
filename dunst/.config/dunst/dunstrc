@@ -2,7 +2,7 @@
 allow_markup = yes
 word_wrap = yes
 follow = mouse
-font = "Ubuntu 11"
+font = "Fira Sans 11"
 alignment = center
 line_height = 0
 separator_height = 2

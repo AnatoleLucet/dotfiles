@@ -378,7 +378,6 @@ require('gitlinker').setup(opts)
 EOF
 
 " FTerm
-:lua require('FTerm').setup()
 nnoremap <silent> <A-t> :lua require("FTerm").toggle()<cr>
 tnoremap <silent> <A-t> <C-\><C-n>:lua require("FTerm").toggle()<cr>
 

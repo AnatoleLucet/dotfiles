@@ -235,7 +235,7 @@ set $text-color          #f3f4f5
 # set $urgent-bg-color     #E53935
 # set $indicator           #1F5379
 
-font pango: Ubuntu bold 11px
+font pango: Fira Sans bold 11px
 # window colors
 client.focused $tertiaryColor $tertiaryColor $text-color
 client.unfocused $secondaryColor $secondaryColor $tertiaryColor
