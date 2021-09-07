@@ -55,7 +55,7 @@ packages=(
     dunst
     betterlockscreen
     i3-gaps
-    # android-studio
+    android-studio
 
     # Langs/runtimes/compilers
     nodejs
