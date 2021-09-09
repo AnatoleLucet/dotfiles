@@ -5,7 +5,7 @@ set -e
 export STOW_FOLDERS="git, fonts, zsh, nvim, i3, picom, polybar, rofi, kitty, dunst"
 
 if ! [ -x "$(command -v stow)" ]; then
-    sudo pacman -S stow
+    sudo pacman -S stow --noconfirm
 fi
 
 # link dotfiles
@@ -42,23 +42,19 @@ packages=(
 
     # Apps
     kitty
-    google-chrome
     redshift
     pavucontrol
     pasystray
-    picom-git
     polybar
     sqlite
     vscode
     rofi
-    i3lock-color
     dunst
-    betterlockscreen
     i3-gaps
-    android-studio
 
     # Langs/runtimes/compilers
     nodejs
+    npm
     go
     python
     gcc
@@ -90,9 +86,15 @@ npm_packages=(
 
 aur_packages=(
     xcwd-git
+    google-chrome
+    picom-git
+    i3lock-color
+    betterlockscreen
+    android-studio
 )
 
 # install packages
+sudo pacman -Syy
 for package in "${packages[@]}"; do
     if ! [ "$(pacman -Qi $package 2> /dev/null)" ]; then
         sudo pacman -S $package --noconfirm
@@ -108,6 +110,7 @@ done
 
 # install aura
 if ! [ "$(pacman -Qm | grep aura)" ]; then
+    sudo pacman -S --needed base-devel --noconfirm
     git clone https://aur.archlinux.org/aura-bin.git /tmp/aura-bin
     cd /tmp/aura-bin
     makepkg
@@ -117,11 +120,14 @@ if ! [ "$(pacman -Qm | grep aura)" ]; then
 fi
 
 # install aur packages
+aura_build_path=$HOME/.cache/aura-build
+mkdir -p $aura_build_path
 for package in "${aur_packages[@]}"; do
     if ! [ "$(pacman -Qm | grep $package)" ]; then
-        sudo aura -A $package --noconfirm
+        sudo aura -A $package --noconfirm --build $aura_build_path
     fi
 done
+rm -rf $aura_build_path
 
 # install insomnia
 if ! [ "$(pacman -Qm | grep insomnia)" ]; then
