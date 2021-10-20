@@ -24,7 +24,8 @@ source $ZSH/oh-my-zsh.sh
 [[ -s "$HOME/.nix-profile/etc/grc.zsh" ]] && source ~/.nix-profile/etc/grc.zsh
 
 # FZF
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+source /usr/share/fzf/key-bindings.zsh
+source /usr/share/fzf/completion.zsh
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*" --glob "!node_modules/*" --glob "!vendor/*" 2> /dev/null'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 f() {

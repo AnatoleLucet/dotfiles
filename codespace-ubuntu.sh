@@ -26,6 +26,7 @@ npm_packages=(
     prettier
     eslint_d
     @fsouza/prettierd
+    write-good
 )
 
 brew_packages=(
@@ -39,6 +40,8 @@ brew_packages=(
     fd
     ripgrep
     the_silver_searcher
+    tcpdump
+    httpstat
 )
 
 # install apt packages

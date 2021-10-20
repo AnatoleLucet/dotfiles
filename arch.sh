@@ -35,6 +35,9 @@ packages=(
     tokei
     fzf
     github-cli
+    dnsutils
+    openvpn
+    tcpdump
     
     # TUIs
     neovim
@@ -51,6 +54,7 @@ packages=(
     rofi
     dunst
     i3-gaps
+    peek
 
     # Langs/runtimes/compilers
     nodejs
@@ -67,11 +71,15 @@ packages=(
     ttf-font-awesome
     noto-fonts-emoji
 
+    # LSPs
+    gopls
+
     # Others
     cmake
     libev
     grc
     tlp
+    python-pynvim
 )
 
 npm_packages=(
@@ -91,6 +99,10 @@ aur_packages=(
     i3lock-color
     betterlockscreen
     android-studio
+    httpstat-go
+    ttf-poppins
+    slack-desktop
+    write-good
 )
 
 # install packages

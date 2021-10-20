@@ -35,7 +35,7 @@ local on_attach = function(client, bufnr)
   buf_set_keymap("n", "<space>co", "<cmd>Trouble<CR>", opts)
 
   if client.resolved_capabilities.document_formatting then
-    vim.cmd("autocmd BufWritePost <buffer> lua vim.lsp.buf.formatting_seq_sync()")
+    vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()")
   end
 end
 

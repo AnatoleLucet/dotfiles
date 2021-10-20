@@ -110,7 +110,7 @@ Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 
-Plug 'phaazon/hop.nvim', { 'branch': 'pre-extmarks' }
+Plug 'phaazon/hop.nvim'
 Plug 'nacro90/numb.nvim'
 
 Plug 'edluffy/specs.nvim'
@@ -196,7 +196,7 @@ set ignorecase
 set infercase
 set guifont=MonoLisa\ Nerd\ Font\ 12
 set completeopt=menuone,noselect
-set spell
+" set spell
 set signcolumn=yes
 set colorcolumn=99999
 
@@ -231,6 +231,9 @@ endfunction
 nnoremap <silent> <expr> o <SID>NewLineInsertExpr(1, 'o')
 nnoremap <silent> <expr> O <SID>NewLineInsertExpr(1, 'O')
 
+" NimvTree
+lua require("nvim-tree").setup()
+
 " Kommentary
 lua << EOF
 require('kommentary.config').configure_language('typescriptreact', {
@@ -262,9 +265,10 @@ local null_ls = require("null-ls")
 
 local sources = {
     null_ls.builtins.formatting.prettier,
-    null_ls.builtins.eslint_d,
+    null_ls.builtins.formatting.eslint_d,
+
     null_ls.builtins.diagnostics.write_good,
-    null_ls.builtins.diagnostics.eslint.with({ command = "eslint_d" })
+    null_ls.builtins.diagnostics.eslint_d,
 }
 
 null_ls.setup({ sources = sources })
@@ -333,13 +337,13 @@ EOF
 :lua require('nvim-autopairs').setup({ disable_filetype = { "TelescopePrompt" } })
 
 " Spellsitter
-:lua require('spellsitter').setup({ hl = 'error', captures = { "comment" } })
+" :lua require('spellsitter').setup({ hl = 'error', captures = { "comment" } })
 
 " Neogit
 :lua require('neogit').setup()
 
 " Nvim Tree
-nnoremap <leader>e :NvimTreeFindFile<CR>
+nnoremap <leader>e :NvimTreeFindFile<CR> :NvimTreeOpen<CR>
 let g:nvim_tree_indent_markers = 1
 let g:nvim_tree_lsp_diagnostics = 1
 let g:nvim_tree_add_trailing = 1
