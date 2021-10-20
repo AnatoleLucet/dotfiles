@@ -103,6 +103,7 @@ aur_packages=(
     ttf-poppins
     slack-desktop
     write-good
+    vim-language-server
 )
 
 # install packages

@@ -68,7 +68,7 @@ bindsym $mod+Shift+i exec gnome-screenshot -a -i
 # kill focused window
 bindsym $mod+Shift+A kill
 
-bindsym $mod+d exec rofi -run-command "zsh -ci '{cmd}'" -show run
+bindsym $mod+d exec rofi -run-command "zsh -ci '{cmd}'" -show run -matching fuzzy -sorting-method fzf -sort
 
 # change focus
 bindsym $mod+j focus left

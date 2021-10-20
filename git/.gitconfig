@@ -11,5 +11,8 @@
 [init]
   defaultBranch = "main";
 
+[diff]
+	renameLimit = 100000
+
 [includeIf "gitdir:~/dev/git.ayaline.com/"]
   path = "~/.gitconfigs/ayaline"

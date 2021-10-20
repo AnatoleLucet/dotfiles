@@ -37,6 +37,9 @@ local on_attach = function(client, bufnr)
   if client.resolved_capabilities.document_formatting then
     vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()")
   end
+
+  -- doesn't seems to work very well
+  -- require('lsp_signature').on_attach()
 end
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
@@ -122,7 +125,7 @@ local servers = {
     useContainers = true,
   },
 }
-vim.lsp.set_log_level("debug")
+-- vim.lsp.set_log_level("debug")
 
 for _, lsp in ipairs(servers) do
   local opts = {
@@ -151,31 +154,43 @@ for _, lsp in ipairs(servers) do
   nvim_lsp[lsp.name].setup(opts)
 end
 
-require("compe").setup({
-  enabled = true;
-  autocomplete = true;
-  debug = false;
-  min_length = 1;
-  preselect = "always";
-  throttle_time = 80;
-  source_timeout = 200;
-  incomplete_delay = 400;
-  max_abbr_width = 100;
-  max_kind_width = 100;
-  max_menu_width = 100;
-  documentation = true;
+local cmp = require('cmp')
+cmp.setup({
+  snippet = {
+    expand = function(args)
+      require('luasnip').lsp_expand(args.body)
+    end
+  },
 
-  source = {
-    path = true;
-    buffer = true;
-    calc = true;
-    nvim_lsp = true;
-    nvim_lua = true;
-    -- vsnip = true;
-    -- ultisnips = true;
-  };
+  mapping = {
+    ['<C-p>'] = cmp.mapping.select_prev_item(),
+    ['<C-n>'] = cmp.mapping.select_next_item(),
+    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<C-e>'] = cmp.mapping.close(),
+    ['<CR>'] = cmp.mapping.confirm({
+      behavior = cmp.ConfirmBehavior.Insert,
+      select = true,
+    })
+  },
 
+  sources = {
+    { name = 'path' },
+    { name = 'calc' },
+    { name = 'luasnip' },
+    { name = 'nvim_lsp' },
+    { name = 'nvim_lua' },
+    { name = 'buffer' },
+    { name = 'emoji' },
+  },
+
+  completion = {
+    completeopt = 'menu,menuone,noinsert',
+  }
 })
+
+require("luasnip/loaders/from_vscode").load()
 
 require("nvim-treesitter.configs").setup({
   ensure_installed = "maintained",
@@ -185,7 +200,7 @@ require("nvim-treesitter.configs").setup({
   rainbow = {
     enable = true,
     extended_mode = true,
-    max_file_lines = 1000,
+    -- max_file_lines = 1000,
     colors = {
       "#7dcfff",
       "#ff9e64",
@@ -200,7 +215,7 @@ require("nvim-treesitter.configs").setup({
     enable = true,
     keymaps = {
       ["<cr>"] = "textsubjects-smart",
-      [";"] = "textsubjects-container-outer",
+      -- [";"] = "textsubjects-container-outer",
     },
   },
   autotag = {
@@ -211,8 +226,6 @@ require("nvim-treesitter.configs").setup({
     enable_autocmd = false,
   },
 })
-
-require('lsp_signature').on_attach()
 
 require('lspsaga').init_lsp_saga({
   use_saga_diagnostic_sign = true,

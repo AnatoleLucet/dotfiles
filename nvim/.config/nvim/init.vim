@@ -124,7 +124,19 @@ Plug 'ruifm/gitlinker.nvim'
 Plug 'famiu/nvim-reload'
 
 Plug 'neovim/nvim-lspconfig'
-Plug 'hrsh7th/nvim-compe'
+
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-calc'
+Plug 'hrsh7th/cmp-emoji'
+Plug 'hrsh7th/cmp-nvim-lua'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'saadparwaiz1/cmp_luasnip'
+
+Plug 'L3MON4D3/LuaSnip'
+Plug 'rafamadriz/friendly-snippets'
+
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'p00f/nvim-ts-rainbow'
 Plug 'machakann/vim-highlightedyank'
@@ -133,12 +145,13 @@ Plug 'kyazdani42/nvim-tree.lua'
 Plug 'ray-x/lsp_signature.nvim'
 Plug 'folke/trouble.nvim'
 Plug 'kabouzeid/nvim-lspinstall'
-Plug 'glepnir/lspsaga.nvim'
+" Plug 'glepnir/lspsaga.nvim'
+Plug 'jasonrhansen/lspsaga.nvim', {'branch': 'finder-preview-fixes'}
 Plug 'folke/lsp-colors.nvim'
 Plug 'lspcontainers/lspcontainers.nvim'
+Plug 'mfussenegger/nvim-ts-hint-textobject'
 
-" until https://github.com/romgrk/nvim-treesitter-context/issues/49
-" Plug 'romgrk/nvim-treesitter-context'
+Plug 'romgrk/nvim-treesitter-context'
 Plug 'nvim-treesitter/nvim-treesitter-refactor'
 
 Plug 'f-person/git-blame.nvim'
@@ -177,6 +190,11 @@ Plug 'michaelb/sniprun', {'do': 'bash install.sh'}
 Plug 'tpope/vim-unimpaired'
 Plug 'junkblocker/git-time-lapse'
 
+Plug 'simrat39/symbols-outline.nvim'
+Plug 'mileszs/ack.vim'
+Plug 'gelguy/wilder.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'lewis6991/impatient.nvim'
+
 call plug#end()
 
 set nu
@@ -195,10 +213,11 @@ set fileencodings=utf-8
 set ignorecase
 set infercase
 set guifont=MonoLisa\ Nerd\ Font\ 12
-set completeopt=menuone,noselect
+set completeopt=menuone,noselect,noinsert
 " set spell
 set signcolumn=yes
 set colorcolumn=99999
+set fillchars+=diff:╱
 
 let mapleader=" "
 nnoremap <silent> <ESC> :nohlsearch<CR>
@@ -231,8 +250,55 @@ endfunction
 nnoremap <silent> <expr> o <SID>NewLineInsertExpr(1, 'o')
 nnoremap <silent> <expr> O <SID>NewLineInsertExpr(1, 'O')
 
-" NimvTree
-lua require("nvim-tree").setup()
+" Impatient
+lua require('impatient')
+
+" Wilder
+call wilder#setup({'modes': [':', '/', '?']})
+call wilder#set_option('pipeline', [
+      \   wilder#branch(
+      \     wilder#python_file_finder_pipeline({
+      \       'file_command': ['find', '.', '-type', 'f', '-printf', '%P\n'],
+      \       'dir_command': ['find', '.', '-type', 'd', '-printf', '%P\n'],
+      \       'filters': ['fuzzy_filter', 'difflib_sorter'],
+      \     }),
+      \     wilder#cmdline_pipeline(),
+      \     wilder#python_search_pipeline(),
+      \   ),
+      \ ])
+call wilder#set_option('renderer', wilder#popupmenu_renderer({
+      \ 'highlighter': wilder#basic_highlighter(),
+      \ 'highlights': {
+      \   'accent': wilder#make_hl('WilderAccent', 'Pmenu', [{}, {}, {'foreground': '#f4468f'}]),
+      \ },
+      \ 'max_height': 10
+      \ }))
+
+" Diffview
+lua << EOF
+require('diffview').setup({
+  enhanced_diff_hl = true,
+})
+EOF
+
+" Ack
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
+
+" LuaSnip
+imap <silent><expr> <Tab> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>' 
+inoremap <silent> <S-Tab> <cmd>lua require'luasnip'.jump(-1)<Cr>
+
+snoremap <silent> <Tab> <cmd>lua require('luasnip').jump(1)<Cr>
+snoremap <silent> <S-Tab> <cmd>lua require('luasnip').jump(-1)<Cr>
+
+imap <silent><expr> <C-E> luasnip#choice_active() ? '<Plug>luasnip-next-choice' : '<C-E>'
+smap <silent><expr> <C-E> luasnip#choice_active() ? '<Plug>luasnip-next-choice' : '<C-E>'
+
+" nvim-ts-hint-textobject
+omap <silent> m :<C-U>lua require('tsht').nodes()<CR>
+vnoremap <silent> m :lua require('tsht').nodes()<CR>
 
 " Kommentary
 lua << EOF
@@ -343,7 +409,8 @@ EOF
 :lua require('neogit').setup()
 
 " Nvim Tree
-nnoremap <leader>e :NvimTreeFindFile<CR> :NvimTreeOpen<CR>
+lua require("nvim-tree").setup()
+nnoremap <leader>e :NvimTreeFindFile<CR>:NvimTreeOpen<CR>
 let g:nvim_tree_indent_markers = 1
 let g:nvim_tree_lsp_diagnostics = 1
 let g:nvim_tree_add_trailing = 1
@@ -352,19 +419,13 @@ let g:nvim_tree_auto_close = 1
 let g:nvim_tree_width = 39
 
 " Telescope
+nnoremap <silent><leader>. :Telescope file_browser<CR>
 augroup telescopeMaps
   au VimEnter * noremap <silent> <leader>t :Telescope<CR>
   " unmap buffergator's
   au VimEnter * unmap <leader>tc
   au VimEnter * unmap <leader>to
 augroup END
-
-" Compe
-inoremap <silent><expr> <C-Space> compe#complete()
-inoremap <silent><expr> <CR>      compe#confirm('<CR>')
-inoremap <silent><expr> <C-e>     compe#close('<C-e>')
-inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
-inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
 
 " Gitlinker
 lua << EOF
@@ -386,19 +447,27 @@ nnoremap <silent> <A-t> :lua require("FTerm").toggle()<cr>
 tnoremap <silent> <A-t> <C-\><C-n>:lua require("FTerm").toggle()<cr>
 
 " Specs
-lua << EOF
-local opts = {
-  min_jump = 15,
-  popup = {
-    resizer = require('specs').empty_resizer,
-    winhl = "ConflictMarkerBegin",
-    width = 1000,
-    blend = 50
-  } 
-}
-
-require('specs').setup(opts)
-EOF
+" lua << EOF
+" local opts = {
+"   min_jump = 15,
+"   popup = {
+"     resizer = require('specs').empty_resizer,
+"     winhl = "ConflictMarkerBegin",
+"     blend = 50,
+"     resizer = function(width, ccol, cnt)
+"       if cnt < 100 then
+"         local winwidth = vim.api.nvim_win_get_width(0)
+"         local col = vim.api.nvim_win_get_position(0)[2]
+"         print(winwidth, col)
+"         return {winwidth, col}
+"       else
+"         return nil
+"       end
+"     end
+"   } 
+" }
+" require('specs').setup(opts)
+" EOF
 
 " Num
 :lua require('numb').setup()
@@ -536,7 +605,10 @@ require("lualine").setup({
         'diagnostics',
         sources = {'nvim_lsp'},
       },
-      'filename',
+      {
+        'filename',
+        path = 1,
+      },
     },
     lualine_x = {
       'encoding',
@@ -900,5 +972,7 @@ highlight ConflictMarkerOurs guibg=#2e5049
 highlight ConflictMarkerTheirs guibg=#344f69
 highlight ConflictMarkerEnd guibg=#2f628e
 highlight ConflictMarkerCommonAncestorsHunk guibg=#754a81
+
+hi link TSNodeUnmatched HopUnmatched
 
 set shortmess+=c
