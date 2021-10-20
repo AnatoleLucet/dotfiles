@@ -31,6 +31,8 @@ home-manager switch
 # install nvim plugins
 curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 nvim --headless +PlugInstall +qall 2> /dev/null
+npm config set prefix '~/.npm-packages'
+sudo npm i -g @fsouza/prettierd
 
 if lsb_release -d | grep -q "Ubuntu"; then
 	sudo apt update
@@ -48,8 +50,11 @@ if lsb_release -d | grep -q "Ubuntu"; then
 	sudo apt install -y docker-ce docker-ce-cli containerd.io
 	sudo groupadd docker
 	sudo usermod -aG docker $USER
+
+	# install tlp
+	sudo apt install -y tlp
 else 
-	echo "[WARN] Unsupported linux distro. You need to install docker and i3-gaps manually."
+	echo "[WARN] Unsupported linux distro. You need to install docker, i3-gaps and tlp manually."
 fi
 
 # set zsh as the default shell

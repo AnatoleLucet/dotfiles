@@ -20,10 +20,13 @@
     nodePackages.typescript-language-server
     nodePackages.prettier
     nodePackages.eslint_d
+    nodePackages.expo-cli
+    nodePackages.vim-language-server
     xcwd
     thefuck
     curl
     tokei
+    gopls
 
     # TUIs
     neovim
@@ -65,5 +68,7 @@
     cmake
     libev
     grc
+    brightnessctl
+    acpi
   ];
 }

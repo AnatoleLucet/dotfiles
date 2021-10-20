@@ -29,6 +29,7 @@ bindsym $mod+Escape exec betterlockscreen -l
 # lock on lid close
 exec_always --no-startup-id xss-lock -- ~/.config/i3/lock.sh
 
+exec_always --no-startup-id ~/.config/i3/boot.sh
 exec_always --no-startup-id pgrep polybar | xargs -r kill; polybar main
 exec_always zsh -ci "picom"
 
@@ -256,3 +257,11 @@ mode "$mode_gaps" {
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
+
+# bindsym XF86MonBrightnessUp exec brightnessctl set 10%+
+# bindsym XF86MonBrightnessDown exec brightnessctl set 10%-
+bindsym XF86MonBrightnessDown  exec amixer -D pulse set Master 1+ toggle
+
+bindsym XF86AudioMute exec amixer -D pulse set Master 1+ toggle
+bindsym XF86AudioLowerVolume exec amixer sset 'Master' 5%-
+bindsym XF86AudioRaiseVolume exec amixer sset 'Master' 5%+

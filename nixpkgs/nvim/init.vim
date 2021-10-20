@@ -242,6 +242,9 @@ require('kommentary.config').configure_language('typescriptreact', {
 })
 EOF
 
+" NvimTree
+lua require("nvim-tree").setup()
+
 " Trouble
 nnoremap <leader>o :Trouble<CR>
 
@@ -261,10 +264,10 @@ lua << EOF
 local null_ls = require("null-ls")
 
 local sources = {
-    null_ls.builtins.formatting.prettier,
-    null_ls.builtins.eslint_d,
-    null_ls.builtins.diagnostics.write_good,
-    null_ls.builtins.diagnostics.eslint.with({ command = "eslint_d" })
+  null_ls.builtins.formatting.prettierd.with({ command = "prettierd" }),
+  null_ls.builtins.eslint_d,
+  null_ls.builtins.diagnostics.write_good,
+  null_ls.builtins.diagnostics.eslint.with({ command = "eslint_d" })
 }
 
 null_ls.setup({ sources = sources })
