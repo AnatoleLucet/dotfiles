@@ -2,7 +2,8 @@ font:
   size: 9.5
   normal:
     family: MonoLisa Nerd Font
-    style: Normal
+    # family: MonoLisa Nerd Font
+    style: Bold
   bold:
     family: MonoLisa Nerd Font
     style: Bold
@@ -18,8 +19,9 @@ colors:
     background: '#292d3e'
     foreground: '#EBEBEB'
   cursor:
-    text: '#FF261E'
-    cursor: '#FF261E'
+    text: '#1B2229'
+    #7f03fcr: '#03fc41'
+    cursor: '#51afef'
   normal:
     black: '#0d0d0d'
     red: '#FF301B'

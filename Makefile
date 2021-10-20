@@ -70,7 +70,8 @@ install:
 			fortune \
 			fd-find \
 			picom \
-			polybar
+			polybar \
+			sqlite3 libsqlite3-dev
 		
 		@if !(grep -q Microsoft /proc/version); then \
 			sudo apt install -y \
@@ -95,7 +96,8 @@ install:
 			yarn \
 			tsun \
 			typescript \
-			@types/node
+			@types/node \
+			prettier
 
 	# - manually install -
 		# oh-my-zsh
@@ -153,6 +155,9 @@ install:
 			`# docker perms` \
 			sudo groupadd docker; \
 			sudo usermod -aG docker $(USER); \
+			\
+			`# force chrome dark mode` \
+			sudo sed -i 's;/usr/bin/google-chrome-stable;/usr/bin/google-chrome-stabl --force-dark-mode;g' /usr/share/applications/google-chrome.desktop \
 		fi
 
 
@@ -244,7 +249,7 @@ c/i/nvim:
 	curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
 	https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 	# import config files
-	ln -sf ${ROOT_DIR}/nvim/* ~/.config/nvim
+	ln -sf ${ROOT_DIR}/nvim ~/.config
 	# install plugins
 	nvim +PlugInstall +qall
 

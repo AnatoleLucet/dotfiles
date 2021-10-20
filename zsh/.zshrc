@@ -6,15 +6,26 @@ ZSH_THEME="robbyrussell"
 
 # Plugins
 plugins=(
+	fzf-tab
+	bazel
+	extract
 	git
 	emoji
 	zsh-syntax-highlighting
 	zsh-autosuggestions
-	fzf-tab
+	docker
+	gitfast
+	golang
+	grc
+	kubectl
+	thefuck
+	vi-mode
 )
+
 
 # Start Oh-My-Zsh
 source $ZSH/oh-my-zsh.sh
+source ~/.oh-my-zsh/custom/plugins/fzf-tab/fzf-tab.plugin.zsh
 
 [[ -s "/etc/grc.zsh" ]] && source /etc/grc.zsh
 
@@ -26,6 +37,7 @@ export GOPATH=$HOME/go
 export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin:$HOME/.yarn/bin:/usr/bin/watchman:/home/linuxbrew/.linuxbrew/bin:$HOME/.cargo/bin:$DENO_INSTALL/bin
 export TERM=xterm-256color # to fix some issues with termbox
 export MANPAGER="sh -c 'col -bx | batcat -l man -p'"
+export ANDROID_SDK=$HOME/Android/Sdk
 
 if [ -f ~/.zshrc.local ]; then
     source ~/.zshrc.local
@@ -36,7 +48,7 @@ fi
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*" --glob "!node_modules/*" --glob "!vendor/*" 2> /dev/null'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 f() {
-    sels=( "${(@f)$(fd "${fd_default[@]}" "${@:2}"| fzf)}" )
+    sels=( '${(@f)$(fd "${fd_default[@]}" "${@:2}"| fzf)}' )
     test -n "$sels" && print -z -- "$1 ${sels[@]:q:q}"
 }
 # Deps
@@ -120,9 +132,17 @@ alias nv='nvim'
 alias t='tree --dirsfirst -C'
 
 # Git
-alias gcm='git checkout $(git symbolic-ref --short HEAD)'
+alias gcn!='git commit -v --no-edit --amend'
+unalias grh
+grh() { git reset HEAD "$@" && gst; }
+unalias grhh
+grhh() { git reset HEAD --hard "$@" && gst; }
+unalias gru
+gru() { git reset -- "$@" && gst; }
+alias gcm='git checkout $(git symbolic-ref refs/remotes/origin/HEAD | sed "s@^refs/remotes/origin/@@")'
 alias fgco='git checkout $(git branch --color=always | fzf --ansi --reverse)'
 alias fgr='git revert $(git log --oneline --decorate --color=always | fzf --ansi --reverse)'
+alias gsf='g show $(glo | fzf --ansi --reverse | cut -f 1 -d " ")'
 
 # Others
 alias open='xdg-open'
@@ -133,7 +153,9 @@ alias fd='fdfind'
 mcd() { mkdir -p "$@" && cd "$@"; }
 p() { ping ${1:-"1.1.1.1"} }
 alias fortune='fortune -n 200 | cowsay | lolcat'
-alias dv='cd ${$(fd --hidden --type d .git ~/dev | rev | cut -d "/" -f 2- | rev | fzf --reverse):-$(pwd)}'
+alias dv='cd ${$(fd --hidden --type d "^.git$" ~/dev | rev | cut -d "/" -f 2- | rev | fzf --reverse --height=15):-$(pwd)}'
+# alias dv='cd ${$(echo $HOME/dev/$(fd --hidden --type d "^.git$" ~/dev | rev | cut -d "/" -f 2- | rev | sed "s/${HOME//\//\\/}\/dev\///g" | fzf --reverse --height=15)):-$(pwd)}'
+alias extip='curl https://ipinfo.io/ip; echo'
 
 nmcli() {
     if [[ $@ == "n r" ]]; then

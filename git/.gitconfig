@@ -5,6 +5,8 @@
 	editor = nvim
 [pull]
 	rebase = true
+[diff]
+	renameLimit = 10000
 
 [includeIf "gitdir:~/dev/git.ayaline.com/"]
 	path = ~/dev/git.ayaline.com/.gitconfig

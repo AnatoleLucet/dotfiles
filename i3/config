@@ -18,7 +18,7 @@ exec_always ~/.config/i3/boot.sh
 exec --no-startup-id redshift -O 5250
 
 # gaps
-gaps inner 17
+gaps inner 16
 
 # audio icon
 # exec_always --no-startup-id /usr/bin/pasystray
@@ -29,8 +29,8 @@ bindsym $mod+Escape exec multilockscreen -l
 # lock on lid close
 exec_always --no-startup-id xss-lock -- ~/.config/i3/lock.sh
 
+exec_always --no-startup-id pgrep polybar | xargs -r kill; polybar main
 exec_always picom
-exec_always polybar main
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -55,7 +55,8 @@ floating_modifier $mod
 
 # start a terminal
 # bindsym $mod+Return exec gnome-terminal
-bindsym $mod+Return exec alacritty
+# bindsym $mod+Return exec alacritty
+bindsym $mod+Return exec kitty --single-instance
 bindsym $mod+Shift+Return exec zsh ~/.config/i3/open-term-in-last-dir.sh
 
 # emacs
@@ -67,7 +68,7 @@ bindsym $mod+Shift+i exec gnome-screenshot -a -i
 # kill focused window
 bindsym $mod+Shift+A kill
 
-bindsym $mod+d exec rofi -show run
+bindsym $mod+d exec rofi -show drun -matching fuzzy -sorting-method fzf -sort
 
 # change focus
 bindsym $mod+j focus left
@@ -206,10 +207,9 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-# set $mainColor #d160a7
-# set $secondaryColor #27212e
-# set $tertiaryColor #41384d
-# set $textColor #ffffff
+set $secondaryColor #232633
+set $tertiaryColor #384061
+set $textColor #6e7075
 
 # bar {
 # 	tray_output primary
@@ -227,29 +227,25 @@ bindsym $mod+r mode "resize"
 # client.focused $mainColor $secondaryColor $textColor
 # client.unfocused $tertiaryColor $secondaryColor $textColor
 
-font pango: Ubuntu bold 11px
 
-set $bg-color 	         #20212B
-set $inactive-bg-color	 #20212B
+# set $bg-color 	         #20212B
+# set $inactive-bg-color	 #20212B
 set $text-color          #f3f4f5
-set $inactive-text-color #676E7D
-set $urgent-bg-color     #E53935
-set $indicator           #1F5379
+# set $inactive-text-color #676E7D
+# set $urgent-bg-color     #E53935
+# set $indicator           #1F5379
 
-#window colors
-#                         border                background           text                   indicator
-client.focused            $urgent-bg-color      $urgnet-bg-color     $text-color            $indicator
-client.unfocused          $inactive-bg-color    $inactive-bg-color   $inactive-text-color   $indicator
-client.focused_inactive   $inactive-bg-color    $inactive-bg-color   $inactive-text-color   $indicator
-client.urgent             $urgent-bg-color      $urgent-bg-color     $text-color            $indicator
+font pango: Ubuntu bold 11px
+# window colors
+client.focused $tertiaryColor $tertiaryColor $text-color
+client.unfocused $secondaryColor $secondaryColor $tertiaryColor
+client.urgent $urgent-bg-color $urgent-bg-color $tertiaryColor
 
 # disable window titlebars and add border
 smart_borders on
 hide_edge_borders smart_no_gaps
 
-border_radius 5
-
-for_window [class=".*"] border pixel 4
+for_window [class=".*"] border pixel 0
 
 # switch gaps by bindsym
 set $mode_gaps Toggle gaps: (1) on (2) off

@@ -1,2 +1,4 @@
-alacritty --working-directory=$(xcwd)
+# alacritty --working-directory=$(xcwd)
+
+kitty --single-instance $(xcwd)
 

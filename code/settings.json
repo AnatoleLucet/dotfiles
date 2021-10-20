@@ -17,7 +17,6 @@
   "material-icon-theme.activeIconPack": "react",
   "editor.smoothScrolling": true,
   "liveshare.featureSet": "insiders",
-  "window.zoomLevel": 0,
   "prettier.singleQuote": true,
   "editor.formatOnSave": true,
   "git.autofetch": true,
@@ -55,5 +54,11 @@
   "vim.sneak": true,
   "[javascriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
+  },
+  "editor.inlineSuggest.enabled": true,
+  "go.goroot": "${workspaceFolder}/bazel-${workspaceFolderBasename}/external/go_sdk",
+  "go.toolsEnvVars": {
+    "GOPACKAGESDRIVER_BAZEL_QUERY": "kind(go_binary, //...)",
+    "GOPACKAGESDRIVER": "${workspaceFolder}/tools/gopackagesdriver.sh"
+  },
 }
