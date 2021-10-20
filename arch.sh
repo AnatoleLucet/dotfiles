@@ -4,6 +4,7 @@ set -e
 
 export STOW_FOLDERS="git, fonts, zsh, nvim, i3, picom, polybar, rofi, kitty, dunst"
 
+sudo pacman -Syy
 if ! [ -x "$(command -v stow)" ]; then
     sudo pacman -S stow --noconfirm
 fi
@@ -107,7 +108,6 @@ aur_packages=(
 )
 
 # install packages
-sudo pacman -Syy
 for package in "${packages[@]}"; do
     if ! [ "$(pacman -Qi $package 2> /dev/null)" ]; then
         sudo pacman -S $package --noconfirm
