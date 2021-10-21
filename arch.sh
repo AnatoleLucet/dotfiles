@@ -4,13 +4,13 @@ set -e
 
 export STOW_FOLDERS="git, fonts, zsh, nvim, i3, picom, polybar, rofi, kitty, dunst"
 
+# remove possibly pre-existing files that would conflict with stow
+rm -rf ~/.zshrc
+
 sudo pacman -Syy
 if ! [ -x "$(command -v stow)" ]; then
     sudo pacman -S stow --noconfirm
 fi
-
-# link dotfiles
-STOW_FOLDERS=$STOW_FOLDERS ./link.sh
 
 # install packages
 packages=(
@@ -191,3 +191,6 @@ fi
 # set zsh as the default shell
 sudo usermod -s $(which zsh) $USER
 sudo chsh -s $(which zsh)
+
+# link dotfiles
+STOW_FOLDERS=$STOW_FOLDERS ./link.sh

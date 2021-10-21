@@ -57,7 +57,7 @@ Plug 'akinsho/nvim-bufferline.lua'
 Plug 'rhysd/conflict-marker.vim'
 Plug 'tpope/vim-dispatch'
 " Plug 'romgrk/doom-one.vim'
-Plug 'GustavoPrietoP/doom-one.vim'
+" Plug 'GustavoPrietoP/doom-one.vim'
 Plug 'stsewd/fzf-checkout.vim'
 " Plug 'alvan/vim-closetag'
 Plug 'windwp/nvim-ts-autotag'
@@ -146,7 +146,8 @@ Plug 'ray-x/lsp_signature.nvim'
 Plug 'folke/trouble.nvim'
 Plug 'kabouzeid/nvim-lspinstall'
 " Plug 'glepnir/lspsaga.nvim'
-Plug 'jasonrhansen/lspsaga.nvim', {'branch': 'finder-preview-fixes'}
+" Plug 'jasonrhansen/lspsaga.nvim', {'branch': 'finder-preview-fixes'}
+Plug 'tami5/lspsaga.nvim', { 'commit': '276822b611b26be2e52a31d8eef1ccce30b819a5' }
 Plug 'folke/lsp-colors.nvim'
 Plug 'lspcontainers/lspcontainers.nvim'
 Plug 'mfussenegger/nvim-ts-hint-textobject'
@@ -330,11 +331,10 @@ lua << EOF
 local null_ls = require("null-ls")
 
 local sources = {
-    null_ls.builtins.formatting.prettier,
-    null_ls.builtins.formatting.eslint_d,
-
+    null_ls.builtins.eslint_d,
+    null_ls.builtins.formatting.prettierd.with({ command = "prettierd"}),
     null_ls.builtins.diagnostics.write_good,
-    null_ls.builtins.diagnostics.eslint_d,
+    null_ls.builtins.diagnostics.eslint.with({ command = "eslint_d" }),
 }
 
 null_ls.setup({ sources = sources })
