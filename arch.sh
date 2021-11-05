@@ -80,6 +80,7 @@ packages=(
     libev
     grc
     tlp
+    powertop
     python-pynvim
 )
 

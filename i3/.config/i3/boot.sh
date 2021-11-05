@@ -14,3 +14,6 @@ xmodmap -e "clear Lock"
 touchpadId=$(xinput list | grep Touchpad | sed "s/.*id=\([[:digit:]]*\).*/\1/g")
 xinput set-prop $touchpadId "libinput Tapping Enabled" 1
 xinput set-prop $touchpadId "libinput Tapping Button Mapping Enabled" 0, 1
+
+# battery
+powertop --auto-tune
