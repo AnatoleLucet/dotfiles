@@ -12,9 +12,6 @@ if ! [ -x "$(command -v stow)" ]; then
     sudo pacman -S stow --noconfirm
 fi
 
-# remove possibly pre-existing files so Stow doesn't conflict with them
-rm ~/.zshrc || true
-
 # install packages
 packages=(
     # Shells
@@ -219,6 +216,9 @@ fi
 # set zsh as the default shell
 sudo usermod -s $(which zsh) $USER
 sudo chsh -s $(which zsh)
+
+# remove possibly pre-existing files so Stow doesn't conflict with them
+rm ~/.zshrc || true
 
 # link dotfiles
 STOW_FOLDERS=$STOW_FOLDERS ./link.sh
