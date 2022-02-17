@@ -12,6 +12,9 @@ if ! [ -x "$(command -v stow)" ]; then
     sudo pacman -S stow --noconfirm
 fi
 
+# remove possibly pre-existing files so Stow doesn't conflict with them
+rm ~/.zshrc || true
+
 # install packages
 packages=(
     # Shells
@@ -39,6 +42,10 @@ packages=(
     dnsutils
     openvpn
     tcpdump
+    nmap
+    bat
+    parallel
+    cpulimit
     
     # TUIs
     neovim
@@ -56,24 +63,33 @@ packages=(
     dunst
     i3-gaps
     peek
+    # picom
 
     # Langs/runtimes/compilers
     nodejs
     npm
     go
     python
+    python-pip
     gcc
     meson
     ninja
+    rust
 
     # Fonts
     powerline-fonts
+    ttf-fira-sans
     ttf-fira-code
     ttf-font-awesome
     noto-fonts-emoji
 
     # LSPs
     gopls
+    bash-language-server
+    vscode-css-languageserver
+    yaml-language-server
+    rust-analyzer
+    lua-language-server
 
     # Others
     cmake
@@ -82,22 +98,36 @@ packages=(
     tlp
     powertop
     python-pynvim
+    python-pytorch
 )
 
 npm_packages=(
     yarn
+    pnpm
     tsun
     typescript
     typescript-language-server
+    svelte-language-server
+    graphql-language-service-cli
+    vscode-langservers-extracted
+    vls
     prettier
     eslint_d
     @fsouza/prettierd
+    nodemon
+)
+
+bin_aur_packages=(
+    aura-bin
+    # neovim-nightly-bin
+    insomnia-bin
+    robo3t-bin
+    google-chrome
 )
 
 aur_packages=(
     xcwd-git
-    google-chrome
-    picom-git
+    siji-git
     i3lock-color
     betterlockscreen
     android-studio
@@ -106,6 +136,10 @@ aur_packages=(
     slack-desktop
     write-good
     vim-language-server
+    dockerfile-language-server
+    nosqlbooster-mongodb
+    dive
+    picom-git
 )
 
 # install packages
@@ -117,21 +151,26 @@ done
 
 # install npm packages
 for package in "${npm_packages[@]}"; do
-    if ! [ "$(npm list -g | grep $package)" ]; then
+    if ! [ "$(npm list -g --depth=0 | grep $package@)" ]; then
         sudo npm i -g $package
     fi
 done
 
-# install aura
-if ! [ "$(pacman -Qm | grep aura)" ]; then
-    sudo pacman -S --needed base-devel --noconfirm
-    git clone https://aur.archlinux.org/aura-bin.git /tmp/aura-bin
-    cd /tmp/aura-bin
-    makepkg
-    sudo pacman -U $(find . -maxdepth 1 -name "*.tar.zst") --noconfirm
-    cd -
-    rm -rf /tmp/aura-bin
-fi
+# install bin aur packages
+for package in "${bin_aur_packages[@]}"; do
+    if ! [ "$(pacman -Qm | grep $package)" ]; then
+        tmpfolder=$(mktemp -d /tmp/$package.XXXXX)
+        cd $tmpfolder
+        git init -b tmp
+        git remote add origin https://aur.archlinux.org/$package.git
+        git fetch
+        git checkout master
+        makepkg -s
+        sudo pacman -U $(find . -maxdepth 1 -name "*.tar.zst") --noconfirm
+        cd -
+        rm -rf $tmpfolder
+    fi
+done
 
 # install aur packages
 aura_build_path=$HOME/.cache/aura-build
@@ -142,28 +181,6 @@ for package in "${aur_packages[@]}"; do
     fi
 done
 rm -rf $aura_build_path
-
-# install insomnia
-if ! [ "$(pacman -Qm | grep insomnia)" ]; then
-    cd /tmp
-    git clone https://aur.archlinux.org/insomnia-bin.git
-    cd /tmp/insomnia-bin
-    makepkg -s
-    sudo pacman -U $(find . -maxdepth 1 -name "*.tar.zst") --noconfirm
-    cd -
-    rm -rf /tmp/insomnia-bin
-fi
-
-# install robo3t
-if ! [ "$(pacman -Qm | grep robo3t)" ]; then
-    cd /tmp
-    git clone https://aur.archlinux.org/robo3t-bin.git
-    cd /tmp/robo3t-bin
-    makepkg -s
-    sudo pacman -U $(find . -maxdepth 1 -name "*.tar.zst") --noconfirm
-    cd -
-    rm -rf /tmp/robo3t-bin
-fi
 
 # install nvim plugins
 if ! [ -e $HOME/.local/share/nvim/site/autoload/plug.vim ]; then
@@ -185,8 +202,18 @@ fc-cache -r
 
 # create docker group
 if ! [ "$(groups | grep docker)" ]; then
-    #sudo groupadd docker
+    sudo groupadd docker
     sudo usermod -aG docker $USER
+fi
+
+# start docker socket on boot
+if ! [ -e /usr/lib/systemd/system/docker.service ]; then
+    sudo systemctl enable --now docker.service
+fi
+
+# create nosqlbooster bin
+if ! [ -e /usr/bin/nosqlbooster ]; then
+    sudo ln -s /opt/nosqlbooster-mongodb/nosqlbooster4mongo /usr/bin/nosqlbooster
 fi
 
 # set zsh as the default shell

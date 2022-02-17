@@ -34,9 +34,11 @@ local on_attach = function(client, bufnr)
   buf_set_keymap("n", "<space>cc", "<cmd>lua require'lspsaga.diagnostic'.show_cursor_diagnostics()<CR>", opts)
   buf_set_keymap("n", "<space>co", "<cmd>Trouble<CR>", opts)
 
-  if client.resolved_capabilities.document_formatting then
-    vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()")
-  end
+  vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()")
+
+  -- if client.name == "tsserver" then
+  --   client.resolved_capabilities.document_formatting = false
+  -- end
 
   -- doesn't seems to work very well
   -- require('lsp_signature').on_attach()
@@ -54,82 +56,72 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 local servers = {
   {
     name = "bashls",
-    useContainers = true,
   },
   {
     name = "cssls",
-    useContainers = false,
   },
   --[[ {
     name = "denols",
-    useContainers = true,
   }, ]]
   {
     name = "dockerls",
-    useContainers = true,
   },
   {
     name = "gopls",
-    useContainers = false,
   },
   {
     name = "graphql",
-    useContainers = false,
   },
   {
     name = "html",
-    useContainers = true,
   },
   {
     name = "jsonls",
-    useContainers = true,
   },
   --[[ {
     name = "stylelint_lsp",
-    useContainers = false,
   }, ]]
   {
     name = "svelte",
-    useContainers = true,
   },
   {
     name = "tsserver",
-    useContainers = false,
+    on_attach = function(client, bufnr)
+      -- local ts_utils = require("nvim-lsp-ts-utils")
+      -- ts_utils.setup_client(client)
+
+      client.resolved_capabilities.document_formatting = false
+    end
   },
   {
     name = "vimls",
-    useContainers = false,
   },
   {
     name = "sumneko_lua",
-    useContainers = true,
   },
   {
     name = "yamlls",
-    useContainers = true,
   },
   {
     name = "vuels",
-    useContainers = true,
-  },
-  {
-    name = "terraformls",
-    useContainers = true,
   },
   {
     name = "rust_analyzer",
-    useContainers = true,
   },
   {
     name = "pyright",
-    useContainers = true,
   },
 }
 -- vim.lsp.set_log_level("debug")
 
 for _, lsp in ipairs(servers) do
   local opts = {
-    on_attach = on_attach,
+    on_attach = function(client, bufnr)
+      on_attach(client, bufnr)
+      if lsp.on_attach then
+        lsp.on_attach(client, bufnr)
+      end
+    end
   }
 
   --[[ if lsp.name == "gopls" then
@@ -147,12 +139,26 @@ for _, lsp in ipairs(servers) do
     print(vim.inspect(opts.cmd_env))
   end ]]
 
-  if lsp.useContainers then
-    opts.cmd = require("lspcontainers").command(lsp.name)
-  end
-
   nvim_lsp[lsp.name].setup(opts)
 end
+
+local null_ls = require("null-ls")
+
+local sources = {
+    null_ls.builtins.formatting.prettierd,
+    null_ls.builtins.formatting.eslint_d,
+
+    null_ls.builtins.diagnostics.write_good,
+    null_ls.builtins.diagnostics.eslint_d.with({
+      -- only_local = "node_modules/.bin",
+    }),
+}
+
+null_ls.setup({
+  sources = sources,
+  on_attach = on_attach,
+})
+
 
 local cmp = require('cmp')
 cmp.setup({

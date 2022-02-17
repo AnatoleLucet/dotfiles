@@ -18,7 +18,7 @@ exec_always ~/.config/i3/boot.sh
 exec --no-startup-id redshift -O 5250
 
 # gaps
-gaps inner 16
+gaps inner 13
 
 # audio icon
 # exec_always --no-startup-id /usr/bin/pasystray
@@ -207,9 +207,8 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-set $secondaryColor #232633
-set $tertiaryColor #384061
-set $textColor #6e7075
+set $secondaryColor #00000066
+set $tertiaryColor #00000099
 
 # bar {
 # 	tray_output primary
@@ -235,11 +234,12 @@ set $text-color          #f3f4f5
 # set $urgent-bg-color     #E53935
 # set $indicator           #1F5379
 
+title_align center
 font pango: Poppins bold 10px
 # window colors
-client.focused $tertiaryColor $tertiaryColor $text-color
-client.unfocused $secondaryColor $secondaryColor $tertiaryColor
-client.urgent $urgent-bg-color $urgent-bg-color $tertiaryColor
+client.focused $secondaryColor $secondaryColor $text-color
+client.unfocused $tertiaryColor $tertiaryColor $text-color
+client.urgent $urgent-bg-color $urgent-bg-color $text-color
 
 # disable window titlebars and add border
 smart_borders on
@@ -251,8 +251,8 @@ for_window [class=".*"] border pixel 0
 set $mode_gaps Toggle gaps: (1) on (2) off
 bindsym $mod+equal mode "$mode_gaps"; exec notify-send -a "Gaps mode" " " "(1) - enable \n(2) - disable" -t 1000
 mode "$mode_gaps" {
-    bindsym 1 mode "default", gaps inner all set 30, gaps outer all set 10, exec zsh -ci "picom", exec $HOME/.config/polybar/launch.sh
-    bindsym 2 mode "default", gaps inner all set 1, gaps outer all set 1, exec pkill picom, exec $HOME/.config/polybar/launch.sh
+    bindsym 1 mode "default", gaps inner all set 15, exec pkill picom, exec zsh -ci "picom", exec $HOME/.config/polybar/launch.sh
+    bindsym 2 mode "default", gaps inner all set 1, exec pkill picom, exec zsh -ci "picom --corner-radius=0 --shadow-opacity=0", exec $HOME/.config/polybar/launch.sh
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }

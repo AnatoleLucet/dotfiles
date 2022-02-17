@@ -9,7 +9,8 @@ Plug 'drewtempelmeyer/palenight.vim'
 " Plug 'coc-extensions/coc-svelte', {'do': 'yarn install --frozen-lockfile'}
 " Plug 'weirongxu/coc-explorer', {'do': 'yarn install --frozen-lockfile'}
 " Plug 'tpope/vim-commentary'
-Plug 'b3nj5m1n/kommentary'
+" Plug 'b3nj5m1n/kommentary'
+Plug 'numToStr/Comment.nvim'
 
 " Plug 'evanleck/vim-svelte', {'branch': 'main'}
 "
@@ -29,6 +30,7 @@ Plug 'editorconfig/editorconfig-vim'
 " Plug 'bling/vim-airline'
 " Plug 'vim-airline/vim-airline-themes'
 Plug 'hoob3rt/lualine.nvim'
+Plug 'arkav/lualine-lsp-progress'
 
 " Plug 'thaerkh/vim-workspace'
 Plug 'LucHermitte/lh-brackets'
@@ -137,7 +139,7 @@ Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'L3MON4D3/LuaSnip'
 Plug 'rafamadriz/friendly-snippets'
 
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate', 'commit': '668de0951a36ef17016074f1120b6aacbe6c4515'}
 Plug 'p00f/nvim-ts-rainbow'
 Plug 'machakann/vim-highlightedyank'
 Plug 'RRethy/vim-illuminate'
@@ -147,9 +149,8 @@ Plug 'folke/trouble.nvim'
 Plug 'kabouzeid/nvim-lspinstall'
 " Plug 'glepnir/lspsaga.nvim'
 " Plug 'jasonrhansen/lspsaga.nvim', {'branch': 'finder-preview-fixes'}
-Plug 'tami5/lspsaga.nvim', { 'commit': '276822b611b26be2e52a31d8eef1ccce30b819a5' }
+Plug 'tami5/lspsaga.nvim'
 Plug 'folke/lsp-colors.nvim'
-Plug 'lspcontainers/lspcontainers.nvim'
 Plug 'mfussenegger/nvim-ts-hint-textobject'
 
 Plug 'romgrk/nvim-treesitter-context'
@@ -180,6 +181,7 @@ Plug 'matbme/JABS.nvim'
 Plug 'dyng/ctrlsf.vim'
 
 Plug 'jose-elias-alvarez/null-ls.nvim'
+Plug 'jose-elias-alvarez/nvim-lsp-ts-utils'
 
 Plug 'RRethy/nvim-treesitter-textsubjects'
 Plug 'marko-cerovac/material.nvim'
@@ -195,6 +197,10 @@ Plug 'simrat39/symbols-outline.nvim'
 Plug 'mileszs/ack.vim'
 Plug 'gelguy/wilder.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'lewis6991/impatient.nvim'
+
+Plug 'github/copilot.vim'
+
+Plug 'chentau/marks.nvim'
 
 call plug#end()
 
@@ -251,6 +257,9 @@ endfunction
 nnoremap <silent> <expr> o <SID>NewLineInsertExpr(1, 'o')
 nnoremap <silent> <expr> O <SID>NewLineInsertExpr(1, 'O')
 
+" Marks
+lua require('marks').setup({})
+
 " Impatient
 lua require('impatient')
 
@@ -301,16 +310,31 @@ smap <silent><expr> <C-E> luasnip#choice_active() ? '<Plug>luasnip-next-choice' 
 omap <silent> m :<C-U>lua require('tsht').nodes()<CR>
 vnoremap <silent> m :lua require('tsht').nodes()<CR>
 
-" Kommentary
+" Comment
 lua << EOF
-require('kommentary.config').configure_language('typescriptreact', {
-  single_line_comment_string = 'auto',
-  multi_line_comment_strings = 'auto',
-  hook_function = function()
-    require('ts_context_commentstring.internal').update_commentstring()
+require('Comment').setup({
+  pre_hook = function(ctx)
+    local U = require('Comment.utils')
+    local type = ctx.ctype == U.ctype.line and '__default' or '__multiline'
+
+    return require('ts_context_commentstring.internal').calculate_commentstring {
+      key = type,
+    }
   end,
 })
 EOF
+
+
+" Kommentary
+" lua << EOF
+" require('kommentary.config').configure_language('typescriptreact', {
+"   single_line_comment_string = 'auto',
+"   multi_line_comment_strings = 'auto',
+"   hook_function = function()
+"     require('ts_context_commentstring.internal').update_commentstring()
+"   end,
+" })
+" EOF
 
 " Trouble
 nnoremap <leader>o :Trouble<CR>
@@ -325,20 +349,6 @@ lua require("todo-comments").setup()
 
 " Buffergator
 nnoremap <silent> <leader>bm :JABSOpen<CR>
-
-" Null-ls
-lua << EOF
-local null_ls = require("null-ls")
-
-local sources = {
-    null_ls.builtins.eslint_d,
-    null_ls.builtins.formatting.prettierd.with({ command = "prettierd"}),
-    null_ls.builtins.diagnostics.write_good,
-    null_ls.builtins.diagnostics.eslint.with({ command = "eslint_d" }),
-}
-
-null_ls.setup({ sources = sources })
-EOF
 
 " ALE 
 lua << EOF
@@ -496,8 +506,11 @@ let g:vimspector_sign_priority = {
   \ }
 
 " Hop
+lua require('hop').setup()
 nnoremap s :HopChar2<cr>
 nnoremap S :HopLine<cr>
+vnoremap s <Cmd>HopChar2<cr>
+vnoremap S <Cmd>HopLine<cr>
 
 " Wiki
 if has("gui_running") || has('nvim-0.4')
@@ -545,9 +558,6 @@ let g:dashboard_custom_header = [
     \' ⠙⠃   ⣼⣿⡟  ⠈⠻⣿⣿⣦⣌⡇⠻⣿⣿⣷⣿⣿⣿ ⣿⣿⡇⠄⠛⠻⢷⣄ ',
     \'      ⢻⣿⣿⣄   ⠈⠻⣿⣿⣿⣷⣿⣿⣿⣿⣿⡟ ⠫⢿⣿⡆     ',
     \'       ⠻⣿⣿⣿⣿⣶⣶⣾⣿⣿⣿⣿⣿⣿⣿⣿⡟⢀⣀⣤⣾⡿⠃     ',
-    \'     ⢰⣶  ⣶ ⢶⣆⢀⣶⠂⣶⡶⠶⣦⡄⢰⣶⠶⢶⣦  ⣴⣶     ',
-    \'     ⢸⣿⠶⠶⣿ ⠈⢻⣿⠁ ⣿⡇ ⢸⣿⢸⣿⢶⣾⠏ ⣸⣟⣹⣧    ',
-    \'     ⠸⠿  ⠿  ⠸⠿  ⠿⠷⠶⠿⠃⠸⠿⠄⠙⠷⠤⠿⠉⠉⠿⠆   ',
     \'',
     \]
 
@@ -603,12 +613,13 @@ require("lualine").setup({
     lualine_c = {
       {
         'diagnostics',
-        sources = {'nvim_lsp'},
+        sources = {'nvim_diagnostic'},
       },
       {
         'filename',
         path = 1,
       },
+      'lsp_progress'
     },
     lualine_x = {
       'encoding',
@@ -654,7 +665,8 @@ nnoremap <silent> <leader>gs :Neogit kind=vsplit<CR>
 nnoremap <silent> <leader>gc :Gcommit<CR>
 nnoremap <leader>gp :Dispatch! git push<CR>
 nnoremap <leader>gl :Dispatch! git pull<CR>
-nnoremap <leader>glo :tabnew<CR>:Glog<CR>
+nnoremap <leader>glo :DiffviewFileHistory<CR>
+nnoremap <leader>gst :DiffviewOpen<CR>
 nnoremap <silent> <leader>gd :Gdiffsplit<CR><C-w>l
 nnoremap <silent> <leader>gcd :Gvdiff!<CR><C-w>J
 nnoremap <silent> gdr :diffget //0<CR>

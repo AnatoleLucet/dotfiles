@@ -1,5 +1,5 @@
 [global]
-allow_markup = yes
+markup = yes
 word_wrap = yes
 follow = mouse
 font = "Fira Sans 11"
@@ -8,20 +8,19 @@ line_height = 0
 separator_height = 2
 padding = 13
 horizontal_padding = 2
-geometry = "270x20-40+60"
-transparency = 10 
-corner_radius = 3
-
-[frame]
-width = 1
-color = "#d160a7"
+width = 270
+offset = "43x98"
+transparency = 10
+corner_radius = 8
+frame_width = 3
+frame_color = "#384061"
 
 [urgency_low]
-background = "#27212e"
+background = "#232633"
 foreground = "#ffffff"
 timeout = 10
 
 [urgency_normal]
-background = "#27212e"
+background = "#232633"
 foreground = "#ffffff"
 timeout = 10

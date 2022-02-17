@@ -111,6 +111,9 @@ alias nv='nvim'
 alias t='tree --dirsfirst -C'
 
 # Git
+alias gre='git restore'
+alias gres='git restore --source'
+alias greS='git restore --staged'
 alias gcn!='git commit -v --no-edit --amend'
 unalias grh
 grh() { git reset HEAD "$@" && gst; }
@@ -122,12 +125,15 @@ alias gcm='git checkout $(git symbolic-ref refs/remotes/origin/HEAD | sed "s@^re
 alias fgco='git checkout $(git branch --color=always | fzf --ansi --reverse)'
 alias fgr='git revert $(git log --oneline --decorate --color=always | fzf --ansi --reverse)'
 alias gsf='g show $(glo | fzf --ansi --reverse | cut -f 1 -d " ")'
+code-owners() {
+	git ls-files ${@:-.} | parallel -d "\n" 'file {} | ag ":.* text" | sed "s/:.*$//" | xargs git blame --line-porcelain | ag "^author " | sed "s/^author //"' 2> /dev/null  | sort -f | uniq -ic | sort -nr
+}
 
 # Others
 alias open='xdg-open'
 alias sudo='nocorrect sudo '
 alias dtf='cd ~/.dotfiles'
-alias bat='batcat'
+# alias bat='batcat'
 mcd() { mkdir -p "$@" && cd "$@"; }
 p() { ping ${1:-"1.1.1.1"} }
 alias fortune='fortune -n 200 | cowsay | lolcat'

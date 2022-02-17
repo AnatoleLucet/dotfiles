@@ -2,7 +2,8 @@
 
 [colors]
 ;background = ${xrdb:color0:#282c34}
-background = #44000000
+# background = #49000000
+background = #5f000000
 background-no-compton = ${xrdb:color0:#282c34}
 background-alt = #282a36
 ;foreground = ${xrdb:color7:#222}
@@ -16,7 +17,7 @@ black = #000
 white = #ffffff
 
 [global/wm]
-margin-top = 5
+margin-top = 0
 margin-bottom = 0
 
 [bar/main]
@@ -26,9 +27,11 @@ monitor = ${env:MONITOR:}
 ;offset-x = 40
 ;offset-y = 16
 width = 100%
-height = 40
-radius = 5
+height = 25
+radius = 0
 fixed-center = true
+separator = "|"
+separator-foreground = #aaa
 
 background = ${colors.background}
 foreground = ${colors.foreground}
@@ -36,19 +39,19 @@ foreground = ${colors.foreground}
 line-size = 3
 line-color = #f00
 
-border-top-size = 15
-border-left-size = 15
-border-right-size = 15
+border-top-size = 0
+border-left-size = 0
+border-right-size = 0
 border-color = #00000000
 
 padding-left = 15
 padding-right = 2
 
-font-0 = "Fira Sans:size=10;3"
-font-1 = "Font Awesome 5 Free:style=Solid:pixelsize=10;3"
-font-2 = "Font Awesome 5 Free:style=Regular:pixelsize=10;3"
-font-3 = "Font Awesome 5 Brands:pixelsize=10;3"
-font-4 = "NotoEmoji Nerd Font Mono:style=Book:size=10;3"
+font-0 = "Poppins SemiBold:size=8;3"
+font-1 = "Font Awesome 6 Free:style=Solid:pixelsize=9;3"
+font-2 = "Font Awesome 6 Free:style=Regular:pixelsize=9;3"
+font-3 = "Font Awesome 6 Brands:pixelsize=9;3"
+font-4 = "NotoEmoji Nerd Font Mono:style=Book:size=9;3"
 
 modules-left = player-mpris-tail weather
 modules-center = i3
@@ -147,7 +150,7 @@ cursor-scroll = ns-resize
 type = custom/script
 exec = $HOME/.local/bin/weather
 interval = 1800
-format-underline = #6272a4
+# format-underline = #6272a4
 
 [module/xwindow]
 type = internal/xwindow
@@ -203,12 +206,13 @@ label-mode = %icon%
 label-mode-padding = 2
 label-mode-foreground = #000
 label-mode-background = ${colors.primary}
-;label-focused-foreground = ${colors.underline}
 
 label-focused = %icon%
 label-focused-padding = 2
-label-focused-underline = ${colors.underline}
-label-focused-background = #44000000
+# label-focused-underline = ${colors.underline}
+# label-focused-background = #44000000
+# label-focused-foreground = #8ab7ed
+label-focused-background = #32000000
 
 label-unfocused = %icon%
 label-unfocused-padding = 2
@@ -264,24 +268,24 @@ card = intel_backlight
 [module/cpu]
 type = internal/cpu
 interval = 1
-format-prefix = " "
+format-prefix = "  "
 format-prefix-foreground = ${colors.foreground-alt}
-format-underline = #ff5555
-
+# format-underline = #ff5555
 label = %percentage:2%%
-label-padding-right = 1
-label-padding-left = 1
+format-padding = 2
+# label-padding-right = 2
+# label-padding-left = 0
 
 [module/memory]
 type = internal/memory
 interval = 1
-format-prefix = " "
+format-prefix = "  "
 format-prefix-foreground = ${colors.foreground-alt}
-;format-underline = ${colors.underline}
+format-padding = 2
 label = %percentage_used%%
-label-padding-right = 1
-label-padding-left = 1
-format-underline = #ffb86c
+# label-padding-right = 1
+# label-padding-left = 1
+# format-underline = #ffb86c
 
 [module/eth]
 type = internal/network
@@ -303,29 +307,30 @@ format-disconnected =
 type = internal/date
 interval = 1
 
-date = " %d/%m/%Y "
+date = "  %d/%m/%Y "
 date-alt =
 
-time = " %H:%M"
-time-alt = " %H:%M"
-label-padding-right = 1
-label-padding-left = 1
+time = "  %H:%M"
+time-alt = "  %H:%M"
+format-padding = 2
+# label-padding-right = 1
+# label-padding-left = 1
 
-
-format-underline = #ff79c6
-label = %{A1:gsimplecal:} %date% %time% %{A}
+# format-underline = #ff79c6
+label = %{A1:gsimplecal:} %date%   %time% %{A}
 
 [module/pulseaudio]
 type = internal/pulseaudio
 
 format-volume = <label-volume>
-label-volume =  %percentage%%
+label-volume =   %percentage%%
 label-volume-foreground = ${root.foreground}
-label-padding-right = 1
-label-padding-left = 1
+# label-volume-padding-right = 1
+# label-volume-padding-left = 1
+format-volume-padding = 2
 
 label-muted =  muted
-label-muted-foreground = #666
+# label-muted-foreground = #666
 sink = alsa_output.usb-Burr-Brown_from_TI_USB_Audio_CODEC-00
 bar-volume-width = 10
 bar-volume-foreground-0 = #55aa55
@@ -343,7 +348,7 @@ bar-volume-fill-font = 2
 bar-volume-empty = ─
 bar-volume-empty-font = 2
 bar-volume-empty-foreground = ${colors.foreground-alt}
-label-volume-underline = #8be9fd
+# label-volume-underline = #8be9fd
 
 [module/alsa]
 type = internal/alsa
@@ -449,7 +454,8 @@ label-separator-foreground = ${colors.foreground-alt}
 label-padding-right = 1
 label-padding-left = 1
 
-format-underline = #f8f8f2
+# format-underline = #f8f8f2
+format-padding = 2
 
 menu-0-0 = 
 menu-0-0-foreground = #42d658
@@ -527,5 +533,6 @@ ramp-signal-3 = 😊
 ramp-signal-4 = 😃
 ramp-signal-5 = 😈
 ramp-font = 2
-format-connected-underline = #9b59f0
-format-disconnected-underline = #9b59f0
+format-padding = 2
+# format-connected-underline = #9b59f0
+# format-disconnected-underline = #9b59f0
