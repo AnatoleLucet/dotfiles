@@ -111,6 +111,13 @@ local servers = {
   {
     name = "pyright",
   },
+  {
+    name = "eslint",
+    -- filetypes =  { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx", "vue", "svelte" }
+    on_attach = function()
+      vim.cmd("autocmd BufWritePre <buffer> EslintFixAll")
+    end
+  }
 }
 -- vim.lsp.set_log_level("debug")
 
@@ -121,7 +128,8 @@ for _, lsp in ipairs(servers) do
       if lsp.on_attach then
         lsp.on_attach(client, bufnr)
       end
-    end
+    end,
+    -- filetypes = lsp.filetypes,
   }
 
   --[[ if lsp.name == "gopls" then
@@ -146,12 +154,12 @@ local null_ls = require("null-ls")
 
 local sources = {
     null_ls.builtins.formatting.prettierd,
-    null_ls.builtins.formatting.eslint_d,
+    -- null_ls.builtins.formatting.eslint_d,
 
     null_ls.builtins.diagnostics.write_good,
-    null_ls.builtins.diagnostics.eslint_d.with({
-      -- only_local = "node_modules/.bin",
-    }),
+    -- null_ls.builtins.diagnostics.eslint_d.with({
+    --   -- only_local = "node_modules/.bin",
+    -- }),
 }
 
 null_ls.setup({

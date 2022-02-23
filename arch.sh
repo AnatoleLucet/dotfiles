@@ -42,7 +42,6 @@ packages=(
     nmap
     bat
     parallel
-    cpulimit
     
     # TUIs
     neovim
@@ -137,6 +136,7 @@ aur_packages=(
     nosqlbooster-mongodb
     dive
     picom-git
+    watchman
 )
 
 # install packages
