@@ -12,6 +12,9 @@ if ! [ -x "$(command -v stow)" ]; then
     sudo pacman -S stow --noconfirm
 fi
 
+# spotify public key
+curl -sS https://download.spotify.com/debian/pubkey_0D811D58.gpg | gpg --import -
+
 # install packages
 packages=(
     # Shells
@@ -137,6 +140,7 @@ aur_packages=(
     dive
     picom-git
     watchman
+    spotify
 )
 
 # install packages
