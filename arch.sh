@@ -4,16 +4,15 @@ set -e
 
 export STOW_FOLDERS="git, fonts, zsh, nvim, i3, picom, polybar, rofi, kitty, dunst"
 
-# remove possibly pre-existing files that would conflict with stow
-rm -rf ~/.zshrc
-
 sudo pacman -Syy
 if ! [ -x "$(command -v stow)" ]; then
     sudo pacman -S stow --noconfirm
 fi
 
 # spotify public key
-curl -sS https://download.spotify.com/debian/pubkey_0D811D58.gpg | gpg --import -
+if ! [ "$(gpg --list-keys | grep Spotify)" ]; then
+    curl -sS https://download.spotify.com/debian/pubkey_0D811D58.gpg | gpg --import -
+fi
 
 # install packages
 packages=(
@@ -84,7 +83,6 @@ packages=(
 
     # LSPs
     gopls
-    bash-language-server
     vscode-css-languageserver
     yaml-language-server
     rust-analyzer
@@ -108,6 +106,7 @@ npm_packages=(
     typescript-language-server
     svelte-language-server
     graphql-language-service-cli
+    bash-language-server
     vscode-langservers-extracted
     vls
     prettier
@@ -139,7 +138,6 @@ aur_packages=(
     nosqlbooster-mongodb
     dive
     picom-git
-    watchman
     spotify
 )
 

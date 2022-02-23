@@ -329,6 +329,7 @@ label-volume-foreground = ${root.foreground}
 # label-volume-padding-left = 1
 format-volume-padding = 2
 
+format-muted-padding = 2
 label-muted =  muted
 # label-muted-foreground = #666
 sink = alsa_output.usb-Burr-Brown_from_TI_USB_Audio_CODEC-00
@@ -383,16 +384,19 @@ type = internal/battery
 battery = BAT0
 adapter = ADP1
 full-at = 98
-label-padding-right = 1
-label-padding-left = 1
+label-padding-right = 0
+label-padding-left = 0
 
 format-charging = <animation-charging> <label-charging>
-format-charging-underline = ${colors.underline}
+format-charging-padding = 2
+# format-charging-underline = ${colors.underline}
 
 format-discharging = <animation-discharging> <label-discharging>
 format-discharging-underline = ${self.format-charging-underline}
+format-discharging-padding = 2
 
 format-full-prefix = " "
+format-full-padding = 2
 format-full-prefix-foreground = ${colors.foreground-alt}
 format-full-underline = ${self.format-charging-underline}
 
@@ -524,7 +528,9 @@ format-disconnected = %{A1:rofi-wifi-menu:}Disconnected%{A}
 ;format-connected = <label-connected>
 format-connected-font = 2
 format-connected-prefix = " "
+format-connected-padding = 2
 format-disconnected-prefix = " "
+format-disconnected-padding = 2
 label-connected = %essid%
 ramp-signal-0 = 😱
 ramp-signal-1 = 😠
@@ -533,6 +539,5 @@ ramp-signal-3 = 😊
 ramp-signal-4 = 😃
 ramp-signal-5 = 😈
 ramp-font = 2
-format-padding = 2
 # format-connected-underline = #9b59f0
 # format-disconnected-underline = #9b59f0
