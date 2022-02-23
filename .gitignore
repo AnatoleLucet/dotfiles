@@ -1,0 +1,2 @@
+/zsh/.local/bin/*
+!/zsh/.local/bin/weather
