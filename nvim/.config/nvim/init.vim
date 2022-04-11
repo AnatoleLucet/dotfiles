@@ -102,8 +102,6 @@ Plug 'puremourning/vimspector', {'do': './install_gadget.py --enable-c --enable-
 Plug 'itchyny/vim-gitbranch'
 Plug 'chrisbra/csv.vim'
 
-Plug 'glepnir/zephyr-nvim'
-
 Plug 'vimwiki/vimwiki'
 
 Plug 'tpope/vim-vinegar'
@@ -139,7 +137,8 @@ Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'L3MON4D3/LuaSnip'
 Plug 'rafamadriz/friendly-snippets'
 
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate', 'commit': '668de0951a36ef17016074f1120b6aacbe6c4515'}
+" Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate', 'commit': '668de0951a36ef17016074f1120b6aacbe6c4515'}
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate' }
 Plug 'p00f/nvim-ts-rainbow'
 Plug 'machakann/vim-highlightedyank'
 Plug 'RRethy/vim-illuminate'
@@ -202,6 +201,12 @@ Plug 'github/copilot.vim'
 
 Plug 'chentau/marks.nvim'
 
+Plug 'nvim-neorg/neorg'
+Plug 'nvim-neorg/neorg-telescope'
+
+" Plug 'hkupty/iron.nvim'
+Plug 'm-demare/hlargs.nvim'
+
 call plug#end()
 
 set nu
@@ -225,6 +230,7 @@ set completeopt=menuone,noselect,noinsert
 set signcolumn=yes
 set colorcolumn=99999
 set fillchars+=diff:╱
+set wrap!
 
 let mapleader=" "
 nnoremap <silent> <ESC> :nohlsearch<CR>
@@ -238,6 +244,8 @@ map +y "+y
 map +p "+p
 tnoremap <silent><F3> <C-\><C-n>:TZFocus<CR>i
 nnoremap <silent><F3> :TZFocus<CR>
+
+nnoremap <silent><C-m> <C-^>
 
 lua require("lsp")
 
@@ -256,6 +264,12 @@ function! s:NewLineInsertExpr( isUndoCount, command )
 endfunction
 nnoremap <silent> <expr> o <SID>NewLineInsertExpr(1, 'o')
 nnoremap <silent> <expr> O <SID>NewLineInsertExpr(1, 'O')
+
+nnoremap <silent> <A-\> :!i3-msg -t command fullscreen toggle<CR>:sleep 150m<CR>:ZenMode<CR>
+
+" hlArgs
+lua require('hlargs').setup()
+autocmd ColorScheme * highlight! link Hlargs TSParameter
 
 " Marks
 lua require('marks').setup({})
@@ -293,7 +307,7 @@ EOF
 
 " Ack
 if executable('ag')
-  let g:ackprg = 'ag --vimgrep'
+  let g:ackprg = 'ag --hidden --vimgrep'
 endif
 
 " LuaSnip
@@ -702,6 +716,7 @@ let g:indent_blankline_use_treesitter = v:true
 let g:indent_blankline_show_current_context = v:true
 let g:indent_blankline_show_trailing_blankline_indent = v:false
 let g:indent_blankline_context_patterns = ['class', 'function', 'method', 'if', 'while', 'for', 'arguments']
+let g:indent_blankline_buftype_exclude = ['terminal']
 " hi link IndentBlanklineContextChar Directory
 
 " Theme
@@ -727,7 +742,7 @@ set pumheight=15
 " let g:floaterm_keymap_kill   = '<C-A-k>'
 
 " Sessions
-nnoremap <silent> <leader><tab> :SearchSession<cr>
+nnoremap <silent> <leader><tab> :SearchSession<cr>:lua require("FTerm").exit()<cr>
 lua << EOF
 local opts = {
   log_level = 'error',
@@ -943,6 +958,22 @@ let g:dockertools_default_all = 0
 let g:dockertools_term_position = 'lefta'
 let g:dockertools_logs_position = 'lefta'
 
+lua << EOF
+require("telescope").setup({
+  defaults = {
+    vimgrep_arguments = {
+      "rg",
+      "--color=never",
+      "--no-heading",
+      "--with-filename",
+      "--line-number",
+      "--column",
+      "--hidden",
+      "--smart-case"
+    },
+  },
+})
+EOF
 nnoremap <silent> <leader>/ :Telescope live_grep<cr>
 
 com! SynStack call SyntaxStack()

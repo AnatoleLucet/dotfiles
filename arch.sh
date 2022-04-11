@@ -11,7 +11,7 @@ fi
 
 # spotify public key
 if ! [ "$(gpg --list-keys | grep Spotify)" ]; then
-    curl -sS https://download.spotify.com/debian/pubkey_0D811D58.gpg | gpg --import -
+    curl -sS https://download.spotify.com/debian/pubkey_5E3C45D7B312C643.gpg | gpg --import -
 fi
 
 # install packages
@@ -96,6 +96,7 @@ packages=(
     powertop
     python-pynvim
     python-pytorch
+    xdotool
 )
 
 npm_packages=(
@@ -135,10 +136,13 @@ aur_packages=(
     write-good
     vim-language-server
     dockerfile-language-server
-    nosqlbooster-mongodb
     dive
     picom-git
     spotify
+    dyn-wall-rs
+    onedrive-abraunegg
+    tidy-viewer
+    mongodb-compass
 )
 
 # install packages
@@ -210,9 +214,14 @@ if ! [ -e /usr/lib/systemd/system/docker.service ]; then
     sudo systemctl enable --now docker.service
 fi
 
-# create nosqlbooster bin
-if ! [ -e /usr/bin/nosqlbooster ]; then
-    sudo ln -s /opt/nosqlbooster-mongodb/nosqlbooster4mongo /usr/bin/nosqlbooster
+# start onedrive monitor on boot
+if ! [ -e /usr/lib/systemd/system/onedrive@.service ]; then
+    sudo systemctl enable --now onedrive@$USER
+fi
+
+# sync onedrive if not already
+if ! [ -e ~/OneDrive ]; then
+    onedrive --synchronize
 fi
 
 # set zsh as the default shell

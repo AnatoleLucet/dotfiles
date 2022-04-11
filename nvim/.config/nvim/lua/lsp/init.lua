@@ -83,6 +83,7 @@ local servers = {
   }, ]]
   {
     name = "svelte",
+    cmd = { "/home/anatole/dev/github.com/sveltejs/language-tools/packages/language-server/bin/server.js", "--stdio" }
   },
   {
     name = "tsserver",
@@ -113,7 +114,7 @@ local servers = {
   },
   {
     name = "eslint",
-    -- filetypes =  { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx", "vue", "svelte" }
+    filetypes =  { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx", "vue", "svelte" },
     on_attach = function()
       vim.cmd("autocmd BufWritePre <buffer> EslintFixAll")
     end
@@ -129,8 +130,14 @@ for _, lsp in ipairs(servers) do
         lsp.on_attach(client, bufnr)
       end
     end,
-    -- filetypes = lsp.filetypes,
   }
+
+  if lsp.filetypes then
+    opts.filetypes = lsp.filetypes
+  end
+  if lsp.cmd then
+    opts.cmd = lsp.cmd
+  end
 
   --[[ if lsp.name == "gopls" then
     local cwd = vim.fn.getcwd()
@@ -192,9 +199,9 @@ cmp.setup({
   sources = {
     { name = 'path' },
     { name = 'calc' },
-    { name = 'luasnip' },
     { name = 'nvim_lsp' },
     { name = 'nvim_lua' },
+    { name = 'luasnip' },
     { name = 'buffer' },
     { name = 'emoji' },
   },
@@ -205,6 +212,23 @@ cmp.setup({
 })
 
 require("luasnip/loaders/from_vscode").load()
+
+local parser_configs = require('nvim-treesitter.parsers').get_parser_configs()
+-- provide syntax highlighting for Neorg tables and the @document.meta tag
+parser_configs.norg_meta = {
+    install_info = {
+        url = "https://github.com/nvim-neorg/tree-sitter-norg-meta",
+        files = { "src/parser.c" },
+        branch = "main"
+    },
+}
+parser_configs.norg_table = {
+    install_info = {
+        url = "https://github.com/nvim-neorg/tree-sitter-norg-table",
+        files = { "src/parser.c" },
+        branch = "main"
+    },
+}
 
 require("nvim-treesitter.configs").setup({
   ensure_installed = "maintained",
@@ -238,6 +262,24 @@ require("nvim-treesitter.configs").setup({
   context_commentstring = {
     enable = true,
     enable_autocmd = false,
+  },
+})
+
+require("neorg").setup({
+  load = {
+    ["core.defaults"] = {},
+    ["core.norg.dirman"] = {
+      config = {
+          workspaces = {
+              zettel = "~/OneDrive/Documents/zettelkasten",
+              home = "~/OneDrive/Documents/notes/home",
+              work = "~/OneDrive/Documents/notes/work",
+          }
+      }
+    },
+    ["core.integrations.nvim-cmp"] = {},
+    ["core.norg.concealer"] = {},
+    ["core.integrations.telescope"] = {},
   },
 })
 

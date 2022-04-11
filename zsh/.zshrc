@@ -140,6 +140,7 @@ alias fortune='fortune -n 200 | cowsay | lolcat'
 alias dv='cd ${$(fd --hidden --type d "^.git$" ~/dev | rev | cut -d "/" -f 2- | rev | fzf --reverse --height=15):-$(pwd)}'
 # alias dv='cd ${$(echo $HOME/dev/$(fd --hidden --type d "^.git$" ~/dev | rev | cut -d "/" -f 2- | rev | sed "s/${HOME//\//\\/}\/dev\///g" | fzf --reverse --height=15)):-$(pwd)}'
 alias extip='curl https://ipinfo.io/ip; echo'
+alias tv='tidy-viewer -n 10000'
 
 nmcli() {
     if [[ $@ == "n r" ]]; then
