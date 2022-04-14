@@ -207,7 +207,7 @@ fc-cache -r
 
 # create docker group
 if ! [ "$(groups | grep docker)" ]; then
-    sudo groupadd docker
+    sudo groupadd docker || true
     sudo usermod -aG docker $USER
 fi
 
