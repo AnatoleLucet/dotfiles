@@ -188,7 +188,7 @@ Plug 'JoosepAlviste/nvim-ts-context-commentstring'
 
 Plug 'projekt0n/github-nvim-theme'
 Plug 'pwntester/octo.nvim'
-Plug 'michaelb/sniprun', {'do': 'bash install.sh'}
+" Plug 'michaelb/sniprun', {'do': 'bash install.sh'}
 Plug 'tpope/vim-unimpaired'
 Plug 'junkblocker/git-time-lapse'
 

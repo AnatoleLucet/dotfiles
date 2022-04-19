@@ -97,6 +97,8 @@ packages=(
     python-pynvim
     python-pytorch
     xdotool
+    bluez
+    bluez-utils
 )
 
 npm_packages=(
