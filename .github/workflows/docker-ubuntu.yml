@@ -1,0 +1,25 @@
+name: Build and Publish Ubuntu Docker image
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v2
+        with:
+          username: anatolelucet
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          file: .docker/ubuntu.Dockerfile
+          push: true
+          tags: anatolelucet/sh:latest

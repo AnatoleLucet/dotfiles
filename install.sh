@@ -4,7 +4,7 @@ set -e
 
 if [ -x "$(command -v pacman)" ]; then
 	./arch.sh
-elif [ -e "/.dockerenv" ]; then
+elif [ "$(cat /proc/1/sched | head -n 1 | grep "^bash\|sh")" ]; then
 	if [ -x "$(command -v apt)"  ]; then
 		./docker-ubuntu.sh
 	else

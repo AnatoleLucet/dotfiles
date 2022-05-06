@@ -54,6 +54,7 @@ brew_packages=(
     rust
     rust-analyzer
     lua-language-server
+    gh
 )
 
 # install apt packages
