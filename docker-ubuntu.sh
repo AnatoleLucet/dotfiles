@@ -58,8 +58,8 @@ brew_packages=(
 
 # install apt packages
 for package in "${apt_packages[@]}"; do
-    if ! [ "$(apt list --installed | grep $package)" ]; then
-        echo $package
+    if ! [ "$(apt list --installed | grep "^$package")" ]; then
+        echo installing $package
         if [ $package = "neovim" ]; then
             sudo add-apt-repository -y ppa:neovim-ppa/unstable
             sudo apt update
