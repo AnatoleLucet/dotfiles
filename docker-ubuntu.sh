@@ -8,18 +8,14 @@ if ! [ -x "$(command -v stow)" ]; then
     sudo apt install -y stow
 fi
 
-# link dotfiles
-rm -rf ~/.zshrc
-STOW_FOLDERS=$STOW_FOLDERS ./link.sh
-
 apt_packages=(
+    curl
+    git
     cowsay
     fortune
     grc
     nodejs
     npm
-    curl
-    git
     zsh
 )
 
@@ -110,3 +106,9 @@ fi
 
 # set zsh as the default shell
 printf "\nzsh" >> $HOME/.bashrc
+
+# remove possibly pre-existing files so Stow doesn't conflict with them
+rm ~/.zshrc || true
+
+# link dotfiles
+STOW_FOLDERS=$STOW_FOLDERS ./link.sh
