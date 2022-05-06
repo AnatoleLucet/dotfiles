@@ -83,7 +83,7 @@ done
 # install homebrew packages
 if ! [ -x "$(command -v brew)" ]; then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" < /dev/null
-    echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> /home/codespace/.profile
+    echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> ~/.profile
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
 for package in "${brew_packages[@]}"; do
