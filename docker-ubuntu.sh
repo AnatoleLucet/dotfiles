@@ -20,6 +20,7 @@ apt_packages=(
     npm
     curl
     git
+    zsh
 )
 
 npm_packages=(
