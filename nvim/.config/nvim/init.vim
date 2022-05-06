@@ -230,7 +230,7 @@ set completeopt=menuone,noselect,noinsert
 set signcolumn=yes
 set colorcolumn=99999
 set fillchars+=diff:╱
-set wrap!
+" set wrap!
 
 let mapleader=" "
 nnoremap <silent> <ESC> :nohlsearch<CR>

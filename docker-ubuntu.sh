@@ -20,13 +20,19 @@ apt_packages=(
 
 npm_packages=(
     yarn
+    pnpm
     tsun
     typescript
     typescript-language-server
+    svelte-language-server
+    graphql-language-service-cli
+    bash-language-server
+    vscode-langservers-extracted
+    vls
     prettier
     eslint_d
     @fsouza/prettierd
-    write-good
+    nodemon
 )
 
 brew_packages=(
@@ -42,6 +48,11 @@ brew_packages=(
     the_silver_searcher
     tcpdump
     httpstat
+    go
+    gopls
+    rust
+    rust-analyzer
+    lua-language-server
 )
 
 # install apt packages

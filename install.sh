@@ -4,11 +4,11 @@ set -e
 
 if [ -x "$(command -v pacman)" ]; then
 	./arch.sh
-elif [ -e "/home/codespace" ]; then
-	if [ "$(lsb_release -d | grep Ubuntu)" ]; then
-		./codespace-ubuntu.sh
+elif [ -e "/.dockerenv" ]; then
+	if [ -x "$(command -v apt)"  ]; then
+		./docker-ubuntu.sh
 	else
-		echo "Unsupported codespace image. Exiting."
+		echo "Unsupported docker image. Exiting."
 		exit 1
 	fi
 else
