@@ -16,6 +16,8 @@ apt_packages=(
     cowsay
     fortune
     grc
+    nodejs
+    npm
 )
 
 npm_packages=(
