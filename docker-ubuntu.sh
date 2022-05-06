@@ -18,6 +18,8 @@ apt_packages=(
     grc
     nodejs
     npm
+    curl
+    git
 )
 
 npm_packages=(
