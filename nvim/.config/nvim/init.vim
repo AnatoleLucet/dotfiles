@@ -199,7 +199,7 @@ Plug 'lewis6991/impatient.nvim'
 
 Plug 'github/copilot.vim'
 
-Plug 'chentau/marks.nvim'
+Plug 'chentoast/marks.nvim'
 
 Plug 'nvim-neorg/neorg'
 Plug 'nvim-neorg/neorg-telescope'
@@ -245,7 +245,7 @@ map +p "+p
 tnoremap <silent><F3> <C-\><C-n>:TZFocus<CR>i
 nnoremap <silent><F3> :TZFocus<CR>
 
-nnoremap <silent><C-m> <C-^>
+nnoremap <C-m> <C-^>
 
 lua require("lsp")
 

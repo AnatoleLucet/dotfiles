@@ -60,7 +60,6 @@ brew_packages=(
 # install apt packages
 for package in "${apt_packages[@]}"; do
     if ! [ "$(apt list --installed | grep "^$package")" ]; then
-        echo installing $package
         if [ $package = "neovim" ]; then
             sudo add-apt-repository -y ppa:neovim-ppa/unstable
             sudo apt update
@@ -73,7 +72,6 @@ done
 # install npm packages
 for package in "${npm_packages[@]}"; do
     if ! [ "$(npm list -g 2> /dev/null | grep $package)" ]; then
-        echo $package
         sudo npm i -g $package
     fi
 done
