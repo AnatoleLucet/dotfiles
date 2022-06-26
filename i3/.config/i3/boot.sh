@@ -14,6 +14,11 @@ xmodmap -e "clear Lock"
 touchpadId=$(xinput list | grep Touchpad | sed "s/.*id=\([[:digit:]]*\).*/\1/g")
 xinput set-prop $touchpadId "libinput Tapping Enabled" 1
 xinput set-prop $touchpadId "libinput Tapping Button Mapping Enabled" 0, 1
+xmodmap -e "keycode 64 = Mode_switch"
+xmodmap -e "keycode 43 = h H Left H"
+xmodmap -e "keycode 44 = j J Down J"
+xmodmap -e "keycode 45 = k K Up K"
+xmodmap -e "keycode 46 = l L Right L"
 
 # battery
 powertop --auto-tune

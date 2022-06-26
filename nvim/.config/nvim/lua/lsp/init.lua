@@ -83,7 +83,6 @@ local servers = {
   }, ]]
   {
     name = "svelte",
-    cmd = { "/home/anatole/dev/github.com/sveltejs/language-tools/packages/language-server/bin/server.js", "--stdio" }
   },
   {
     name = "tsserver",

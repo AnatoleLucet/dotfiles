@@ -50,7 +50,6 @@ ec () {
 	fi
 }
 
-
 # Lsd 
 lsdOptions='--group-dirs first'
 alias ls='lsd '$lsdOptions
@@ -175,5 +174,8 @@ codi() {
 }
 
 bindkey -s '^p' 'dv^M'
+bindkey "^ " autosuggest-accept
+bindkey "^k" up-history
+bindkey "^j" down-history
 
 eval $(thefuck --alias)

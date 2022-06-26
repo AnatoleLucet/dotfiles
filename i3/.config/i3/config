@@ -15,6 +15,7 @@ new_window 1pixel
 
 exec_always feh --bg-fill ~/.config/i3/wallpaper.jpg --bg-fill ~/.config/i3/wallpaper.jpg
 exec_always ~/.config/i3/boot.sh
+exec_always zsh -c '~/.config/i3/auto-rotate-screen.sh eDP-1 "ELAN Touchscreen"'
 exec --no-startup-id redshift -O 5250
 
 # gaps
@@ -59,9 +60,6 @@ floating_modifier $mod
 bindsym $mod+Return exec zsh -ci "kitty --single-instance"
 bindsym $mod+Shift+Return exec zsh ~/.config/i3/open-term-in-last-dir.sh
 
-# emacs
-bindsym $mod+o exec emacs
-
 # gnome screenshot
 bindsym $mod+Shift+i exec gnome-screenshot -a -i
 
@@ -71,10 +69,10 @@ bindsym $mod+Shift+A kill
 bindsym $mod+d exec rofi -run-command "zsh -ci '{cmd}'" -show run -matching fuzzy -sorting-method fzf -sort
 
 # change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+m focus right
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -83,10 +81,10 @@ bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+M move right
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -95,7 +93,7 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+h split h
+bindsym $mod+b split h
 
 # split in vertical orientation
 bindsym $mod+v split v

@@ -61,6 +61,7 @@ packages=(
     dunst
     i3-gaps
     peek
+    solaar
     # picom
 
     # Langs/runtimes/compilers
