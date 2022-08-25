@@ -5,6 +5,9 @@ export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin:$HOME/.yarn/bin:/usr/bin/watchm
 export TERM=xterm-256color # to fix some issues with termbox
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export ANDROID_SDK=$HOME/Android/Sdk
+export ANDROID_SDK_ROOT=$ANDROID_SDK
+export PATH=$PATH:$ANDROID_SDK_ROOT/emulator
+export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools
 
 if [ -x "$(command -v ruby)" ]; then
   export PATH=$PATH:$(ruby -r rubygems -e 'puts Gem.user_dir')/bin

@@ -100,6 +100,7 @@ packages=(
     xdotool
     bluez
     bluez-utils
+    brightnessctl
 )
 
 npm_packages=(
