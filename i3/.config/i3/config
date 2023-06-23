@@ -16,6 +16,7 @@ new_window 1pixel
 exec_always feh --bg-fill ~/.config/i3/wallpaper.jpg --bg-fill ~/.config/i3/wallpaper.jpg
 exec_always ~/.config/i3/boot.sh
 exec_always zsh -c '~/.config/i3/auto-rotate-screen.sh eDP-1 "ELAN Touchscreen"'
+exec_always zsh -c '~/.config/i3/auto-rotate-screen.sh eDP-1 "ELAN Touchscreen Stylus"'
 exec --no-startup-id redshift -O 5250
 
 # gaps

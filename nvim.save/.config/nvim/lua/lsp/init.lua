@@ -2,12 +2,13 @@ local nvim_lsp = require('lspconfig')
 
 local on_attach = function(client, bufnr)
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
   --Enable completion triggered by <c-x><c-o>
   buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-  local opts = { noremap=true, silent=true }
+  local opts = { noremap = true, silent = true }
 
   buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
   buf_set_keymap('n', 'gd', '<Cmd>Telescope lsp_definitions<CR>', opts)
@@ -34,7 +35,8 @@ local on_attach = function(client, bufnr)
   buf_set_keymap("n", "<space>cc", "<cmd>lua require'lspsaga.diagnostic'.show_cursor_diagnostics()<CR>", opts)
   buf_set_keymap("n", "<space>co", "<cmd>Trouble<CR>", opts)
 
-  vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()")
+  --[[ vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()") ]]
+  vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.format()")
 
   -- if client.name == "tsserver" then
   --   client.resolved_capabilities.document_formatting = false
@@ -46,11 +48,11 @@ end
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
-    signs = true,
-    underline = true,
-    update_in_insert = true,
-    virtual_text = true,
-  }
+  signs = true,
+  underline = true,
+  update_in_insert = true,
+  virtual_text = true,
+}
 )
 
 local servers = {
@@ -60,9 +62,9 @@ local servers = {
   {
     name = "cssls",
   },
-  --[[ {
-    name = "denols",
-  }, ]]
+  --[[ { ]]
+  --[[   name = "denols", ]]
+  --[[ }, ]]
   {
     name = "dockerls",
   },
@@ -86,11 +88,12 @@ local servers = {
   },
   {
     name = "tsserver",
+    root_dir = nvim_lsp.util.root_pattern('.git'), -- monorepooo
     on_attach = function(client, bufnr)
       -- local ts_utils = require("nvim-lsp-ts-utils")
       -- ts_utils.setup_client(client)
 
-      client.resolved_capabilities.document_formatting = false
+      client.server_capabilities.document_formatting = false
     end
   },
   {
@@ -113,7 +116,8 @@ local servers = {
   },
   {
     name = "eslint",
-    filetypes =  { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx", "vue", "svelte" },
+    filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx",
+      "vue", "svelte" },
     on_attach = function()
       vim.cmd("autocmd BufWritePre <buffer> EslintFixAll")
     end
@@ -159,13 +163,13 @@ end
 local null_ls = require("null-ls")
 
 local sources = {
-    null_ls.builtins.formatting.prettierd,
-    -- null_ls.builtins.formatting.eslint_d,
+  null_ls.builtins.formatting.prettierd,
+  -- null_ls.builtins.formatting.eslint_d,
 
-    null_ls.builtins.diagnostics.write_good,
-    -- null_ls.builtins.diagnostics.eslint_d.with({
-    --   -- only_local = "node_modules/.bin",
-    -- }),
+  null_ls.builtins.diagnostics.write_good,
+  -- null_ls.builtins.diagnostics.eslint_d.with({
+  --   -- only_local = "node_modules/.bin",
+  -- }),
 }
 
 null_ls.setup({
@@ -217,18 +221,18 @@ require("luasnip/loaders/from_vscode").load()
 local parser_configs = require('nvim-treesitter.parsers').get_parser_configs()
 -- provide syntax highlighting for Neorg tables and the @document.meta tag
 parser_configs.norg_meta = {
-    install_info = {
-        url = "https://github.com/nvim-neorg/tree-sitter-norg-meta",
-        files = { "src/parser.c" },
-        branch = "main"
-    },
+  install_info = {
+    url = "https://github.com/nvim-neorg/tree-sitter-norg-meta",
+    files = { "src/parser.c" },
+    branch = "main"
+  },
 }
 parser_configs.norg_table = {
-    install_info = {
-        url = "https://github.com/nvim-neorg/tree-sitter-norg-table",
-        files = { "src/parser.c" },
-        branch = "main"
-    },
+  install_info = {
+    url = "https://github.com/nvim-neorg/tree-sitter-norg-table",
+    files = { "src/parser.c" },
+    branch = "main"
+  },
 }
 
 require("nvim-treesitter.configs").setup({
@@ -266,70 +270,97 @@ require("nvim-treesitter.configs").setup({
   },
 })
 
+require("treesitter-context").setup({
+  enable = true,
+  zindex = 50,
+})
+
 require("neorg").setup({
   load = {
     ["core.defaults"] = {},
     ["core.norg.dirman"] = {
       config = {
-          workspaces = {
-              zettel = "~/OneDrive/Documents/zettelkasten",
-              home = "~/OneDrive/Documents/notes/home",
-              work = "~/OneDrive/Documents/notes/work",
-          }
+        workspaces = {
+          zettel = "~/OneDrive/Documents/zettelkasten",
+          home = "~/OneDrive/Documents/notes/home",
+          work = "~/OneDrive/Documents/notes/work",
+        }
       }
     },
     ["core.integrations.nvim-cmp"] = {},
     ["core.norg.concealer"] = {},
     ["core.integrations.telescope"] = {},
+    ["core.keybinds"] = {},
   },
 })
 
 require('lspsaga').init_lsp_saga({
-  use_saga_diagnostic_sign = true,
-  error_sign = '',
-  warn_sign = '',
-  hint_sign = ' ',
-  border_style = 'round',
-  code_action_prompt = { enabled = false },
+  --[[ use_saga_diagnostic_sign = true, ]]
+  border_style = 'rounded',
+  --[[ code_action_prompt = { enabled = false }, ]]
+})
+
+--[[ error_sign = '', ]]
+--[[ warn_sign = '', ]]
+--[[ hint_sign = ' ', ]]
+local signs = {
+  Error = ' ',
+  Warn = ' ',
+  Info = ' ',
+  Hint = 'ﴞ ',
+}
+for type, icon in pairs(signs) do
+  local hl = 'DiagnosticSign' .. type
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+end
+
+vim.diagnostic.config({
+  signs = true,
+  update_in_insert = false,
+  underline = true,
+  severity_sort = true,
+  virtual_text = {
+    source = true,
+  },
 })
 
 
 -- lsp-install
-local function setup_servers()
-  require("lspinstall").setup()
-
-  local installed_servers = require("lspinstall").installed_servers()
-  local servers = {
-    {
-      install_name = "typescript",
-      lsp_name = "tsserver"
-    },
-    {
-      install_name = "deno",
-      lsp_name = "denols"
-    },
-  }
-
-  for _, server in pairs(servers) do
-    local is_server_installed = false
-    for _, installed_server in ipairs(installed_servers) do
-      if installed_server == server.install_name then
-        is_server_installed = true
-        break
-      end
-    end
-
-    print(vim.inspect(installed_servers), server.install_name)
-
-    if is_server_installed == false then
-      require("lspinstall").install_server(server.install_name)
-    end
-
-    local config = {}
-
-    require("lspconfig")[server.lsp_name].setup(config)
-  end
-end
+-- local function setup_servers()
+--   require("lspinstall").setup()
+--
+--   local installed_servers = require("lspinstall").installed_servers()
+--   local servers = {
+--     {
+--       install_name = "typescript",
+--       lsp_name = "tsserver"
+--     },
+--     {
+--       install_name = "deno",
+--       lsp_name = "denols"
+--     },
+--   }
+--
+--   for _, server in pairs(servers) do
+--     local is_server_installed = false
+--     for _, installed_server in ipairs(installed_servers) do
+--       if installed_server == server.install_name then
+--         is_server_installed = true
+--         break
+--       end
+--     end
+--
+--     print(vim.inspect(installed_servers), server.install_name)
+--
+--     if is_server_installed == false then
+--       require("lspinstall").install_server(server.install_name)
+--     end
+--
+--     local config = {}
+--
+--     require("lspconfig")[server.lsp_name].setup(config)
+--   end
+-- end
 
 -- deosn't work
 --[[ setup_servers()

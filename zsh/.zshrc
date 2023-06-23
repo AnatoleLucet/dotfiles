@@ -127,6 +127,12 @@ alias gsf='g show $(glo | fzf --ansi --reverse | cut -f 1 -d " ")'
 code-owners() {
 	git ls-files ${@:-.} | parallel -d "\n" 'file {} | ag ":.* text" | sed "s/:.*$//" | xargs git blame --line-porcelain | ag "^author " | sed "s/^author //"' 2> /dev/null  | sort -f | uniq -ic | sort -nr
 }
+commits-owners() {
+	git log --no-merges | grep Author | sed 's/.*<\(.*\)>/\1/' | sort -f | uniq -ic | sort -nr
+}
+author-stats() {
+	git log --author="$@" --pretty=tformat: --numstat | gawk '{ add += $1; subs += $2; loc += $1 - $2 } END { printf "Added lines: %s\nRemoved lines: %s\nTotal lines: %s\n", add, subs, loc }' -
+}
 
 # Others
 alias open='xdg-open'
@@ -136,10 +142,11 @@ alias dtf='cd ~/.dotfiles'
 mcd() { mkdir -p "$@" && cd "$@"; }
 p() { ping ${1:-"1.1.1.1"} }
 alias fortune='fortune -n 200 | cowsay | lolcat'
-alias dv='cd ${$(fd --hidden --type d "^.git$" ~/dev | rev | cut -d "/" -f 2- | rev | fzf --reverse --height=15):-$(pwd)}'
+alias dv='cd ${$(fd --hidden --type d "^.git$" ~/dev | rev | cut -d "/" -f 3- | rev | fzf --reverse --height=15):-$(pwd)}'
 # alias dv='cd ${$(echo $HOME/dev/$(fd --hidden --type d "^.git$" ~/dev | rev | cut -d "/" -f 2- | rev | sed "s/${HOME//\//\\/}\/dev\///g" | fzf --reverse --height=15)):-$(pwd)}'
 alias extip='curl https://ipinfo.io/ip; echo'
 alias tv='tidy-viewer -n 10000'
+e() { nautilus ${@:-.} & }
 
 nmcli() {
     if [[ $@ == "n r" ]]; then

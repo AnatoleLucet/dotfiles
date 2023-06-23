@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Gnome config
+GenericName=config
+Comment=config
+Exec=.script/load-dconf-settings.sh
+Terminal=false
+Type=Application
+X-GNOME-Autostart-enabled=true

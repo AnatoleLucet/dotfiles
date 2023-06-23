@@ -1,6 +1,6 @@
 call plug#begin('~/.vim/plugged')
 
-Plug 'psliwka/vim-smoothie'
+" Plug 'psliwka/vim-smoothie'
 " Plug 'Yggdroot/indentLine'
 Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'drewtempelmeyer/palenight.vim'
@@ -47,7 +47,7 @@ Plug 'ThePrimeagen/vim-be-good'
 Plug 'metakirby5/codi.vim'
 Plug 'camspiers/animate.vim'
 Plug 'rhysd/clever-f.vim'
-Plug 'matze/vim-move'
+" Plug 'matze/vim-move'
 Plug 'rhysd/git-messenger.vim'
 Plug 'liuchengxu/vista.vim'
 Plug 'wellle/targets.vim'
@@ -77,7 +77,7 @@ Plug 'mbbill/undotree'
 Plug 'liuchengxu/vim-which-key'
 Plug 'junkblocker/git-time-lapse'
 
-Plug 'terryma/vim-multiple-cursors'
+" Plug 'terryma/vim-multiple-cursors'
 Plug 'bronson/vim-visual-star-search'
 
 " meh
@@ -102,7 +102,7 @@ Plug 'puremourning/vimspector', {'do': './install_gadget.py --enable-c --enable-
 Plug 'itchyny/vim-gitbranch'
 Plug 'chrisbra/csv.vim'
 
-Plug 'vimwiki/vimwiki'
+" Plug 'vimwiki/vimwiki'
 
 Plug 'tpope/vim-vinegar'
 
@@ -146,9 +146,10 @@ Plug 'kyazdani42/nvim-tree.lua'
 Plug 'ray-x/lsp_signature.nvim'
 Plug 'folke/trouble.nvim'
 Plug 'kabouzeid/nvim-lspinstall'
-" Plug 'glepnir/lspsaga.nvim'
 " Plug 'jasonrhansen/lspsaga.nvim', {'branch': 'finder-preview-fixes'}
-Plug 'tami5/lspsaga.nvim'
+Plug 'glepnir/lspsaga.nvim'
+" replacement for glepnir/lspsaga.nvim:
+" Plug 'tami5/lspsaga.nvim'
 Plug 'folke/lsp-colors.nvim'
 Plug 'mfussenegger/nvim-ts-hint-textobject'
 
@@ -160,7 +161,7 @@ Plug 'rktjmp/lush.nvim'
 Plug 'TimUntersberger/neogit'
 
 Plug 'norcalli/nvim-colorizer.lua'
-Plug 'lewis6991/spellsitter.nvim'
+" Plug 'lewis6991/spellsitter.nvim'
 
 Plug 'windwp/nvim-autopairs'
 
@@ -207,6 +208,15 @@ Plug 'nvim-neorg/neorg-telescope'
 " Plug 'hkupty/iron.nvim'
 Plug 'm-demare/hlargs.nvim'
 
+Plug 'ThePrimeagen/harpoon'
+
+Plug 'kevinhwang91/promise-async'
+Plug 'kevinhwang91/nvim-ufo'
+
+Plug 'eandrju/cellular-automaton.nvim'
+
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
+
 call plug#end()
 
 set nu
@@ -232,6 +242,8 @@ set colorcolumn=99999
 set fillchars+=diff:╱
 " set wrap!
 
+set backupcopy=yes " https://github.com/paulmillr/chokidar/issues/237
+
 let mapleader=" "
 nnoremap <silent> <ESC> :nohlsearch<CR>
 map <leader>y "+y
@@ -244,6 +256,11 @@ map +y "+y
 map +p "+p
 tnoremap <silent><F3> <C-\><C-n>:TZFocus<CR>i
 nnoremap <silent><F3> :TZFocus<CR>
+
+nnoremap <silent><C-d> <C-d>zz
+nnoremap <silent><C-u> <C-u>zz
+nnoremap <silent>n nzzzv
+nnoremap <silent>N Nzzzv
 
 nnoremap <C-m> <C-^>
 
@@ -265,7 +282,32 @@ endfunction
 nnoremap <silent> <expr> o <SID>NewLineInsertExpr(1, 'o')
 nnoremap <silent> <expr> O <SID>NewLineInsertExpr(1, 'O')
 
-nnoremap <silent> <A-\> :!i3-msg -t command fullscreen toggle<CR>:sleep 150m<CR>:ZenMode<CR>
+" nnoremap <silent> <A-\> :!i3-msg -t command fullscreen toggle<CR>:sleep 150m<CR>:ZenMode<CR>
+nnoremap <silent> <C-\> :ZenMode<CR>
+
+" Markdown Preview
+let g:mkdp_theme = 'dark'
+
+" UFO
+lua << EOF
+-- require('ufo').setup({
+--     provider_selector = function(bufnr, filetype, buftype)
+--         return {'treesitter', 'indent'}
+--     end
+-- })
+EOF
+
+
+" Harpoon
+lua require("telescope").load_extension('harpoon')
+
+nnoremap <silent> <leader>a :lua require('harpoon.mark').add_file()<CR>
+nnoremap <silent> <C-f> :lua require('harpoon.ui').toggle_quick_menu()<CR>
+
+nnoremap <silent> <C-h> :lua require('harpoon.ui').nav_file(1)<CR>
+nnoremap <silent> <C-j> :lua require('harpoon.ui').nav_file(2)<CR>
+nnoremap <silent> <C-k> :lua require('harpoon.ui').nav_file(3)<CR>
+nnoremap <silent> <C-l> :lua require('harpoon.ui').nav_file(4)<CR>
 
 " hlArgs
 lua require('hlargs').setup()
@@ -444,6 +486,9 @@ let g:nvim_tree_width = 39
 
 " Telescope
 nnoremap <silent><leader>. :Telescope file_browser<CR>
+" not working?
+nnoremap <silent> <leader>s :Telescope lsp_document_symbols<CR>
+
 augroup telescopeMaps
   au VimEnter * noremap <silent> <leader>t :Telescope<CR>
   " unmap buffergator's
@@ -649,7 +694,13 @@ require("lualine").setup({
 EOF
 
 " Bufferline
-lua require("bufferline").setup({ separator_style = "thin" })
+lua << EOF
+require("bufferline").setup({
+  options = {
+    separator_style = "thin"
+  }
+})
+EOF
 nnoremap <silent> <C-s> :BufferLinePick<CR>
 nnoremap <silent> <leader>bd :BufferLineSortByDirectory<CR>
 nnoremap <silent> <leader>be :BufferLineSortByExtension<CR>
@@ -666,7 +717,7 @@ let g:vista_default_executive = 'coc'
 " nmap <silent> <leader>v :Vista finder<CR>
 
 " Move
-let g:move_key_modifier = 'C'
+" let g:move_key_modifier = 'C'
 
 " Animate
 nnoremap <silent> <C-Up>    :call animate#window_delta_height(10)<CR>
@@ -724,9 +775,9 @@ set t_Co=256
 " also set onedark for missing syntax in doom-one
 " colorscheme one
 " colorscheme doom-one
-let g:tokyonight_style = 'night'
+" let g:tokyonight_style = 'night'
 let g:tokyonight_enable_italic = 1
-colorscheme tokyonight
+colorscheme tokyonight-night
 " colorscheme material
 " let g:material_style = 'palenight'
 syntax enable
@@ -941,10 +992,10 @@ endif
 " autocmd VimLeave * if get(g:, 'coc_process_pid', 0) | call system('kill -9 -'.g:coc_process_pid) | endif
 
 " Remap split focus
-nnoremap <silent> <leader>k <C-w>k
-nnoremap <silent> <leader>j <C-w>j
-nnoremap <silent> <leader>h <C-w>h
-nnoremap <silent> <leader>l <C-w>l
+" nnoremap <silent> <leader>k <C-w>k
+" nnoremap <silent> <leader>j <C-w>j
+" nnoremap <silent> <leader>h <C-w>h
+" nnoremap <silent> <leader>l <C-w>l
 
 " Messenger
 nnoremap <silent> <leader>gm :GitMessenger<CR>
@@ -987,6 +1038,7 @@ fu! SyntaxStack()
     if lastID == 0 | return | end
     echohl synIDattr(synIDtrans(lastID), "name")
     echon synIDattr(synIDtrans(lastID), "name")
+
     echon ' ' . string(synNames)
     echohl None
 endfu "

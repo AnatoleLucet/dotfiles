@@ -2,7 +2,7 @@
 
 set -e
 
-export STOW_FOLDERS="git, fonts, zsh, nvim, i3, picom, polybar, rofi, kitty, dunst"
+export STOW_FOLDERS="git, fonts, zsh, nvim, i3, picom, polybar, rofi, kitty, dunst, gnome, keyd"
 
 sudo pacman -Syy
 if ! [ -x "$(command -v stow)" ]; then
@@ -74,6 +74,7 @@ packages=(
     meson
     ninja
     rust
+    jdk11-openjdk
 
     # Fonts
     powerline-fonts
@@ -147,6 +148,7 @@ aur_packages=(
     onedrive-abraunegg
     tidy-viewer
     mongodb-compass
+    keyd
 )
 
 # install packages
@@ -189,10 +191,9 @@ for package in "${aur_packages[@]}"; do
 done
 rm -rf $aura_build_path
 
-# install nvim plugins
-if ! [ -e $HOME/.local/share/nvim/site/autoload/plug.vim ]; then
-    curl -fLo $HOME/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    nvim --headless +PlugInstall +qall 2> /dev/null
+# install NvChad
+if ! [ -e $HOME/.config/nvim/init.lua ]; then
+  git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1
 fi
 
 # install oh-my-zsh
@@ -203,6 +204,11 @@ if ! [ -e $HOME/.oh-my-zsh ]; then
     git clone https://github.com/softmoth/zsh-vim-mode ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-vim-mode
     git clone https://github.com/Aloxaf/fzf-tab ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/fzf-tab
 fi
+
+# install cht.sh
+curl -s https://cht.sh/:cht.sh | sudo tee /usr/local/bin/cht && sudo chmod +x /usr/local/bin/cht
+
+# TODO: move theses configs to independent postinstall scripts
 
 # refresh fonts
 fc-cache -r
@@ -227,6 +233,9 @@ fi
 if ! [ -e ~/OneDrive ]; then
     onedrive --synchronize
 fi
+
+# keyd config
+sudo ln -sf ~/.config/keyd/default.conf /etc/keyd/default.conf
 
 # set zsh as the default shell
 sudo usermod -s $(which zsh) $USER

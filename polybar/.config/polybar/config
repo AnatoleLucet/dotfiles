@@ -381,9 +381,9 @@ bar-volume-empty-foreground = ${colors.foreground-alt}
 
 [module/battery]
 type = internal/battery
-battery = BAT0
+battery = BAT1
 adapter = ADP1
-full-at = 98
+full-at = 100
 label-padding-right = 0
 label-padding-left = 0
 
