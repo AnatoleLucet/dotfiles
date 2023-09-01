@@ -181,7 +181,6 @@ local plugins = {
 						url_data.host = "gitlab.ayaline.com"
 						return require("gitlinker.hosts").get_gitlab_type_url(url_data)
 					end,
-					["***REMOVED***"] = require("gitlinker.hosts").get_gitlab_type_url,
 				},
 			})
 		end,
@@ -209,6 +208,13 @@ local plugins = {
 					current = "ConflictMarkerTheirs",
 				},
 			})
+		end,
+	},
+	{
+		"iamcco/markdown-preview.nvim",
+		event = "VeryLazy",
+		build = function()
+			vim.fn["mkdp#util#install"]()
 		end,
 	},
 

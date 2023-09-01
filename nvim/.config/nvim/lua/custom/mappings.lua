@@ -19,6 +19,9 @@ M.general = {
 
 		["<leader>bk"] = { "<cmd>bp<bar>sp<bar>bn<bar>bd!<cr>", "kill buffer", opts = { nowait = true, silent = true } },
 
+		["<leader>to"] = { "<cmd>tabnew<cr>", "open new tab", opts = { nowait = true, silent = true } },
+		["<leader>tc"] = { "<cmd>tabclose<cr>", "close current tab", opts = { nowait = true, silent = true } },
+
 		["[q"] = { "<cmd>cprev<cr>", "previous quickfix list element", opts = { nowait = true, silent = true } },
 		["]q"] = { "<cmd>cnext<cr>", "next quickfix list element", opts = { nowait = true, silent = true } },
 	},

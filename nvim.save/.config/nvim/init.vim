@@ -504,7 +504,7 @@ local opts = {
       url_data.host = 'gitlab.ayaline.com'
       return require('gitlinker.hosts').get_gitlab_type_url(url_data)
     end,
-    ['***REMOVED***'] = require('gitlinker.hosts').get_gitlab_type_url,
+    ['gitlab.factory.fonciamillenium.net'] = require('gitlinker.hosts').get_gitlab_type_url,
   }
 }
 
