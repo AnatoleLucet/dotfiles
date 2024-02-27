@@ -6,23 +6,22 @@ local M = {}
 
 ---@type Base46HLGroupsList
 M.override = {
-  Comment = {
-    italic = true,
-  },
+	Comment = {
+		italic = true,
+	},
 }
 
 ---@type HLTable
 M.add = {
-
-  ConflictMarkerOurs = {
-    bg = "#2e5049",
-  },
-  ConflictMarkerTheirs = {
-    bg = "#344f69",
-  },
-  ConflictMarkerCommonAncestorsHunk = {
-    bg = "#754a81",
-  },
+	ConflictMarkerOurs = {
+		bg = "#2e5049",
+	},
+	ConflictMarkerTheirs = {
+		bg = "#344f69",
+	},
+	ConflictMarkerCommonAncestorsHunk = {
+		bg = "#754a81",
+	},
 }
 
 return M

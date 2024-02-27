@@ -108,7 +108,7 @@ M.lspconfig = {
 		},
 		["<leader>ra"] = {
 			function()
-				require("nvchad_ui.renamer").open()
+				require("nvchad.renamer").open()
 			end,
 			"LSP rename",
 		},
@@ -126,7 +126,7 @@ M.lspconfig = {
 		},
 		["gr"] = {
 			function()
-				vim.cmd("Lspsaga lsp_finder")
+				vim.cmd("Lspsaga finder")
 			end,
 			"LSP references",
 		},
@@ -230,6 +230,25 @@ M.zenmode = {
 				require("zen-mode").toggle()
 			end,
 			"List workspace folders",
+		},
+	},
+}
+
+M.ssr = {
+	n = {
+		["<leader>sr"] = {
+			function()
+				require("ssr").open()
+			end,
+			"Open SSR",
+		},
+	},
+	x = {
+		["<leader>sr"] = {
+			function()
+				require("ssr").open()
+			end,
+			"Open SSR",
 		},
 	},
 }

@@ -6,7 +6,12 @@ local plugins = {
 	{
 		"neovim/nvim-lspconfig",
 		dependencies = {
-			{ "folke/neodev.nvim" },
+			{
+				"folke/neodev.nvim",
+				config = function()
+					require("neodev").setup()
+				end,
+			},
 			{
 				"jose-elias-alvarez/null-ls.nvim",
 				config = function()
@@ -34,6 +39,16 @@ local plugins = {
 	{
 		"williamboman/mason.nvim",
 		opts = overrides.mason,
+		config = function()
+			require("mason").setup()
+			require("mason-lspconfig").setup()
+		end,
+		dependencies = {
+			{
+				"williamboman/mason-lspconfig.nvim",
+				config = function() end,
+			},
+		},
 	},
 	{
 		"hrsh7th/nvim-cmp",
@@ -58,6 +73,28 @@ local plugins = {
 				config = function(_, opts)
 					require("treesitter-context").setup(opts)
 				end,
+			},
+			{
+				"windwp/nvim-ts-autotag",
+				config = function()
+					require("nvim-ts-autotag").setup()
+				end,
+			},
+			{
+				"JoosepAlviste/nvim-ts-context-commentstring",
+				config = function()
+					require("ts_context_commentstring").setup()
+				end,
+				dependencies = {
+					{
+						"numToStr/Comment.nvim",
+						config = function()
+							require("Comment").setup({
+								pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
+							})
+						end,
+					},
+				},
 			},
 		},
 	},
@@ -136,6 +173,26 @@ local plugins = {
 		"ThePrimeagen/harpoon",
 		dependencies = { "nvim-lua/plenary.nvim" },
 	},
+	{
+		"cshuaimin/ssr.nvim",
+		event = "VeryLazy",
+		config = function()
+			require("ssr").setup()
+		end,
+	},
+	-- {
+	-- 	"rasulomaroff/reactive.nvim",
+	-- 	event = "VeryLazy",
+	-- 	config = function()
+	-- 		require("reactive").setup({
+	-- 			builtin = {
+	-- 				cursorline = true,
+	-- 				cursor = true,
+	-- 				modemsg = true,
+	-- 			},
+	-- 		})
+	-- 	end,
+	-- },
 
 	-- rest
 	{

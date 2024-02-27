@@ -5,9 +5,6 @@ set -e
 export STOW_FOLDERS="git, fonts, zsh, nvim, i3, picom, polybar, rofi, kitty, dunst, gnome, keyd"
 
 sudo pacman -Syy
-if ! [ -x "$(command -v stow)" ]; then
-    sudo pacman -S stow --noconfirm
-fi
 
 # spotify public key
 if ! [ "$(gpg --list-keys | grep Spotify)" ]; then
@@ -20,6 +17,7 @@ packages=(
     zsh
 
     # CLIs
+    stow
     git
     bat
     curl
@@ -44,6 +42,7 @@ packages=(
     nmap
     bat
     parallel
+    zoxide
     
     # TUIs
     neovim
@@ -56,7 +55,6 @@ packages=(
     pasystray
     polybar
     sqlite
-    vscode
     rofi
     dunst
     i3-gaps
@@ -66,6 +64,8 @@ packages=(
 
     # Langs/runtimes/compilers
     nodejs
+    nvm
+    deno
     npm
     go
     python
@@ -149,6 +149,8 @@ aur_packages=(
     tidy-viewer
     mongodb-compass
     keyd
+    bunjs-bin
+    visual-studio-code-bin
 )
 
 # install packages
@@ -198,11 +200,13 @@ fi
 
 # install oh-my-zsh
 if ! [ -e $HOME/.oh-my-zsh ]; then
-    sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh) --unattended"
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-    git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-    git clone https://github.com/softmoth/zsh-vim-mode ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-vim-mode
-    git clone https://github.com/Aloxaf/fzf-tab ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/fzf-tab
+  sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh) --unattended"
+
+  plugin_dir=${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins
+  git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${plugin_dir}/zsh-syntax-highlighting
+  git clone https://github.com/zsh-users/zsh-autosuggestions ${plugin_dir}/zsh-autosuggestions
+  git clone https://github.com/softmoth/zsh-vim-mode ${plugin_dir}/zsh-vim-mode
+  git clone https://github.com/Aloxaf/fzf-tab ${plugin_dir}/fzf-tab
 fi
 
 # install cht.sh

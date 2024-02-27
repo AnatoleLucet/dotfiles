@@ -21,7 +21,19 @@ plugins=(
 source $ZSH/oh-my-zsh.sh
 
 # GRC
-[[ -s "$HOME/.nix-profile/etc/grc.zsh" ]] && source ~/.nix-profile/etc/grc.zsh
+[ -s "$HOME/.nix-profile/etc/grc.zsh" ] && source ~/.nix-profile/etc/grc.zsh
+
+# Bun
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+
+# NVM
+[ -s "/usr/share/nvm/init-nvm.sh" ] && source /usr/share/nvm/init-nvm.sh
+
+# Cargo
+[ -s "$HOME/.cargo/env" ] && source "$HOME/.cargo/env"
+
+# Zoxide
+eval "$(zoxide init zsh)"
 
 # FZF
 source /usr/share/fzf/key-bindings.zsh
@@ -128,7 +140,8 @@ code-owners() {
 	git ls-files ${@:-.} | parallel -d "\n" 'file {} | ag ":.* text" | sed "s/:.*$//" | xargs git blame --line-porcelain | ag "^author " | sed "s/^author //"' 2> /dev/null  | sort -f | uniq -ic | sort -nr
 }
 commits-owners() {
-	git log --no-merges | grep Author | sed 's/.*<\(.*\)>/\1/' | sort -f | uniq -ic | sort -nr
+	# git log --no-merges | grep Author | sed 's/.*<\(.*\)>/\1/' | sort -f | uniq -ic | sort -nr
+  git shortlog -nse
 }
 author-stats() {
 	git log --author="$@" --pretty=tformat: --numstat | gawk '{ add += $1; subs += $2; loc += $1 - $2 } END { printf "Added lines: %s\nRemoved lines: %s\nTotal lines: %s\n", add, subs, loc }' -

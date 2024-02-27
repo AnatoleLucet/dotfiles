@@ -1,99 +1,102 @@
 local M = {}
 
 M.treesitter = {
-  ensure_installed = {
-    "vim",
-    "lua",
+	ensure_installed = {
+		"vim",
+		"lua",
 
-    "html",
-    "css",
-    "graphql",
-    "svelte",
+		"html",
+		"css",
+		"graphql",
+		"svelte",
 
-    "javascript",
-    "typescript",
-    "tsx",
+		"javascript",
+		"typescript",
+		"tsx",
 
-    "php",
+		"php",
 
-    "go",
-    "gomod",
-    "gosum",
+		"go",
+		"gomod",
+		"gosum",
 
-    "rust",
+		"rust",
 
-    "dockerfile",
-    "bash",
-    "yaml",
-    "json",
+		"dockerfile",
+		"bash",
+		"yaml",
+		"json",
 
-    "markdown",
-    "markdown_inline",
-  },
-  indent = {
-    enable = true,
-    -- disable = {
-    --   "python"
-    -- },
-  },
+		"markdown",
+		"markdown_inline",
+	},
+	indent = {
+		enable = true,
+		-- disable = {
+		--   "python"
+		-- },
+	},
 }
 
 M.mason = {
-  ensure_installed = {
-    -- lua
-    "lua-language-server",
-    "stylua",
+	ensure_installed = {
+		-- lua
+		"lua-language-server",
+		"stylua",
 
-    -- web dev
-    "css-lsp",
-    "html-lsp",
-    "typescript-language-server",
-    "deno",
-    "prettierd",
-    "eslint-lsp",
-    "graphql-language-service-cli",
-    "svelte-language-server",
+		-- web dev
+		"css-lsp",
+		"html-lsp",
+		"typescript-language-server",
+		"deno",
+		"prettierd",
+		"eslint-lsp",
+		"graphql-language-service-cli",
+		"svelte-language-server",
+		"intelephense",
+		"tailwindcss-language-server",
 
-    -- golang
-    "gopls",
+		-- golang
+		"gopls",
+		"gofumpt",
 
-    -- rust
-    "rust-analyzer",
+		-- rust
+		"rust-analyzer",
 
-    -- sys
-    "bash-language-server",
-    "dockerfile-language-server",
-    "yaml-language-server",
-  },
+		-- sys
+		"bash-language-server",
+		"dockerfile-language-server",
+		"yaml-language-server",
+	},
 }
 
 -- git support in nvimtree
 M.nvimtree = {
-  git = {
-    enable = true,
-  },
+	git = {
+		enable = true,
+	},
 
-  renderer = {
-    highlight_git = true,
-    icons = {
-      show = {
-        git = true,
-      },
-    },
-  },
+	renderer = {
+		highlight_git = true,
+		icons = {
+			show = {
+				git = true,
+			},
+		},
+	},
 }
 
 M.cmp = {
-  sources = {
-    -- Copilot Source
-    { name = "copilot", group_index = 2 },
-    -- Other Sources
-    { name = "nvim_lsp" },
-    { name = "luasnip" },
-    { name = "buffer" },
-    { name = "nvim_lua" },
-    { name = "path" },
-  },
+	sources = {
+		-- Copilot Source
+		{ name = "copilot", group_index = 2 },
+		-- Other Sources
+		{ name = "nvim_lsp" },
+		{ name = "luasnip" },
+		{ name = "buffer" },
+		{ name = "nvim_lua" },
+		{ name = "path" },
+	},
 }
 
 return M
