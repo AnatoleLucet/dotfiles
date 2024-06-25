@@ -43,6 +43,7 @@ packages=(
     bat
     parallel
     zoxide
+    atuin
     
     # TUIs
     neovim

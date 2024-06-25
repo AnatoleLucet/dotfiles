@@ -199,3 +199,5 @@ bindkey "^k" up-history
 bindkey "^j" down-history
 
 eval $(thefuck --alias)
+
+eval "$(atuin init zsh)"
