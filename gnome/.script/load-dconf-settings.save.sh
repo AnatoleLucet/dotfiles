@@ -46,6 +46,7 @@ gsettings set org.gnome.desktop.wm.keybindings switch-windows-backward "['<Super
 gsettings set org.gnome.desktop.wm.keybindings close "['<Super><shift>a']"
 
 bind "Terminal" "<Super>Return" "kitty"
+# bind "Terminal" "<Super>Return" "wezterm"
 # bind "Terminal last dir" "<Super><shift>Return" 'bash -c "zsh ~/.config/i3/open-term-in-last-dir.sh"'
 bind "Suspend" "<Super>Escape" "systemctl suspend"
 bind "Screenshot" "<Super><shift>i" "gnome-screenshot -a -i"

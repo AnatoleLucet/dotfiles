@@ -2,7 +2,7 @@
 
 set -e
 
-export STOW_FOLDERS="git, fonts, zsh, nvim, i3, picom, polybar, rofi, kitty, dunst, gnome, keyd"
+export STOW_FOLDERS="git, fonts, zsh, nvim, i3, picom, polybar, rofi, kitty, dunst, gnome, keyd, wezterm"
 
 sudo pacman -Syy
 
@@ -86,12 +86,12 @@ packages=(
 
     # LSPs
     gopls
-    vscode-css-languageserver
     yaml-language-server
     rust-analyzer
     lua-language-server
 
     # Others
+    base-devel
     cmake
     libev
     grc
@@ -103,6 +103,7 @@ packages=(
     bluez
     bluez-utils
     brightnessctl
+    xclip
 )
 
 npm_packages=(
@@ -126,7 +127,7 @@ bin_aur_packages=(
     aura-bin
     # neovim-nightly-bin
     insomnia-bin
-    robo3t-bin
+    # robo3t-bin
     google-chrome
 )
 
@@ -135,22 +136,21 @@ aur_packages=(
     siji-git
     i3lock-color
     betterlockscreen
-    android-studio
     httpstat-go
     ttf-poppins
     slack-desktop
     write-good
     vim-language-server
     dockerfile-language-server
-    dive
+    # dive
     picom-git
-    spotify
+    # spotify
     dyn-wall-rs
     onedrive-abraunegg
     tidy-viewer
     mongodb-compass
-    keyd
-    bunjs-bin
+    keyd-git
+    # bunjs-bin
     visual-studio-code-bin
 )
 
@@ -194,11 +194,6 @@ for package in "${aur_packages[@]}"; do
 done
 rm -rf $aura_build_path
 
-# install NvChad
-if ! [ -e $HOME/.config/nvim/init.lua ]; then
-  git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1
-fi
-
 # install oh-my-zsh
 if ! [ -e $HOME/.oh-my-zsh ]; then
   sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh) --unattended"
@@ -228,15 +223,22 @@ fi
 if ! [ -e /usr/lib/systemd/system/docker.service ]; then
     sudo systemctl enable --now docker.service
 fi
+#
+# start keyd socket on boot
+if ! [ -e /usr/lib/systemd/system/docker.service ]; then
+    sudo systemctl enable --now keyd.service
+fi
 
 # start onedrive monitor on boot
 if ! [ -e /usr/lib/systemd/system/onedrive@.service ]; then
-    sudo systemctl enable --now onedrive@$USER
+    # sudo systemctl enable --now onedrive@$USER
+   echo ""
 fi
 
 # sync onedrive if not already
 if ! [ -e ~/OneDrive ]; then
-    onedrive --synchronize
+    # onedrive --synchronize
+   echo ""
 fi
 
 # keyd config
