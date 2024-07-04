@@ -26,14 +26,8 @@ source $ZSH/oh-my-zsh.sh
 # Bun
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
-# NVM
-[ -s "/usr/share/nvm/init-nvm.sh" ] && source /usr/share/nvm/init-nvm.sh
-
 # Cargo
 [ -s "$HOME/.cargo/env" ] && source "$HOME/.cargo/env"
-
-# Zoxide
-eval "$(zoxide init zsh)"
 
 # FZF
 source /usr/share/fzf/key-bindings.zsh
@@ -198,6 +192,7 @@ bindkey "^ " autosuggest-accept
 bindkey "^k" up-history
 bindkey "^j" down-history
 
-eval $(thefuck --alias)
-
+# eval $(thefuck --alias)
 eval "$(atuin init zsh)"
+eval "$(zoxide init zsh)"
+eval "$(fnm env --use-on-cd)"

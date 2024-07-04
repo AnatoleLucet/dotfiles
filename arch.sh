@@ -121,6 +121,7 @@ npm_packages=(
     eslint_d
     @fsouza/prettierd
     nodemon
+    fnm
 )
 
 bin_aur_packages=(
