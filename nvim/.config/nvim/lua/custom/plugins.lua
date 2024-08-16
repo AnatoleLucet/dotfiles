@@ -1,4 +1,4 @@
-local overrides = require("custom.configs.overrides")
+local overrides = require "custom.configs.overrides"
 
 ---@type NvPluginSpec[]
 local plugins = {
@@ -15,13 +15,13 @@ local plugins = {
       {
         "jose-elias-alvarez/null-ls.nvim",
         config = function()
-          require("custom.configs.null-ls")
+          require "custom.configs.null-ls"
         end,
       },
     },
     config = function()
-      require("plugins.configs.lspconfig")
-      require("custom.configs.lspconfig")
+      require "plugins.configs.lspconfig"
+      require "custom.configs.lspconfig"
     end,
     opts = overrides.lspconfig,
   },
@@ -89,9 +89,9 @@ local plugins = {
           {
             "numToStr/Comment.nvim",
             config = function()
-              require("Comment").setup({
+              require("Comment").setup {
                 pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
-              })
+              }
             end,
           },
         },
@@ -132,7 +132,7 @@ local plugins = {
     "folke/noice.nvim",
     event = "VeryLazy",
     config = function()
-      require("noice").setup({
+      require("noice").setup {
         lsp = {
           -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
           override = {
@@ -146,13 +146,13 @@ local plugins = {
         },
         -- you can enable a preset for easier configuration
         presets = {
-          bottom_search = false,   -- use a classic bottom cmdline for search
-          command_palette = true,  -- position the cmdline and popupmenu together
+          bottom_search = false,        -- use a classic bottom cmdline for search
+          command_palette = true,       -- position the cmdline and popupmenu together
           long_message_to_split = true, -- long messages will be sent to a split
-          inc_rename = false,      -- enables an input dialog for inc-rename.nvim
-          lsp_doc_border = false,  -- add a border to hover docs and signature help
+          inc_rename = false,           -- enables an input dialog for inc-rename.nvim
+          lsp_doc_border = false,       -- add a border to hover docs and signature help
         },
-      })
+      }
     end,
     dependencies = {
       "MunifTanjim/nui.nvim",
@@ -162,7 +162,7 @@ local plugins = {
   {
     "nvim-telescope/telescope-live-grep-args.nvim",
     config = function()
-      require("telescope").load_extension("live_grep_args")
+      require("telescope").load_extension "live_grep_args"
     end,
   },
   {
@@ -206,17 +206,17 @@ local plugins = {
     "rmagatti/auto-session",
     lazy = false,
     config = function()
-      require("auto-session").setup({
+      require("auto-session").setup {
         log_level = "error",
-        auto_session_root_dir = vim.fn.stdpath("data") .. "/sessions/",
-      })
+        auto_session_root_dir = vim.fn.stdpath "data" .. "/sessions/",
+      }
     end,
   },
   {
     "zbirenbaum/copilot.lua",
     event = "InsertEnter",
     config = function()
-      require("copilot").setup({
+      require("copilot").setup {
         suggestion = {
           auto_trigger = true,
           keymap = {
@@ -226,20 +226,20 @@ local plugins = {
             prev = "<M-[>",
           },
         },
-      })
+      }
     end,
   },
   {
     "ruifm/gitlinker.nvim",
     config = function()
-      require("gitlinker").setup({
+      require("gitlinker").setup {
         callbacks = {
           ["git.ayaline.com"] = function(url_data)
             url_data.host = "gitlab.ayaline.com"
             return require("gitlinker.hosts").get_gitlab_type_url(url_data)
           end,
         },
-      })
+      }
     end,
     dependencies = {
       {
@@ -258,13 +258,16 @@ local plugins = {
     "akinsho/git-conflict.nvim",
     event = "BufEnter",
     config = function()
-      require("git-conflict").setup({
-        default_mappings = true,
+      require("git-conflict").setup {
+        default_mappings = true,     -- disable buffer local mapping created by this plugin
+        default_commands = true,     -- disable commands created by this plugin
+        disable_diagnostics = false, -- This will disable the diagnostics in a buffer whilst it is conflicted
+        list_opener = "copen",       -- command or function to open the conflicts list
         highlights = {
           incoming = "ConflictMarkerOurs",
           current = "ConflictMarkerTheirs",
         },
-      })
+      }
     end,
   },
   {
@@ -279,7 +282,7 @@ local plugins = {
     version = "*",
     event = "VeryLazy",
     config = function()
-      require("nvim-surround").setup({})
+      require("nvim-surround").setup {}
     end,
   },
 

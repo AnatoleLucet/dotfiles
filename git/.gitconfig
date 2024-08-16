@@ -1,5 +1,5 @@
 [user]
-  email = anatole@hey.com
+  email = anatole.lucet@proton.me
   name = "AnatoleLucet"
 
 [core]
@@ -16,3 +16,6 @@
 
 [includeIf "gitdir:~/dev/git.ayaline.com/"]
   path = "~/.gitconfigs/ayaline"
+
+[includeIf "gitdir:~/dev/git.lyon.labo.int/"]
+  path = "~/.gitconfigs/stormshield"

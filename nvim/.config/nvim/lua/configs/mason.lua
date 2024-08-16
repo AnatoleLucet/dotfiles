@@ -7,7 +7,8 @@ local opts = {
     -- web dev
     "css-lsp",
     "html-lsp",
-    "typescript-language-server",
+    -- "typescript-language-server",
+    "vtsls",
     "deno",
     "prettierd",
     "eslint-lsp",

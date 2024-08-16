@@ -66,7 +66,7 @@ map("n", "<leader>D", function()
   vim.cmd "Lspsaga goto_type_definition"
 end, { desc = "LSP definition type" })
 map("n", "<leader>ra", function()
-  require("nvchad.renamer").open()
+  vim.cmd "Lspsaga rename"
 end, { desc = "LSP rename" })
 map("n", "<leader>ca", function()
   vim.cmd "Lspsaga code_action"
