@@ -29,7 +29,6 @@ for _, lsp in ipairs(servers) do
   }
 end
 
--- lspconfig.tsserver.setup {
 lspconfig.vtsls.setup {
   root_dir = lspconfig.util.root_pattern ".git",
   capabilities = capabilities,
@@ -54,4 +53,15 @@ lspconfig.eslint.setup {
       command = "EslintFixAll",
     })
   end,
+}
+
+lspconfig.ltex.setup {
+  on_init = on_init,
+  capabilities = capabilities,
+  settings = {
+    ltex = {
+      language = "fr",
+      -- language = "en-GB",
+    },
+  },
 }

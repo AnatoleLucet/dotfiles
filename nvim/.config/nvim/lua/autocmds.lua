@@ -96,3 +96,17 @@ autocmd("LspAttach", {
     end, { desc = "Go to next file in Harpoon" })
   end,
 })
+
+autocmd("RecordingEnter", {
+  pattern = "*",
+  callback = function()
+    print "Recording"
+  end,
+})
+
+autocmd("RecordingLeave", {
+  pattern = "*",
+  callback = function()
+    print "Recording stopped"
+  end,
+})

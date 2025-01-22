@@ -68,6 +68,28 @@ local plugins = {
       },
     },
   },
+  -- {
+  --   "pmizio/typescript-tools.nvim",
+  --   event = "VeryLazy",
+  --   dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+  --   opts = {},
+  --   config = function()
+  --     require("typescript-tools").setup {
+  --       on_attach = function(client)
+  --         client.server_capabilities.documentFormattingProvider = false
+  --         client.server_capabilities.documentRangeFormattingProvider = false
+  --       end,
+  --     }
+  --   end,
+  -- },
+  {
+    "yioneko/nvim-vtsls",
+    event = "VeryLazy",
+    opts = {},
+    config = function()
+      require("lspconfig.configs").vtsls = require("vtsls").lspconfig
+    end,
+  },
 
   -- syntax highlithing
   {
@@ -155,11 +177,11 @@ local plugins = {
         },
         -- you can enable a preset for easier configuration
         presets = {
-          bottom_search = false, -- use a classic bottom cmdline for search
-          command_palette = true, -- position the cmdline and popupmenu together
+          bottom_search = false,        -- use a classic bottom cmdline for search
+          command_palette = true,       -- position the cmdline and popupmenu together
           long_message_to_split = true, -- long messages will be sent to a split
-          inc_rename = false, -- enables an input dialog for inc-rename.nvim
-          lsp_doc_border = false, -- add a border to hover docs and signature help
+          inc_rename = false,           -- enables an input dialog for inc-rename.nvim
+          lsp_doc_border = false,       -- add a border to hover docs and signature help
         },
       }
     end,
@@ -266,15 +288,16 @@ local plugins = {
   {
     "akinsho/git-conflict.nvim",
     event = "BufEnter",
-    config = function()
-      require("git-conflict").setup {
-        default_mappings = true,
-        highlights = {
-          incoming = "ConflictMarkerOurs",
-          current = "ConflictMarkerTheirs",
-        },
-      }
-    end,
+    config = true,
+    -- config = function()
+    --   require("git-conflict").setup {
+    --     default_mappings = true,
+    --     highlights = {
+    --       incoming = "ConflictMarkerOurs",
+    --       current = "ConflictMarkerTheirs",
+    --     },
+    --   }
+    -- end,
   },
   {
     "iamcco/markdown-preview.nvim",

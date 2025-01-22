@@ -153,6 +153,7 @@ aur_packages=(
     keyd-git
     # bunjs-bin
     visual-studio-code-bin
+    git-delta
 )
 
 # install packages

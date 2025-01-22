@@ -28,6 +28,9 @@ local opts = {
     "bash-language-server",
     "dockerfile-language-server",
     "yaml-language-server",
+
+    -- writing
+    "ltex-ls",
   },
   automatic_install = true,
 }

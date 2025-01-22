@@ -4,15 +4,26 @@
 
 [core]
   editor = "nvim"
+  pager = "delta"
 
 [pull]
   rebase = true
+
+[merge]
+  conflitstyle = diff3
 
 [init]
   defaultBranch = "main";
 
 [diff]
 	renameLimit = 100000
+  colorMoved = default
+
+[interactive]
+  diffFilter = delte
+
+[delta]
+  naigate = true
 
 [includeIf "gitdir:~/dev/git.ayaline.com/"]
   path = "~/.gitconfigs/ayaline"
