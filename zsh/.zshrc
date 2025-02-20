@@ -192,6 +192,11 @@ bindkey "^ " autosuggest-accept
 bindkey "^k" up-history
 bindkey "^j" down-history
 
+# kind of an ungly hack to fix weird freeze issue with gnome inside a vm
+if systemd-detect-virt > /dev/null; then
+  env LIBGL_ALWAYS_SOFTWARE=1 gnome-session --session=gnome
+fi
+
 # eval $(thefuck --alias)
 eval "$(atuin init zsh)"
 eval "$(zoxide init zsh)"

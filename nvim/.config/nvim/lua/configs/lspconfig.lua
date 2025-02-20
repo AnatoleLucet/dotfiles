@@ -15,6 +15,8 @@ local servers = {
   "lua_ls",
   "intelephense",
   "svelte",
+  "biome",
+  "jsonls",
   -- "tailwindcss",
   "gopls",
 }

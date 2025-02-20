@@ -12,6 +12,8 @@ local opts = {
     "deno",
     "prettierd",
     "eslint-lsp",
+    "biome",
+    "json-lsp",
     "graphql-language-service-cli",
     "svelte-language-server",
     "intelephense",

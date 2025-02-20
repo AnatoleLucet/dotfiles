@@ -1,17 +1,19 @@
+default_session = "~"
 display_full_path = true
 bookmarks = [
-    "apps/cse",
-    "apps/ecdn",
-    "../ecdn",
+    "~",
+    "~/notes",
+    "~/dev/git.lyon.labo.int/sds/cloud-security/apps/cse",
+    "~/dev/git.lyon.labo.int/sds/cloud-security/apps/ecdn",
 ]
-
-[[search_dirs]]
-path = "/home/anatole/.dotfiles"
-depth = 1
 
 [[search_dirs]]
 path = "/home/anatole/dev"
 depth = 10
+
+[[search_dirs]]
+path = "/home/anatole/.dotfiles"
+depth = 1
 
 [[search_dirs]]
 path = "/home/anatole/jeff"
