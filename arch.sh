@@ -2,7 +2,7 @@
 
 set -e
 
-export STOW_FOLDERS="git, fonts, zsh, nvim, i3, picom, polybar, rofi, kitty, dunst, gnome, keyd, wezterm"
+export STOW_FOLDERS="git, fonts, zsh, nvim, i3, picom, polybar, rofi, kitty, dunst, gnome, keyd, wezterm, tmux, tms"
 
 sudo pacman -Syy
 
@@ -44,6 +44,7 @@ packages=(
     parallel
     zoxide
     atuin
+    tmux
     
     # TUIs
     neovim
@@ -125,7 +126,6 @@ npm_packages=(
 )
 
 bin_aur_packages=(
-    aura-bin
     # neovim-nightly-bin
     insomnia-bin
     # robo3t-bin
@@ -154,6 +154,7 @@ aur_packages=(
     # bunjs-bin
     visual-studio-code-bin
     git-delta
+    tmux-plugin-manager
 )
 
 # install packages
@@ -187,14 +188,11 @@ for package in "${bin_aur_packages[@]}"; do
 done
 
 # install aur packages
-aura_build_path=$HOME/.cache/aura-build
-mkdir -p $aura_build_path
 for package in "${aur_packages[@]}"; do
     if ! [ "$(pacman -Qm | grep $package)" ]; then
-        sudo aura -A $package --noconfirm --build $aura_build_path
+        yay -S $package --noconfirm
     fi
 done
-rm -rf $aura_build_path
 
 # install oh-my-zsh
 if ! [ -e $HOME/.oh-my-zsh ]; then
@@ -209,6 +207,9 @@ fi
 
 # install cht.sh
 curl -s https://cht.sh/:cht.sh | sudo tee /usr/local/bin/cht && sudo chmod +x /usr/local/bin/cht
+
+# install sessionizer
+cargo install tmux-sessionizer
 
 # TODO: move theses configs to independent postinstall scripts
 

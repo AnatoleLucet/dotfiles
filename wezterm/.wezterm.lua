@@ -22,37 +22,37 @@ config.colors = {
   ansi = { "#15161e", "#f7768e", "#9ece6a", "#e0af68", "#7aa2f7", "#bb9af7", "#7dcfff", "#a9b1d6" },
   brights = { "#414868", "#f7768e", "#9ece6a", "#e0af68", "#7aa2f7", "#bb9af7", "#7dcfff", "#c0caf5" },
 
-  tab_bar = {
-    inactive_tab_edge = "#16161e",
-    background = "#1a1b26",
-
-    active_tab = {
-      fg_color = "#16161e",
-      bg_color = "#7aa2f7",
-    },
-
-    inactive_tab = {
-      fg_color = "#545c7e",
-      bg_color = "#292e42",
-    },
-
-    inactive_tab_hover = {
-      fg_color = "#7aa2f7",
-      bg_color = "#292e42",
-      -- intensity = "Bold",
-    },
-
-    new_tab_hover = {
-      fg_color = "#7aa2f7",
-      bg_color = "#24283b",
-      intensity = "Bold",
-    },
-
-    new_tab = {
-      fg_color = "#7aa2f7",
-      bg_color = "#24283b",
-    },
-  },
+  -- tab_bar = {
+  --   inactive_tab_edge = "#16161e",
+  --   background = "#1a1b26",
+  --
+  --   active_tab = {
+  --     fg_color = "#16161e",
+  --     bg_color = "#7aa2f7",
+  --   },
+  --
+  --   inactive_tab = {
+  --     fg_color = "#545c7e",
+  --     bg_color = "#292e42",
+  --   },
+  --
+  --   inactive_tab_hover = {
+  --     fg_color = "#7aa2f7",
+  --     bg_color = "#292e42",
+  --     -- intensity = "Bold",
+  --   },
+  --
+  --   new_tab_hover = {
+  --     fg_color = "#7aa2f7",
+  --     bg_color = "#24283b",
+  --     intensity = "Bold",
+  --   },
+  --
+  --   new_tab = {
+  --     fg_color = "#7aa2f7",
+  --     bg_color = "#24283b",
+  --   },
+  -- },
 }
 
 config.keys = {

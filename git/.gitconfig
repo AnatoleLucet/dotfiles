@@ -1,3 +1,6 @@
+[include]
+  path = "~/.gitconfigs/themes"
+
 [user]
   email = anatole.lucet@proton.me
   name = "AnatoleLucet"
@@ -20,10 +23,12 @@
   colorMoved = default
 
 [interactive]
-  diffFilter = delte
+  diffFilter = delta --color-only
 
 [delta]
-  naigate = true
+  navigate = true
+  features = mellow-barbet
+  side-by-side = false
 
 [includeIf "gitdir:~/dev/git.ayaline.com/"]
   path = "~/.gitconfigs/ayaline"

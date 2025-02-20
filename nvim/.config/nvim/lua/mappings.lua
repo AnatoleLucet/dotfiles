@@ -123,7 +123,9 @@ end, { desc = "References" })
 
 -- zenmode
 map("n", "<leader>z", function()
-  require("zen-mode").toggle()
+  require("zen-mode").toggle {
+    window = { width = 160 },
+  }
 end, { desc = "List workspace folders" })
 
 -- ssr
@@ -133,3 +135,6 @@ end, { desc = "Open SSR" })
 map("x", "<leader>sr", function()
   require("ssr").open()
 end, { desc = "Open SSR" })
+
+-- nvim-tree
+map("n", "<A-e>", "<cmd>NvimTreeToggle<cr>zz", { desc = "Toggle NvimTree" })

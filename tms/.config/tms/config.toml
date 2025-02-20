@@ -1,0 +1,18 @@
+display_full_path = true
+bookmarks = [
+    "apps/cse",
+    "apps/ecdn",
+    "../ecdn",
+]
+
+[[search_dirs]]
+path = "/home/anatole/.dotfiles"
+depth = 1
+
+[[search_dirs]]
+path = "/home/anatole/dev"
+depth = 10
+
+[[search_dirs]]
+path = "/home/anatole/jeff"
+depth = 1
