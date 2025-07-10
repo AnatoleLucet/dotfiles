@@ -201,3 +201,7 @@ fi
 eval "$(atuin init zsh)"
 eval "$(zoxide init zsh)"
 eval "$(fnm env --use-on-cd)"
+
+# proto
+export PROTO_HOME="$HOME/.proto";
+export PATH="$PROTO_HOME/shims:$PROTO_HOME/bin:$PATH";

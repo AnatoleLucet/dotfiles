@@ -5,6 +5,7 @@ bookmarks = [
     "~/notes",
     "~/dev/git.lyon.labo.int/sds/cloud-security/apps/cse",
     "~/dev/git.lyon.labo.int/sds/cloud-security/apps/ecdn",
+    "~/dev/git.lyon.labo.int/sds/cloud-security/apps/orchestrator",
 ]
 
 [[search_dirs]]

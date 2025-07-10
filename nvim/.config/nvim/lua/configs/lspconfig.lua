@@ -17,6 +17,7 @@ local servers = {
   "svelte",
   "biome",
   "jsonls",
+  "yamlls",
   -- "tailwindcss",
   "gopls",
 }
@@ -62,8 +63,9 @@ lspconfig.ltex.setup {
   capabilities = capabilities,
   settings = {
     ltex = {
-      language = "fr",
-      -- language = "en-GB",
+      -- language = "auto",
+      -- language = "fr",
+      language = "en-GB",
     },
   },
 }
