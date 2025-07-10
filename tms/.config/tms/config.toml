@@ -16,6 +16,3 @@ depth = 10
 path = "/home/anatole/.dotfiles"
 depth = 1
 
-[[search_dirs]]
-path = "/home/anatole/jeff"
-depth = 1

@@ -21,58 +21,9 @@ config.colors = {
 
   ansi = { "#15161e", "#f7768e", "#9ece6a", "#e0af68", "#7aa2f7", "#bb9af7", "#7dcfff", "#a9b1d6" },
   brights = { "#414868", "#f7768e", "#9ece6a", "#e0af68", "#7aa2f7", "#bb9af7", "#7dcfff", "#c0caf5" },
-
-  -- tab_bar = {
-  --   inactive_tab_edge = "#16161e",
-  --   background = "#1a1b26",
-  --
-  --   active_tab = {
-  --     fg_color = "#16161e",
-  --     bg_color = "#7aa2f7",
-  --   },
-  --
-  --   inactive_tab = {
-  --     fg_color = "#545c7e",
-  --     bg_color = "#292e42",
-  --   },
-  --
-  --   inactive_tab_hover = {
-  --     fg_color = "#7aa2f7",
-  --     bg_color = "#292e42",
-  --     -- intensity = "Bold",
-  --   },
-  --
-  --   new_tab_hover = {
-  --     fg_color = "#7aa2f7",
-  --     bg_color = "#24283b",
-  --     intensity = "Bold",
-  --   },
-  --
-  --   new_tab = {
-  --     fg_color = "#7aa2f7",
-  --     bg_color = "#24283b",
-  --   },
-  -- },
 }
 
-config.keys = {
-  { key = "y", mods = "ALT",       action = wezterm.action.ScrollByLine(-1) },
-  { key = "e", mods = "ALT",       action = wezterm.action.ScrollByLine(1) },
-  { key = "u", mods = "ALT",       action = wezterm.action.ScrollByPage(-1) },
-  { key = "d", mods = "ALT",       action = wezterm.action.ScrollByPage(1) },
-
-  { key = "n", mods = "ALT",       action = wezterm.action.SpawnCommandInNewTab({ cwd = wezterm.home_dir }) },
-  { key = "n", mods = "ALT|SHIFT", action = wezterm.action.SpawnTab("DefaultDomain") },
-  { key = "h", mods = "ALT",       action = wezterm.action.ActivateTabRelative(-1) },
-  { key = "l", mods = "ALT",       action = wezterm.action.ActivateTabRelative(1) },
-  { key = ",", mods = "ALT",       action = wezterm.action.MoveTabRelative(-1) },
-  { key = ".", mods = "ALT",       action = wezterm.action.MoveTabRelative(1) },
-
-  -- { key = "ENTER", mods = "ALT",       action = wezterm.action.SpawnWindow },
-  { key = "w", mods = "ALT",       action = wezterm.action.CloseCurrentPane({ confirm = true }) },
-}
-
--- config.tab_bar_at_bottom = true
+config.enable_tab_bar = false
 config.window_padding = {
   left = 0,
   right = 0,
@@ -87,9 +38,13 @@ config.window_frame = {
 }
 config.window_decorations = "RESIZE"
 
+config.default_prog = { "tmux" }
+
+
 wezterm.on("gui-startup", function(cmd)
-  local tab, pane, window = mux.spawn_window(cmd or {})
+  local tab, pane, window = wezterm.mux.spawn_window(cmd or {})
   window:gui_window():maximize()
+  window:gui_window():toggle_fullscreen()
 end)
 
 return config

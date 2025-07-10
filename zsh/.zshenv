@@ -14,4 +14,4 @@ if [ -x "$(command -v ruby)" ]; then
   export PATH=$PATH:$(ruby -r rubygems -e 'puts Gem.user_dir')/bin
 fi
 
-. "$HOME/.cargo/env"
+[ -s "$HOME/.cargo/env" ] && source "$HOME/.cargo/env"

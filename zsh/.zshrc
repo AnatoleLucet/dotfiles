@@ -26,9 +26,6 @@ source $ZSH/oh-my-zsh.sh
 # Bun
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
-# Cargo
-[ -s "$HOME/.cargo/env" ] && source "$HOME/.cargo/env"
-
 # FZF
 source /usr/share/fzf/key-bindings.zsh
 source /usr/share/fzf/completion.zsh
@@ -200,8 +197,14 @@ fi
 # eval $(thefuck --alias)
 eval "$(atuin init zsh)"
 eval "$(zoxide init zsh)"
-eval "$(fnm env --use-on-cd)"
 
 # proto
 export PROTO_HOME="$HOME/.proto";
 export PATH="$PROTO_HOME/shims:$PROTO_HOME/bin:$PATH";
+
+# fnm
+FNM_PATH="/home/anatole/.local/share/fnm"
+if [ -d "$FNM_PATH" ]; then
+  export PATH="/home/anatole/.local/share/fnm:$PATH"
+  eval "`fnm env`"
+fi
