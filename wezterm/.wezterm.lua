@@ -38,8 +38,7 @@ config.window_frame = {
 }
 config.window_decorations = "RESIZE"
 
-config.default_prog = { "tmux" }
-
+config.default_prog = { "tmux", "attach" }
 
 wezterm.on("gui-startup", function(cmd)
   local tab, pane, window = wezterm.mux.spawn_window(cmd or {})

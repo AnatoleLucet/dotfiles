@@ -105,6 +105,7 @@ packages=(
     bluez-utils
     brightnessctl
     xclip
+    xsel
 )
 
 npm_packages=(
