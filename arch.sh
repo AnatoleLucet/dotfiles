@@ -28,14 +28,14 @@ packages=(
     ripgrep
     the_silver_searcher
     fd
-    cowsay
-    fortune-mod
+    # cowsay
+    # fortune-mod
     lsd
-    lolcat
-    thefuck
+    # lolcat
+    # thefuck
     tokei
     fzf
-    github-cli
+    # github-cli
     dnsutils
     openvpn
     tcpdump
@@ -51,22 +51,21 @@ packages=(
     htop
 
     # Apps
-    kitty
+    # kitty
     redshift
     pavucontrol
     pasystray
-    polybar
+    # polybar
     sqlite
-    rofi
-    dunst
-    i3-gaps
-    peek
-    solaar
+    # rofi
+    # dunst
+    # i3-gaps
+    # peek
+    # solaar
     # picom
 
     # Langs/runtimes/compilers
     nodejs
-    nvm
     deno
     npm
     go
@@ -86,10 +85,10 @@ packages=(
     noto-fonts-emoji
 
     # LSPs
-    gopls
-    yaml-language-server
-    rust-analyzer
-    lua-language-server
+    # gopls
+    # yaml-language-server
+    # rust-analyzer
+    # lua-language-server
 
     # Others
     base-devel
@@ -113,17 +112,17 @@ npm_packages=(
     pnpm
     tsun
     typescript
-    typescript-language-server
-    svelte-language-server
-    graphql-language-service-cli
-    bash-language-server
-    vscode-langservers-extracted
-    vls
-    prettier
-    eslint_d
-    @fsouza/prettierd
+    # typescript-language-server
+    # svelte-language-server
+    # graphql-language-service-cli
+    # bash-language-server
+    # vscode-langservers-extracted
+    # vls
+    # prettier
+    # eslint_d
+    # @fsouza/prettierd
     nodemon
-    fnm
+    # fnm
 )
 
 bin_aur_packages=(
@@ -134,23 +133,23 @@ bin_aur_packages=(
 )
 
 aur_packages=(
-    xcwd-git
+    # xcwd-git
     siji-git
-    i3lock-color
-    betterlockscreen
+    # i3lock-color
+    # betterlockscreen
     httpstat-go
     ttf-poppins
-    slack-desktop
+    # slack-desktop
     write-good
-    vim-language-server
-    dockerfile-language-server
-    # dive
-    picom-git
+    # vim-language-server
+    # dockerfile-language-server
+    dive
+    # picom-git
     # spotify
     dyn-wall-rs
-    onedrive-abraunegg
+    # onedrive-abraunegg
     tidy-viewer
-    mongodb-compass
+    # mongodb-compass
     keyd-git
     # bunjs-bin
     visual-studio-code-bin
