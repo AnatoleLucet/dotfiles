@@ -16,7 +16,7 @@ plugins=(
   golang
   grc
   kubectl
-  thefuck
+  # thefuck
 )
 source $ZSH/oh-my-zsh.sh
 

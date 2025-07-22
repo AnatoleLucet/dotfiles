@@ -17,6 +17,7 @@ packages=(
     zsh
 
     # CLIs
+    yay
     stow
     git
     bat
@@ -222,13 +223,13 @@ if ! [ "$(groups | grep docker)" ]; then
     sudo usermod -aG docker $USER
 fi
 
-# start docker socket on boot
+# start docker service on boot
 if ! [ -e /usr/lib/systemd/system/docker.service ]; then
     sudo systemctl enable --now docker.service
 fi
 #
-# start keyd socket on boot
-if ! [ -e /usr/lib/systemd/system/docker.service ]; then
+# start keyd service on boot
+if ! [ -e /usr/lib/systemd/system/keyd.service ]; then
     sudo systemctl enable --now keyd.service
 fi
 
