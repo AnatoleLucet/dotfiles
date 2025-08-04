@@ -124,13 +124,6 @@ npm_packages=(
     # fnm
 )
 
-bin_aur_packages=(
-    # neovim-nightly-bin
-    # insomnia-bin
-    # robo3t-bin
-    # google-chrome
-)
-
 aur_packages=(
     google-chrome
     # xcwd-git
@@ -158,29 +151,13 @@ aur_packages=(
 )
 
 # install packages
-sudo pacman -Syu ${packages[@]} --noconfirm
+sudo pacman -Syu ${packages[@]} --noconfirm --needed
 
 # install npm packages
 sudo npm i -g ${npm_packages[@]}
 
-# install bin aur packages
-for package in "${bin_aur_packages[@]}"; do
-    if ! [ "$(pacman -Qm | grep $package)" ]; then
-        tmpfolder=$(mktemp -d /tmp/$package.XXXXX)
-        cd $tmpfolder
-        git init -b tmp
-        git remote add origin https://aur.archlinux.org/$package.git
-        git fetch
-        git checkout master
-        makepkg -s
-        sudo pacman -U $(find . -maxdepth 1 -name "*.tar.zst") --noconfirm
-        cd -
-        rm -rf $tmpfolder
-    fi
-done
-
 # install aur packages
-yay -Syu ${aur_packages[@]} --noconfirm
+yay -Syu ${aur_packages[@]} --noconfirm --needed
 
 # install oh-my-zsh
 if ! [ -e $HOME/.oh-my-zsh ]; then
