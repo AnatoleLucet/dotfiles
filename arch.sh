@@ -4,8 +4,6 @@ set -e
 
 export STOW_FOLDERS="git, fonts, zsh, nvim, i3, picom, polybar, rofi, kitty, dunst, gnome, keyd, wezterm, tmux, tms"
 
-sudo pacman -Syy
-
 # spotify public key
 if ! [ "$(gpg --list-keys | grep Spotify)" ]; then
     curl -sS https://download.spotify.com/debian/pubkey_5E3C45D7B312C643.gpg | gpg --import -
@@ -128,12 +126,13 @@ npm_packages=(
 
 bin_aur_packages=(
     # neovim-nightly-bin
-    insomnia-bin
+    # insomnia-bin
     # robo3t-bin
-    google-chrome
+    # google-chrome
 )
 
 aur_packages=(
+    google-chrome
     # xcwd-git
     siji-git
     # i3lock-color
@@ -159,18 +158,10 @@ aur_packages=(
 )
 
 # install packages
-for package in "${packages[@]}"; do
-    if ! [ "$(pacman -Qi $package 2> /dev/null)" ]; then
-        sudo pacman -S $package --noconfirm
-    fi
-done
+sudo pacman -Syu ${packages[@]} --noconfirm
 
 # install npm packages
-for package in "${npm_packages[@]}"; do
-    if ! [ "$(npm list -g --depth=0 | grep $package@)" ]; then
-        sudo npm i -g $package
-    fi
-done
+sudo npm i -g ${npm_packages[@]}
 
 # install bin aur packages
 for package in "${bin_aur_packages[@]}"; do
@@ -189,11 +180,7 @@ for package in "${bin_aur_packages[@]}"; do
 done
 
 # install aur packages
-for package in "${aur_packages[@]}"; do
-    if ! [ "$(pacman -Qm | grep $package)" ]; then
-        yay -S $package --noconfirm
-    fi
-done
+yay -Syu ${aur_packages[@]} --noconfirm
 
 # install oh-my-zsh
 if ! [ -e $HOME/.oh-my-zsh ]; then
