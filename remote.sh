@@ -4,26 +4,20 @@ set -e
 
 sudo true
 
+tmpfolder=$(mktemp -d /tmp/dotfiles.XXXXX)
+
 # download repo
-wget https://github.com/AnatoleLucet/dotfiles/archive/master.tar.gz -O /tmp/dotfiles.tar.gz
+wget https://github.com/AnatoleLucet/dotfiles/archive/master.tar.gz -O $tmpfolder/dotfiles.tar.gz
 
 # uncompress the archive
-tar -xf /tmp/dotfiles.tar.gz -C /tmp
-mkdir $HOME/.dotfiles
-mv /tmp/dotfiles-master/* $HOME/.dotfiles
-rm -r /tmp/dotfiles.tar.gz /tmp/dotfiles-master
+tar -xf $tmpfolder/dotfiles.tar.gz -C $tmpfolder
 
 # install dotfiles
-cd $HOME/.dotfiles
+cd $tmpfolder/dotfiles-master
 sh ./install.sh
 
-# init dotfiles git repo (it's basically a git clone)
-git init -b master
-git remote add origin https://github.com/AnatoleLucet/dotfiles.git
-git fetch
-git branch master origin/master
-git reset --hard HEAD
+# clone dotfiles at correct location for compleness
+git clone https://github.com/AnatoleLucet/dotfiles.git $HOME/.dotfiles
+cd $HOME/.dotfiles
 git remote remove origin
 git remote add origin git@github.com:AnatoleLucet/dotfiles.git
-
-cd -
