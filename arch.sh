@@ -2,12 +2,7 @@
 
 set -e
 
-export STOW_FOLDERS="git, fonts, zsh, nvim, i3, picom, polybar, rofi, kitty, dunst, gnome, keyd, wezterm, tmux, tms"
-
-# spotify public key
-if ! [ "$(gpg --list-keys | grep Spotify)" ]; then
-    curl -sS https://download.spotify.com/debian/pubkey_5E3C45D7B312C643.gpg | gpg --import -
-fi
+export STOW_FOLDERS="git, fonts, zsh, nvim, gnome, keyd, wezterm, tmux, tms"
 
 # install packages
 packages=(
@@ -140,7 +135,6 @@ aur_packages=(
     # picom-git
     # spotify
     dyn-wall-rs
-    # onedrive-abraunegg
     tidy-viewer
     # mongodb-compass
     keyd-git
@@ -187,27 +181,9 @@ if ! [ "$(groups | grep docker)" ]; then
     sudo usermod -aG docker $USER
 fi
 
-# start docker service on boot
-if ! [ -e /usr/lib/systemd/system/docker.service ]; then
-    sudo systemctl enable --now docker.service
-fi
-#
-# start keyd service on boot
-if ! [ -e /usr/lib/systemd/system/keyd.service ]; then
-    sudo systemctl enable --now keyd.service
-fi
-
-# start onedrive monitor on boot
-if ! [ -e /usr/lib/systemd/system/onedrive@.service ]; then
-    # sudo systemctl enable --now onedrive@$USER
-   echo ""
-fi
-
-# sync onedrive if not already
-if ! [ -e ~/OneDrive ]; then
-    # onedrive --synchronize
-   echo ""
-fi
+# enable services
+sudo systemctl enable --now docker.service
+sudo systemctl enable --now keyd.service
 
 # keyd config
 sudo ln -sf ~/.config/keyd/default.conf /etc/keyd/default.conf
