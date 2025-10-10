@@ -302,9 +302,7 @@ local plugins = {
   {
     "iamcco/markdown-preview.nvim",
     event = "VeryLazy",
-    build = function()
-      vim.fn["mkdp#util#install"]()
-    end,
+    build = ":call mkdp#util#install()",
   },
   {
     "kylechui/nvim-surround",

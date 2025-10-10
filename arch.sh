@@ -57,6 +57,7 @@ packages=(
     # peek
     # solaar
     # picom
+    wezterm
 
     # Langs/runtimes/compilers
     nodejs
