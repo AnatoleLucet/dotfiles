@@ -23,7 +23,7 @@ if [ -d "$installdir" ]; then
     * ) echo "Please answer y or n.";;
   esac
 fi
-cp $tmpfolder/dotfiles-master $installdir
+cp -r $tmpfolder/dotfiles-master $installdir
 
 # install dotfiles
 cd $installdir
