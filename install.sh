@@ -11,7 +11,7 @@ elif [ "$(cat /proc/1/sched | head -n 1 | grep "^bash\|sh")" ]; then
 
   echo "Unsupported docker image. Exiting."
   exit 1
+else
+  echo "Unsupported distro. Exiting."
+  exit 1
 fi
-
-echo "Unsupported distro. Exiting."
-exit 1

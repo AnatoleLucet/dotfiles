@@ -9,10 +9,10 @@ bookmarks = [
 ]
 
 [[search_dirs]]
-path = "/home/anatole/dev"
+path = "~/dev"
 depth = 10
 
 [[search_dirs]]
-path = "/home/anatole/.dotfiles"
+path = "~/.dotfiles"
 depth = 1
 
