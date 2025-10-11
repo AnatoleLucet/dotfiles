@@ -171,6 +171,9 @@ curl -s https://cht.sh/:cht.sh | sudo tee /usr/local/bin/cht && sudo chmod +x /u
 # install sessionizer
 cargo install tmux-sessionizer
 
+# install tmux plugins
+tmux new-session -d 'run-shell "source ~/.tmux.conf; ~/.tmux/plugins/tpm/bin/install_plugins"'
+
 # TODO: move theses configs to independent postinstall scripts
 
 # refresh fonts
