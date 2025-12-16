@@ -1,3 +1,6 @@
+local DESKTOP = os.getenv("XDG_CURRENT_DESKTOP") or os.getenv("DESKTOP_SESSION") or ""
+local PROG = os.getenv("WEZTERM_PROGRAM") or "tmux attach || tmux"
+
 local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 
@@ -24,26 +27,29 @@ config.colors = {
 }
 
 config.enable_tab_bar = false
-config.window_padding = {
-  left = 0,
-  right = 0,
-  top = 0,
-  bottom = 0,
-}
+
 config.window_frame = {
   font = font,
   font_size = 6,
   active_titlebar_bg = "#1a1b26",
   inactive_titlebar_bg = "#1a1b26",
 }
-config.window_decorations = "RESIZE"
 
-config.default_prog = { "/bin/bash", "-c", "tmux attach || tmux" }
+if DESKTOP:match("Hyprland") then
+  config.window_padding = { left = 14, right = 14, top = 14, bottom = 4 }
+else
+  config.window_decorations = "RESIZE"
+  config.window_padding = { left = 0, right = 0, top = 0, bottom = 0 }
 
-wezterm.on("gui-startup", function(cmd)
-  local tab, pane, window = wezterm.mux.spawn_window(cmd or {})
-  window:gui_window():maximize()
-  window:gui_window():toggle_fullscreen()
-end)
+  wezterm.on("gui-startup", function(cmd)
+    local tab, pane, window = wezterm.mux.spawn_window(cmd or {})
+    window:gui_window():maximize()
+    window:gui_window():toggle_fullscreen()
+  end)
+end
+
+print(PROG)
+
+config.default_prog = { "/bin/bash", "-c", PROG }
 
 return config

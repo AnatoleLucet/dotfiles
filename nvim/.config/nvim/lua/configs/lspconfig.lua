@@ -2,12 +2,6 @@ local autocmd = vim.api.nvim_create_autocmd
 
 local lspconfig = require "lspconfig"
 
-local on_attach = require "nvchad.configs.lspconfig"
-local on_init = require("nvchad.configs.lspconfig").on_init
-local capabilities = require("nvchad.configs.lspconfig").capabilities
-
-local map = vim.keymap.set
-
 -- if you just want default config for the servers then put them in a table
 local servers = {
   "html",
@@ -23,23 +17,14 @@ local servers = {
 }
 
 for _, lsp in ipairs(servers) do
-  lspconfig[lsp].setup {
-    -- nvchad's on_attach only seem to map keybinds
-    -- i can't override these keybinds so why not just ignore on_attach D:
-    -- on_attach = on_attach,
-    on_init = on_init,
-    capabilities = capabilities,
-  }
+  vim.lsp.enable(lsp)
 end
 
-lspconfig.vtsls.setup {
+vim.lsp.enable("vtsls", {
   root_dir = lspconfig.util.root_pattern ".git",
-  capabilities = capabilities,
-  -- on_attach = on_attach,
-  on_init = on_init,
-}
+})
 
-lspconfig.eslint.setup {
+vim.lsp.enable("eslint", {
   filetypes = {
     "javascript",
     "javascriptreact",
@@ -56,11 +41,9 @@ lspconfig.eslint.setup {
       command = "EslintFixAll",
     })
   end,
-}
+})
 
-lspconfig.ltex.setup {
-  on_init = on_init,
-  capabilities = capabilities,
+vim.lsp.enable("ltex", {
   settings = {
     ltex = {
       -- language = "auto",
@@ -68,4 +51,4 @@ lspconfig.ltex.setup {
       language = "en-GB",
     },
   },
-}
+})
