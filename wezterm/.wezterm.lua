@@ -36,7 +36,7 @@ config.window_frame = {
 }
 
 if DESKTOP:match("Hyprland") then
-  config.window_padding = { left = 14, right = 14, top = 14, bottom = 4 }
+  config.window_padding = { left = 12, right = 12, top = 14, bottom = 4 }
 else
   config.window_decorations = "RESIZE"
   config.window_padding = { left = 0, right = 0, top = 0, bottom = 0 }
