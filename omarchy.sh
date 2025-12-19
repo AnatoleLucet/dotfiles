@@ -2,7 +2,7 @@
 
 set -e
 
-export STOW_FOLDERS="git, fonts-omarchy, zsh, nvim, keyd, wezterm, tmux, tms, hypr"
+export STOW_FOLDERS="git, zsh, nvim, keyd, wezterm, tmux, tms, omarchy"
 
 # install packages
 packages=(

@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=Instagram
+Comment=Instagram
+Exec=omarchy-launch-webapp https://www.instagram.com/
+Terminal=false
+Type=Application
+Icon=/home/anatole/.local/share/applications/icons/Instagram.png
+StartupNotify=true

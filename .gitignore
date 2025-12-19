@@ -1,4 +1,4 @@
 /zsh/.local/bin/*
 !/zsh/.local/bin/weather
 
-/hypr/.config/hypr/hyprland.conf.bak.*
+/omarchy/.config/hypr/hyprland.conf.bak.*

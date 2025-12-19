@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=Hyprmon
+Comment=Hyprmon
+Exec=xdg-terminal-exec --app-id=TUI.float -e hyprmon
+Terminal=false
+Type=Application
+Icon=/home/anatole/.local/share/applications/icons/Hyprmon.png
+StartupNotify=true
