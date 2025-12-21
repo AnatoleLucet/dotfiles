@@ -208,3 +208,6 @@ if [ -d "$FNM_PATH" ]; then
   export PATH="/home/anatole/.local/share/fnm:$PATH"
   eval "`fnm env`"
 fi
+
+# bun completions
+[ -s "/home/anatole/.bun/_bun" ] && source "/home/anatole/.bun/_bun"
