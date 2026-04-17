@@ -92,4 +92,11 @@ M.cmp = {
   },
 }
 
+M.neckpain = {
+  width = 160,
+  autocmds = {
+    enableOnVimEnter = "safe",
+  }
+}
+
 return M

@@ -37,6 +37,16 @@ config.window_frame = {
 
 if DESKTOP:match("Hyprland") then
   config.window_padding = { left = 12, right = 12, top = 14, bottom = 4 }
+
+  -- Remove padding when in fullscreen mode for more *zen*
+  wezterm.on("window-resized", function(window, pane)
+    local dims = window:get_dimensions()
+    if dims.is_full_screen then
+      window:set_config_overrides({ window_padding = { left = 0, right = 0, top = 4, bottom = 0 } })
+    else
+      window:set_config_overrides({ window_padding = { left = 12, right = 12, top = 14, bottom = 4 } })
+    end
+  end)
 else
   config.window_decorations = "RESIZE"
   config.window_padding = { left = 0, right = 0, top = 0, bottom = 0 }
@@ -47,8 +57,6 @@ else
     window:gui_window():toggle_fullscreen()
   end)
 end
-
-print(PROG)
 
 config.default_prog = { "/bin/bash", "-c", PROG }
 

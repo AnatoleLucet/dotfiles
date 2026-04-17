@@ -106,6 +106,13 @@ alias m='make'
 alias ma='make all'
 alias mr='make run'
 
+# Zig
+# alias z='zig' # overlaps with zoxide
+alias zb='zig build'
+alias zbr='zig build run'
+alias zbt='zig build test --summary all'
+alias zt='zig test'
+
 # Nvim
 alias nv='nvim'
 
@@ -211,3 +218,8 @@ fi
 
 # bun completions
 [ -s "/home/anatole/.bun/_bun" ] && source "/home/anatole/.bun/_bun"
+
+# opencode
+export PATH=/home/anatole/.opencode/bin:$PATH
+
+. "$HOME/.local/share/../bin/env"

@@ -122,11 +122,7 @@ map("n", "<leader>xr", function()
 end, { desc = "References" })
 
 -- zenmode
-map("n", "<leader>z", function()
-  require("zen-mode").toggle {
-    window = { width = 160 },
-  }
-end, { desc = "List workspace folders" })
+map("n", "<leader>z", "<cmd>NoNeckPain<cr>", { desc = "Toggle zen mode" })
 
 -- ssr
 map("n", "<leader>sr", function()

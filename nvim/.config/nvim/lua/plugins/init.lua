@@ -94,6 +94,7 @@ local plugins = {
   -- syntax highlithing
   {
     "nvim-treesitter/nvim-treesitter",
+    branch = "main",
     opts = overrides.treesitter,
     dependencies = {
       {
@@ -136,7 +137,9 @@ local plugins = {
     "NvChad/nvim-colorizer.lua",
   },
   {
-    "folke/zen-mode.nvim",
+    "shortcuts/no-neck-pain.nvim",
+    lazy = false, -- no lazy for enableOnVimEnter to work with sessions
+    opts = overrides.neckpain,
   },
   {
     "f-person/git-blame.nvim",

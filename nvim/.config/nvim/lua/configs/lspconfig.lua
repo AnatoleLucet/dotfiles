@@ -14,6 +14,7 @@ local servers = {
   "yamlls",
   -- "tailwindcss",
   "gopls",
+  "zls",
 }
 
 for _, lsp in ipairs(servers) do
