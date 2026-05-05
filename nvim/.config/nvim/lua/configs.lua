@@ -48,14 +48,11 @@ M.tokyonight = {
 		hl._LualineRecording = { fg = c.orange }
 
 		-- treesitter
-		hl["@keyword"] = { fg = c.purple, italic = false }
-		hl["@keyword.function"] = { fg = c.purple, italic = false }
-		hl["@keyword.modifier"] = { fg = c.purple, italic = false } -- pub, priv, mut...
-		hl["@keyword.coroutine"] = { fg = c.purple, italic = false } -- async/await
-		hl["@keyword.import"] = { fg = c.purple, italic = false }
 		hl["@keyword"] = { fg = c.magenta, italic = false }
 		hl["@keyword.function"] = { fg = c.magenta, italic = false } -- fn/func/def
-		hl["@keyword.modifier"] = { fg = c.magenta2, italic = false }
+		hl["@keyword.modifier"] = { fg = c.magenta, italic = false } -- pub, priv, mut...
+		hl["@keyword.coroutine"] = { fg = c.magenta, italic = false } -- async/await
+		hl["@keyword.import"] = { fg = c.purple, italic = false }
 		hl["@function.method.call"] = { fg = c.blue2 } -- foo.bar()
 		hl["@function.method"] = { fg = c.blue } -- method definitions
 		hl["@variable"] = { fg = c.fg_dark } -- general variables
@@ -95,7 +92,7 @@ M.neotree = {
 		},
 		follow_current_file = {
 			enabled = true,
-			leave_dirs_open = false, -- close auto-expanded dirs when leaving
+			leave_dirs_open = false, -- dont close auto-expanded dirs when leaving
 		},
 	},
 	window = {
@@ -106,6 +103,7 @@ M.neotree = {
 		},
 		mappings = {
 			["/"] = "none", -- disable builtin search
+			["<esc>"] = "none", -- for nohl keybind to work
 
 			["o"] = { "open", nowait = true },
 			-- need to disable defaults for 'o' to work:
@@ -116,6 +114,8 @@ M.neotree = {
 			["on"] = "none",
 			["os"] = "none",
 			["ot"] = "none",
+
+			["z"] = "none", -- for zz to work
 
 			["I"] = { "toggle_hidden", nowait = true },
 		},
@@ -265,6 +265,10 @@ M.filetypes = {
 	},
 	zig = {
 		lsp = { "zls" },
+	},
+	c = {
+		lsp = { "clangd" },
+		formatter = { "clang-format" },
 	},
 	sh = {
 		lsp = { "bash-language-server" },

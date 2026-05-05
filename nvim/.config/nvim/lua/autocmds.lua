@@ -1,5 +1,16 @@
 local autocmd = vim.api.nvim_create_autocmd
 
+-- disable git blame VT when searching so noice's search VT doesn't conflict
+local function sync_blame()
+	require("gitsigns").toggle_current_line_blame(vim.v.hlsearch == 0)
+end
+vim.on_key(function()
+	vim.schedule(sync_blame)
+end, vim.api.nvim_create_namespace("blame_hlsearch_sync"))
+vim.api.nvim_create_autocmd("CursorMoved", {
+	callback = sync_blame,
+})
+
 -- auto install and start treesitter parsers
 autocmd("FileType", {
 	callback = function(ev)
