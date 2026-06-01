@@ -134,3 +134,6 @@ require("lint").linters_by_ft = configs.lint.linters_by_ft
 -- blink.cmp
 vim.pack.add({ { src = "https://github.com/Saghen/blink.cmp", version = vim.version.range("*") } })
 require("blink.cmp").setup(configs.blink.cmp)
+
+-- markdown-preview.nvim
+vim.pack.add({ { src = "https://github.com/iamcco/markdown-preview.nvim" } })

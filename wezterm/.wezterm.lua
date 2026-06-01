@@ -11,51 +11,59 @@ config.font = font
 config.font_size = font_size
 
 config.colors = {
-  foreground = "#c0caf5",
-  background = "#1a1b26",
-  cursor_bg = "#c0caf5",
-  cursor_border = "#c0caf5",
-  cursor_fg = "#1a1b26",
-  selection_bg = "#2e3c64",
-  selection_fg = "#c0caf5",
-  split = "#7aa2f7",
-  compose_cursor = "#ff9e64",
-  scrollbar_thumb = "#292e42",
+	foreground = "#c0caf5",
+	background = "#1a1b26",
+	cursor_bg = "#c0caf5",
+	cursor_border = "#c0caf5",
+	cursor_fg = "#1a1b26",
+	selection_bg = "#2e3c64",
+	selection_fg = "#c0caf5",
+	split = "#7aa2f7",
+	compose_cursor = "#ff9e64",
+	scrollbar_thumb = "#292e42",
 
-  ansi = { "#15161e", "#f7768e", "#9ece6a", "#e0af68", "#7aa2f7", "#bb9af7", "#7dcfff", "#a9b1d6" },
-  brights = { "#414868", "#f7768e", "#9ece6a", "#e0af68", "#7aa2f7", "#bb9af7", "#7dcfff", "#c0caf5" },
+	ansi = { "#15161e", "#f7768e", "#9ece6a", "#e0af68", "#7aa2f7", "#bb9af7", "#7dcfff", "#a9b1d6" },
+	brights = { "#414868", "#f7768e", "#9ece6a", "#e0af68", "#7aa2f7", "#bb9af7", "#7dcfff", "#c0caf5" },
 }
 
 config.enable_tab_bar = false
 
 config.window_frame = {
-  font = font,
-  font_size = 6,
-  active_titlebar_bg = "#1a1b26",
-  inactive_titlebar_bg = "#1a1b26",
+	font = font,
+	font_size = 6,
+	active_titlebar_bg = "#1a1b26",
+	inactive_titlebar_bg = "#1a1b26",
+}
+
+local paddings = {
+	none = { left = 0, right = 0, top = 0, bottom = 0 },
+
+	-- default = { left = 12, right = 12, top = 14, bottom = 4 },
+	default = { left = 0, right = 0, top = 0, bottom = 0 },
+	fullscreen = { left = 0, right = 0, top = 4, bottom = 0 },
 }
 
 if DESKTOP:match("Hyprland") then
-  config.window_padding = { left = 12, right = 12, top = 14, bottom = 4 }
+	config.window_padding = paddings.default
 
-  -- Remove padding when in fullscreen mode for more *zen*
-  wezterm.on("window-resized", function(window, pane)
-    local dims = window:get_dimensions()
-    if dims.is_full_screen then
-      window:set_config_overrides({ window_padding = { left = 0, right = 0, top = 4, bottom = 0 } })
-    else
-      window:set_config_overrides({ window_padding = { left = 12, right = 12, top = 14, bottom = 4 } })
-    end
-  end)
+	-- Remove padding when in fullscreen mode for more *zen*
+	wezterm.on("window-resized", function(window, pane)
+		local dims = window:get_dimensions()
+		if dims.is_full_screen then
+			window:set_config_overrides({ window_padding = paddings.fullscreen })
+		else
+			window:set_config_overrides({ window_padding = paddings.default })
+		end
+	end)
 else
-  config.window_decorations = "RESIZE"
-  config.window_padding = { left = 0, right = 0, top = 0, bottom = 0 }
+	config.window_decorations = "RESIZE"
+	config.window_padding = paddings.none
 
-  wezterm.on("gui-startup", function(cmd)
-    local tab, pane, window = wezterm.mux.spawn_window(cmd or {})
-    window:gui_window():maximize()
-    window:gui_window():toggle_fullscreen()
-  end)
+	wezterm.on("gui-startup", function(cmd)
+		local tab, pane, window = wezterm.mux.spawn_window(cmd or {})
+		window:gui_window():maximize()
+		window:gui_window():toggle_fullscreen()
+	end)
 end
 
 config.default_prog = { "/bin/bash", "-c", PROG }

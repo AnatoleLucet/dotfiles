@@ -8,6 +8,9 @@ M.pack_hooks = {
 		end
 		require("fff.download").download_or_build_binary()
 	end,
+	["markdown-preview.nvim"] = function()
+		vim.fn["mkdp#util#install"]()
+	end,
 }
 
 ---- configs ----
@@ -191,7 +194,7 @@ M.floatty = {
 
 M.ibl = {
 	indent = { char = "▏", highlight = "_IblIdent" },
-	scope = { show_start = false, highlight = "_IblScope" },
+	scope = { show_start = false, show_end = false, highlight = "_IblScope" },
 }
 
 M.illuminate = {
