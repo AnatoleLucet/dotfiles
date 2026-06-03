@@ -77,7 +77,7 @@ M.noice = {
 }
 
 M.noneckpain = {
-	width = 140,
+	width = 160,
 	autocmds = {
 		enableOnVimEnter = "safe",
 	},
