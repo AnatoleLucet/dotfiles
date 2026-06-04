@@ -20,6 +20,9 @@ plugins=(
 )
 source $ZSH/oh-my-zsh.sh
 
+# enable completion
+autoload -U compinit; compinit
+
 # GRC
 [ -s "$HOME/.nix-profile/etc/grc.zsh" ] && source ~/.nix-profile/etc/grc.zsh
 

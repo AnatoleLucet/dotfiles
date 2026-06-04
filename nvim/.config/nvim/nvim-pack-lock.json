@@ -21,6 +21,10 @@
       "rev": "aeca454727486d488a6ecbcde30db72e741e3524",
       "src": "https://github.com/zbirenbaum/copilot.lua"
     },
+    "copy-file-path.nvim": {
+      "rev": "1ae57d11ce890fffc224f0daf88999f809829d87",
+      "src": "https://github.com/h3pei/copy-file-path.nvim"
+    },
     "fff.nvim": {
       "rev": "2465c2cad624cd43f9cedcb8bb852d95dd603788",
       "src": "https://github.com/dmtrKovalenko/fff.nvim"

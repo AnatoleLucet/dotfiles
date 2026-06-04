@@ -137,3 +137,6 @@ require("blink.cmp").setup(configs.blink.cmp)
 
 -- markdown-preview.nvim
 vim.pack.add({ { src = "https://github.com/iamcco/markdown-preview.nvim" } })
+
+-- copy-file-path.nvim
+vim.pack.add({ { src = "https://github.com/h3pei/copy-file-path.nvim" } })
