@@ -46,3 +46,17 @@ vim.lsp.config("gopls", {
 		},
 	},
 })
+
+-- yamlls
+vim.lsp.config("yamlls", {
+	settings = {
+		yaml = {
+			schemaStore = {
+				enable = true,
+				url = "https://www.schemastore.org/api/json/catalog.json",
+			},
+			validate = true,
+			format = { enable = true },
+		},
+	},
+})

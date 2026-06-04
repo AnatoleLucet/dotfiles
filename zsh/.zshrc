@@ -122,6 +122,13 @@ alias nv='nvim'
 # Tree
 alias t='tree --dirsfirst -C'
 
+# K8s
+alias kg='kubectl get'
+alias kgg='kubectl get gateway'
+alias kcr='kubectl create'
+alias kcrn='kubectl create namespace'
+alias kdg='kubectl describe gateway'
+
 # Git
 alias gre='git restore'
 alias gres='git restore --source'
