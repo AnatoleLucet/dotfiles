@@ -39,7 +39,8 @@ local paddings = {
 	none = { left = 0, right = 0, top = 0, bottom = 0 },
 
 	-- default = { left = 12, right = 12, top = 14, bottom = 4 },
-	default = { left = 0, right = 0, top = 0, bottom = 0 },
+	-- default = { left = 0, right = 0, top = 0, bottom = 0 },
+	default = { left = 0, right = 0, top = 16, bottom = 0 },
 	fullscreen = { left = 0, right = 0, top = 4, bottom = 0 },
 }
 
