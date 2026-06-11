@@ -2,3 +2,4 @@
 !/zsh/.local/bin/weather
 
 /omarchy/.config/hypr/hyprland.conf.bak.*
+/tmux/.config/tmux/plugins

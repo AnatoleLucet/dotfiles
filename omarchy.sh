@@ -53,6 +53,7 @@ aur_packages=(
     # Apps
     # google-chrome
     wezterm-git
+    helium-browser-bin
 
     # Fonts
     siji-git
@@ -62,6 +63,7 @@ aur_packages=(
     httpstat-go
     dive
     tidy-viewer
+    hyprmon-bin
 
     # Others
     git-delta
@@ -104,12 +106,8 @@ sudo ln -sf ~/.config/keyd/default.conf /etc/keyd/default.conf
 sudo usermod -s $(which zsh) $USER
 sudo chsh -s $(which zsh)
 
-# remove possibly pre-existing files so Stow doesn't conflict with them
-rm ~/.zshrc || true
-rm ~/.config/fontconfig || true
-rm ~/.local/share/fonts/MonoLisa* || true
-rm ~/.config/nvim || true
-rm ~/.config/hypr || true
+# so it doesn't conflict with stow (can't rm it, hyprland keeps recreating it)
+mv ~/.config/hypr/hyprland.conf ~/.config/hypr/hyprland.conf.default || true
 
 # link dotfiles
 STOW_FOLDERS=$STOW_FOLDERS ./link.sh

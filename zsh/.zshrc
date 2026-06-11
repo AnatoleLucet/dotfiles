@@ -231,5 +231,3 @@ fi
 
 # opencode
 export PATH=/home/anatole/.opencode/bin:$PATH
-
-. "$HOME/.local/share/../bin/env"
