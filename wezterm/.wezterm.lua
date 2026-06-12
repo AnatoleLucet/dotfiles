@@ -35,33 +35,15 @@ config.window_frame = {
 	inactive_titlebar_bg = "#1a1b26",
 }
 
-local paddings = {
-	none = { left = 0, right = 0, top = 0, bottom = 0 },
+config.window_padding = { left = 0, right = 0, top = 0, bottom = 0 }
+config.window_content_alignment = { horizontal = "Center", vertical = "Center" }
 
-	-- default = { left = 12, right = 12, top = 14, bottom = 4 },
-	-- default = { left = 0, right = 0, top = 0, bottom = 0 },
-	default = { left = 0, right = 0, top = 16, bottom = 0 },
-	fullscreen = { left = 0, right = 0, top = 4, bottom = 0 },
-}
-
-if DESKTOP:match("Hyprland") then
-	config.window_padding = paddings.default
-
-	-- Remove padding when in fullscreen mode for more *zen*
-	wezterm.on("window-resized", function(window, pane)
-		local dims = window:get_dimensions()
-		if dims.is_full_screen then
-			window:set_config_overrides({ window_padding = paddings.fullscreen })
-		else
-			window:set_config_overrides({ window_padding = paddings.default })
-		end
-	end)
-else
+if not DESKTOP:match("Hyprland") then
 	config.window_decorations = "RESIZE"
-	config.window_padding = paddings.none
 
+	-- fullscreen on startup
 	wezterm.on("gui-startup", function(cmd)
-		local tab, pane, window = wezterm.mux.spawn_window(cmd or {})
+		local _, _, window = wezterm.mux.spawn_window(cmd or {})
 		window:gui_window():maximize()
 		window:gui_window():toggle_fullscreen()
 	end)

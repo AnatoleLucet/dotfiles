@@ -2,7 +2,7 @@
 
 set -e
 
-export STOW_FOLDERS="git, zsh, nvim, keyd, wezterm, tmux, tms, omarchy"
+export STOW_FOLDERS="git, zsh, nvim, keyd, wezterm, tmux, tms, omarchy, spicetify"
 
 # install packages
 packages=(
@@ -114,3 +114,6 @@ STOW_FOLDERS=$STOW_FOLDERS ./link.sh
 
 # install tmux plugins
 tmux new-session -d 'run-shell "source ~/.tmux.conf; ~/.tmux/plugins/tpm/bin/install_plugins"'
+
+# apply spicetify config
+spicetify apply -n
