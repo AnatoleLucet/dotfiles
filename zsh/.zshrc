@@ -231,3 +231,6 @@ fi
 
 # opencode
 export PATH=/home/anatole/.opencode/bin:$PATH
+
+# mise (version manager — manages go, etc.)
+eval "$(mise activate zsh)"

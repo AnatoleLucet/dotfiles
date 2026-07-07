@@ -90,6 +90,10 @@
       "rev": "5cfe7fffbd01e17b3c1e14af85d5febdef88bd8c",
       "src": "https://github.com/catgoose/nvim-colorizer.lua"
     },
+    "nvim-fountain": {
+      "rev": "b0baf2c5396a54cd001e4c7e64108588fda9a4f9",
+      "src": "https://github.com/0mykull/nvim-fountain"
+    },
     "nvim-lint": {
       "rev": "eab58b48eb11d7745c11c505e0f3057165902461",
       "src": "https://github.com/mfussenegger/nvim-lint"

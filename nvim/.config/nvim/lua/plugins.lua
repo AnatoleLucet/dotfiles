@@ -136,7 +136,11 @@ vim.pack.add({ { src = "https://github.com/Saghen/blink.cmp", version = vim.vers
 require("blink.cmp").setup(configs.blink.cmp)
 
 -- markdown-preview.nvim
-vim.pack.add({ { src = "https://github.com/iamcco/markdown-preview.nvim" } })
+vim.pack.add({ "https://github.com/iamcco/markdown-preview.nvim" })
 
 -- copy-file-path.nvim
-vim.pack.add({ { src = "https://github.com/h3pei/copy-file-path.nvim" } })
+vim.pack.add({ "https://github.com/h3pei/copy-file-path.nvim" })
+
+-- nvim-fountain
+vim.pack.add({ "https://github.com/0mykull/nvim-fountain" })
+vim.filetype.add({ pattern = { [".*%.fountain%.md"] = "fountain" } })
