@@ -20,34 +20,51 @@ map("n", "[q", "<cmd>cprev<cr>", { desc = "previous quickfix list element", sile
 map("n", "]q", "<cmd>cnext<cr>", { desc = "next quickfix list element", silent = true })
 
 map("x", "<leader>p", '"_dP', { desc = "paste without yaking", nowait = true })
-map({"n", "v"}, "<leader>y", '"+y', { desc = "copy selection to system clipboard", nowait = true })
+map({ "n", "v" }, "<leader>y", '"+y', { desc = "copy selection to system clipboard", nowait = true })
 map("n", "<leader>Y", ":%y+<cr>", { desc = "copy file content to system clipboard", nowait = true })
-map({"n", "v"}, "<leader>d", '"_d', { desc = "delete without yanking", nowait = true })
-
+map({ "n", "v" }, "<leader>d", '"_d', { desc = "delete without yanking", nowait = true })
 
 -- neotree
-map('n', '<M-e>', '<cmd>Neotree toggle<cr>', { desc = 'neotree toggle', silent = true })
-
+map("n", "<M-e>", "<cmd>Neotree toggle<cr>", { desc = "neotree toggle", silent = true })
 
 -- fff
-map('n', '<leader>ff', function() require('fff').find_files() end, { desc = 'find files' })
-map('n', '<leader>fw', function() require('fff').live_grep() end, { desc = 'live grep' })
-map('n', '<leader>gmc', function() require('fff').live_grep({ query = '<<<<<<<' }) end, { desc = 'search for merge conflicts' })
-
+map("n", "<leader>ff", function()
+	require("fff").find_files()
+end, { desc = "find files" })
+map("n", "<leader>fw", function()
+	require("fff").live_grep()
+end, { desc = "live grep" })
+map("n", "<leader>gmc", function()
+	require("fff").live_grep({ query = "<<<<<<<" })
+end, { desc = "search for merge conflicts" })
 
 -- floatty
-map('n', '<M-i>', function() floatty.toggle() end, { desc = 'floatty toggle' })
-map('t', '<M-i>', function() floatty.toggle() end, { desc = 'floatty toggle' })
-
+map("n", "<M-i>", function()
+	floatty.toggle()
+end, { desc = "floatty toggle" })
+map("t", "<M-i>", function()
+	floatty.toggle()
+end, { desc = "floatty toggle" })
 
 -- harpoon
-map("n", "<leader>wl", function() require("harpoon.ui").toggle_quick_menu() end, { desc = "open Harpoon" })
-map("n", "<leader>wa", function() require("harpoon.mark").add_file() end, { desc = "add current buffer to Harpoon" })
-map("n", "<C-h>", function() require("harpoon.ui").nav_file(1) end, { desc = "go to previous file in Harpoon" })
-map("n", "<C-j>", function() require("harpoon.ui").nav_file(2) end, { desc = "go to next file in Harpoon" })
-map("n", "<C-k>", function() require("harpoon.ui").nav_file(3) end, { desc = "go to next file in Harpoon" })
-map("n", "<C-l>", function() require("harpoon.ui").nav_file(4) end, { desc = "go to next file in Harpoon" })
-
+map("n", "<leader>wl", function()
+	require("harpoon.ui").toggle_quick_menu()
+end, { desc = "open Harpoon" })
+map("n", "<leader>wa", function()
+	require("harpoon.mark").add_file()
+end, { desc = "add current buffer to Harpoon" })
+map("n", "<C-h>", function()
+	require("harpoon.ui").nav_file(1)
+end, { desc = "go to previous file in Harpoon" })
+map("n", "<C-j>", function()
+	require("harpoon.ui").nav_file(2)
+end, { desc = "go to next file in Harpoon" })
+map("n", "<C-k>", function()
+	require("harpoon.ui").nav_file(3)
+end, { desc = "go to next file in Harpoon" })
+map("n", "<C-l>", function()
+	require("harpoon.ui").nav_file(4)
+end, { desc = "go to next file in Harpoon" })
 
 -- lsp
 map("n", "K", vim.lsp.buf.hover, { desc = "lsp hover" })

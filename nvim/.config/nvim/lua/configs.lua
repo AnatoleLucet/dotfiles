@@ -283,6 +283,7 @@ M.filetypes = {
 	},
 	markdown = {
 		lsp = { "ltex-ls-plus" },
+		formatter = { "prettierd" },
 	},
 }
 

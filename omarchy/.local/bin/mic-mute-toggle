@@ -1,0 +1,45 @@
+#!/bin/bash
+# Self-healing microphone mute toggle for the keyboard mic-mute key.
+#
+# Why this exists: `wpctl set-mute ... toggle` (what omarchy-audio-input-mute
+# does) occasionally desyncs on the Fosi Audio K7 USB source — pactl/wpctl
+# report "muted" while the mic keeps recording, and a plain toggle can't clear
+# it (setting a value it already believes it has is a no-op). This script
+# instead picks the target state explicitly and forces a real state-change
+# event by pulsing through the opposite value first, then drives the keyboard
+# LED and OSD from the state it actually set (never a possibly-stale re-read).
+
+set -u
+
+SRC='@DEFAULT_AUDIO_SOURCE@'
+
+# Read the current effective mute of the default source.
+if pactl get-source-mute @DEFAULT_SOURCE@ 2>/dev/null | grep -q yes; then
+  currently_muted=1
+else
+  currently_muted=0
+fi
+
+if [[ "$currently_muted" -eq 1 ]]; then
+  # Want UNMUTE: pulse to muted, then unmute, to force a real change event.
+  wpctl set-mute "$SRC" 1 >/dev/null 2>&1
+  sleep 0.05
+  wpctl set-mute "$SRC" 0 >/dev/null 2>&1
+  led=off
+  osd_message='Microphone on'
+  osd_icon='audio-input-microphone-symbolic'
+else
+  # Want MUTE: pulse to unmuted, then mute.
+  wpctl set-mute "$SRC" 0 >/dev/null 2>&1
+  sleep 0.05
+  wpctl set-mute "$SRC" 1 >/dev/null 2>&1
+  led=on
+  osd_message='Microphone muted'
+  osd_icon='microphone-sensitivity-muted-symbolic'
+fi
+
+omarchy-brightness-keyboard-mute "$led"
+
+omarchy-swayosd-client \
+  --custom-message "$osd_message" \
+  --custom-icon "$osd_icon"
